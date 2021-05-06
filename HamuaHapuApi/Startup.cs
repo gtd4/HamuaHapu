@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HamuaHapuApi.DAL;
+using HamuaHapuApi.DAL.Implementations;
+using HamuaHapuApi.DAL.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace HamuaHapuApi
 {
@@ -28,6 +33,13 @@ namespace HamuaHapuApi
             services.AddControllers();
 
             services.AddSwaggerGen();
+
+            services.AddScoped<INgaMaraeProvider, NgaMaraeProvider>();
+
+            var con = Configuration.GetConnectionString("Default");
+
+            services.AddDbContext<HamuaContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
