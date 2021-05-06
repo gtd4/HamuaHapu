@@ -34,14 +34,14 @@ namespace HamuaRegistrationApi.Controllers
             return ngamarae;
         }
 
-        [HttpGet("/{areaname}")]
+        [HttpGet("/area/{areaname}")]
         public IEnumerable<NgaMarae> GetByAreaName(string areaname)
         {
             var ngamarae = orderProvider.GetAllOrdersByArea(areaname);
             return ngamarae;
         }
 
-        [HttpGet("/{hapuname}")]
+        [HttpGet("/hapu/{hapuname}")]
         public IEnumerable<NgaMarae> GetByHapuName(string hapuname)
         {
             var ngamarae = orderProvider.GetAllOrdersByHapu(hapuname);
