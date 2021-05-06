@@ -27,7 +27,7 @@ namespace HamuaRegistrationApi.DAL.Implementations
             return maraeContext.NgaMarae.Where(x => x.Area.Equals(areaName));
         }
 
-        public IEnumerable<NgaMarae> GetAllOrdersByHapua(string hapuName)
+        public IEnumerable<NgaMarae> GetAllOrdersByHapu(string hapuName)
         {
             return maraeContext.NgaMarae.Where(x => x.Hapu.Equals(hapuName));
         }
