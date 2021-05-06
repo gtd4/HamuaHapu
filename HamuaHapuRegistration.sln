@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamuaHapuApi", "HamuaHapuApi\HamuaHapuApi.csproj", "{BE29C8BA-2F60-43FD-9315-DE379E6CB43F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamuaHapuRegistration", "HamuaWebApp\HamuaHapuRegistration.csproj", "{2DBFCBEE-129D-4F86-AB90-5113037FD6A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamuaRegistrationApi", "HamuaApi\HamuaRegistrationApi.csproj", "{23DEA09B-6B1A-46F9-A776-5E0B4DE6F223}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BE29C8BA-2F60-43FD-9315-DE379E6CB43F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE29C8BA-2F60-43FD-9315-DE379E6CB43F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE29C8BA-2F60-43FD-9315-DE379E6CB43F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE29C8BA-2F60-43FD-9315-DE379E6CB43F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2DBFCBEE-129D-4F86-AB90-5113037FD6A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2DBFCBEE-129D-4F86-AB90-5113037FD6A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DBFCBEE-129D-4F86-AB90-5113037FD6A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DBFCBEE-129D-4F86-AB90-5113037FD6A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23DEA09B-6B1A-46F9-A776-5E0B4DE6F223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23DEA09B-6B1A-46F9-A776-5E0B4DE6F223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23DEA09B-6B1A-46F9-A776-5E0B4DE6F223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23DEA09B-6B1A-46F9-A776-5E0B4DE6F223}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

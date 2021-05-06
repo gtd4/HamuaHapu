@@ -1,6 +1,6 @@
 using System;
 
-namespace HamuaHapuApi
+namespace WebApplication1
 {
     public class WeatherForecast
     {

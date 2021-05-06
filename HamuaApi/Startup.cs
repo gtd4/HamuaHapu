@@ -2,21 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HamuaHapuApi.DAL;
-using HamuaHapuApi.DAL.Implementations;
-using HamuaHapuApi.DAL.Interfaces;
+using HamuaRegistrationApi.DAL;
+using HamuaRegistrationApi.DAL.Implementations;
+using HamuaRegistrationApi.DAL.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
 
-namespace HamuaHapuApi
+namespace WebApplication1
 {
     public class Startup
     {
@@ -33,8 +32,7 @@ namespace HamuaHapuApi
             services.AddControllers();
 
             services.AddSwaggerGen();
-
-            services.AddScoped<INgaMaraeProvider, NgaMaraeProvider>();
+            services.AddScoped<IMaraeProvider, MaraeProvider>();
 
             var con = Configuration.GetConnectionString("Default");
 
@@ -52,6 +50,8 @@ namespace HamuaHapuApi
 
             app.UseHttpsRedirection();
 
+            app.UseRouting();
+
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
@@ -60,8 +60,6 @@ namespace HamuaHapuApi
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
-
-            app.UseRouting();
 
             app.UseAuthorization();
 
