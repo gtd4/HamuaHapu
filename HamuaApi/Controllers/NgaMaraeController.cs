@@ -30,8 +30,22 @@ namespace HamuaRegistrationApi.Controllers
         [HttpGet]
         public IEnumerable<NgaMarae> Get()
         {
-            var orders = orderProvider.GetAllOrders().ToList();
-            return orders;
+            var ngamarae = orderProvider.GetAllOrders();
+            return ngamarae;
+        }
+
+        [HttpGet("/{areaname}")]
+        public IEnumerable<NgaMarae> GetByAreaName(string areaname)
+        {
+            var ngamarae = orderProvider.GetAllOrdersByArea(areaname);
+            return ngamarae;
+        }
+
+        [HttpGet("/{hapuname}")]
+        public IEnumerable<NgaMarae> GetByHapuName(string hapuname)
+        {
+            var ngamarae = orderProvider.GetAllOrdersByHapu(hapuname);
+            return ngamarae;
         }
     }
 }

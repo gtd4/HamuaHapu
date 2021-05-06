@@ -10,5 +10,9 @@ namespace HamuaRegistrationApi.DAL.Interfaces
     public interface IMaraeProvider
     {
         IEnumerable<NgaMarae> GetAllOrders();
+
+        IEnumerable<NgaMarae> GetAllOrdersByArea(string areaName);
+
+        IEnumerable<NgaMarae> GetAllOrdersByHapu(string areaName);
     }
 }
