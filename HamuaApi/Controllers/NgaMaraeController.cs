@@ -45,6 +45,13 @@ namespace HamuaRegistrationApi.Controllers
             return Ok(ngamarae);
         }
 
+        [HttpGet("[controller]/{id}")]
+        public async Task<IActionResult> GetByIdAsync(int id)
+        {
+            var ngamarae = await maraeProvider.GetMaraeByIdAsync(id);
+            return Ok(ngamarae);
+        }
+
         [HttpPost("[controller]/")]
         public async Task<IActionResult> GetByIdAsync(NgaMarae newMarae)
         {
