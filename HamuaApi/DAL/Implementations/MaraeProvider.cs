@@ -41,6 +41,14 @@ namespace HamuaRegistrationApi.DAL.Implementations
                     marae = marae.OrderByDescending(s => s.Hapu);
                     break;
 
+                case "area":
+                    marae = marae.OrderBy(s => s.Area);
+                    break;
+
+                case "area_desc":
+                    marae = marae.OrderByDescending(s => s.Area);
+                    break;
+
                 default:
                     marae = marae.OrderBy(s => s.Name);
                     break;

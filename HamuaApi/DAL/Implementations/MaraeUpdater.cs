@@ -20,7 +20,7 @@ namespace HamuaRegistrationApi.DAL.Implementations
             maraeProvider = provider;
         }
 
-        public async Task<NgaMarae> CreateMaraeAsync(NgaMarae newMarae)
+        public async Task<Marae> CreateMaraeAsync(Marae newMarae)
         {
             try
             {
@@ -35,12 +35,12 @@ namespace HamuaRegistrationApi.DAL.Implementations
             }
         }
 
-        public Task<NgaMarae> DeleteMaraeAsync(int id)
+        public Task<Marae> DeleteMaraeAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<NgaMarae> UpdateMaraeAsync(int id, string area, string maraeName, string hapu)
+        public async Task<Marae> UpdateMaraeAsync(int id, string area, string maraeName, string hapu)
         {
             try
             {

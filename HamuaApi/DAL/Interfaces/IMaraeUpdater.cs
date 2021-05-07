@@ -9,10 +9,10 @@ namespace HamuaRegistrationApi.DAL.Interfaces
 {
     public interface IMaraeUpdater
     {
-        Task<NgaMarae> CreateMaraeAsync(NgaMarae newMarae);
+        Task<Marae> CreateMaraeAsync(Marae newMarae);
 
-        Task<NgaMarae> UpdateMaraeAsync(int id, string area, string maraeName, string hapu);
+        Task<Marae> UpdateMaraeAsync(int id, string area, string maraeName, string hapu);
 
-        Task<NgaMarae> DeleteMaraeAsync(int id);
+        Task<Marae> DeleteMaraeAsync(int id);
     }
 }

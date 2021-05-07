@@ -9,12 +9,12 @@ namespace HamuaRegistrationApi.DAL.Interfaces
 {
     public interface IMaraeProvider
     {
-        Task<IEnumerable<NgaMarae>> GetAllMaraeAsync(string sortby = "", string searchString = "");
+        Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby = "", string searchString = "");
 
-        Task<IEnumerable<NgaMarae>> GetAllOrdersByAreaAsync(string areaName, string sortby = "", string searchString = "");
+        Task<IEnumerable<Marae>> GetAllOrdersByAreaAsync(string areaName, string sortby = "", string searchString = "");
 
-        Task<IEnumerable<NgaMarae>> GetAllOrdersByHapuAsync(string hapuName, string sortby = "", string searchString = "");
+        Task<IEnumerable<Marae>> GetAllOrdersByHapuAsync(string hapuName, string sortby = "", string searchString = "");
 
-        Task<NgaMarae> GetMaraeByIdAsync(int id);
+        Task<Marae> GetMaraeByIdAsync(int id);
     }
 }
