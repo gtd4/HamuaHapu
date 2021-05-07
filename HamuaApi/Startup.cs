@@ -33,6 +33,7 @@ namespace WebApplication1
 
             services.AddSwaggerGen();
             services.AddScoped<IMaraeProvider, MaraeProvider>();
+            services.AddScoped<IMaraeUpdater, MaraeUpdater>();
 
             var con = Configuration.GetConnectionString("Default");
 

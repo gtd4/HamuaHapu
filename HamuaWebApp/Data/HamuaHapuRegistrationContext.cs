@@ -15,5 +15,7 @@ namespace HamuaHapuRegistration.Data
         }
 
         public DbSet<HamuaHapuRegistration.Models.HapuMember> HapuMember { get; set; }
+
+        public DbSet<HamuaHapuRegistration.Models.NgaMarae> NgaMarae { get; set; }
     }
 }

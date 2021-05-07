@@ -1,5 +1,6 @@
 ﻿using HamuaRegistrationApi.DAL.Interfaces;
 using HamuaRegistrationApi.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace HamuaRegistrationApi.DAL.Implementations
             maraeContext = context;
         }
 
-        public IEnumerable<NgaMarae> GetAllMarae(string sortby, string searchString = "")
+        public async Task<IEnumerable<NgaMarae>> GetAllMaraeAsync(string sortby, string searchString = "")
         {
             var marae = maraeContext.NgaMarae.Select(x => x);
 
@@ -44,26 +45,26 @@ namespace HamuaRegistrationApi.DAL.Implementations
                     marae = marae.OrderBy(s => s.Marae);
                     break;
             }
-            return marae;
+            return await marae.ToListAsync();
         }
 
-        public IEnumerable<NgaMarae> GetAllOrdersByArea(string areaName, string sortby, string searchString = "")
+        public async Task<IEnumerable<NgaMarae>> GetAllOrdersByAreaAsync(string areaName, string sortby, string searchString = "")
         {
-            var marae = GetAllMarae(sortby, searchString);
+            var marae = await GetAllMaraeAsync(sortby, searchString);
 
             return marae.Where(x => x.Area.Equals(areaName)); ;
         }
 
-        public IEnumerable<NgaMarae> GetAllOrdersByHapu(string hapuName, string sortby, string searchString = "")
+        public async Task<IEnumerable<NgaMarae>> GetAllOrdersByHapuAsync(string hapuName, string sortby, string searchString = "")
         {
-            var marae = GetAllMarae(sortby, searchString);
+            var marae = await GetAllMaraeAsync(sortby, searchString);
 
             return marae.Where(x => x.Hapu.Equals(hapuName)); ;
         }
 
-        public NgaMarae GetMaraeById(int id)
+        public async Task<NgaMarae> GetMaraeByIdAsync(int id)
         {
-            return maraeContext.NgaMarae.Find(id);
+            return await maraeContext.NgaMarae.FindAsync(id);
         }
     }
 }

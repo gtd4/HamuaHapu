@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HamuaRegistrationApi.DAL.Models
+namespace HamuaHapuRegistration.Models
 {
     public class NgaMarae
     {
@@ -12,8 +12,6 @@ namespace HamuaRegistrationApi.DAL.Models
 
         public string Marae { get; set; }
         public string Hapu { get; set; }
-
-        //public bool? IsDeleted { get; set; }
 
         public NgaMarae()
         {

@@ -15,39 +15,48 @@ namespace HamuaRegistrationApi.Controllers
     {
         private readonly ILogger<NgaMarae> _logger;
         private IMaraeProvider maraeProvider;
+        private IMaraeUpdater maraeUpdater;
 
-        public NgaMaraeController(ILogger<NgaMarae> logger, IMaraeProvider provider)
+        public NgaMaraeController(ILogger<NgaMarae> logger, IMaraeProvider provider, IMaraeUpdater updater)
         {
             _logger = logger;
             maraeProvider = provider;
+            maraeUpdater = updater;
         }
 
         [HttpGet]
-        public IEnumerable<NgaMarae> Get(string orderby, string searchString)
+        public async Task<IActionResult> GetAsync(string orderby, string searchString)
         {
-            var ngamarae = maraeProvider.GetAllMarae(orderby, searchString);
-            return ngamarae;
+            var ngamarae = await maraeProvider.GetAllMaraeAsync(orderby, searchString);
+            return Ok(ngamarae);
         }
 
         [HttpGet("[controller]/area/{areaname}")]
-        public IEnumerable<NgaMarae> GetByAreaName(string areaname, string sortby, string searchString)
+        public async Task<IActionResult> GetByAreaNameAsync(string areaname, string sortby, string searchString)
         {
-            var ngamarae = maraeProvider.GetAllOrdersByArea(areaname, sortby, searchString);
-            return ngamarae;
+            var ngamarae = await maraeProvider.GetAllOrdersByAreaAsync(areaname, sortby, searchString);
+            return Ok(ngamarae);
         }
 
         [HttpGet("[controller]/hapu/{hapuname}")]
-        public IEnumerable<NgaMarae> GetByHapuName(string hapuname, string sortby, string searchString)
+        public async Task<IActionResult> GetByHapuNameAsync(string hapuname, string sortby, string searchString)
         {
-            var ngamarae = maraeProvider.GetAllOrdersByHapu(hapuname, sortby, searchString);
-            return ngamarae;
+            var ngamarae = await maraeProvider.GetAllOrdersByHapuAsync(hapuname, sortby, searchString);
+            return Ok(ngamarae);
         }
 
-        [HttpGet("[controller]/{id}")]
-        public NgaMarae GetById(int id)
+        [HttpPost("[controller]/")]
+        public async Task<IActionResult> GetByIdAsync(NgaMarae newMarae)
         {
-            var marae = maraeProvider.GetMaraeById(id);
-            return marae;
+            var marae = await maraeUpdater.CreateMaraeAsync(newMarae);
+            return Ok(marae);
+        }
+
+        [HttpPut("[controller]/{id}")]
+        public async Task<IActionResult> GetByIdAsync(int id, string area = "", string maraeName = "", string hapu = "")
+        {
+            var marae = await maraeUpdater.UpdateMaraeAsync(id, area, maraeName, hapu);
+            return Ok(marae);
         }
     }
 }
