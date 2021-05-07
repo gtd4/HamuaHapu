@@ -17,5 +17,40 @@ namespace HamuaRegistrationApi.DAL.Implementations
         {
             tangataContext = context;
         }
+
+        public async Task<IEnumerable<Tangata>> GetAllTangataAsync(string sortby = "", string searchString = "")
+        {
+            var tangata = tangataContext.NgaTangata.Select(x => x);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                tangata = tangata.Where(x => x.FirstName.Contains(searchString) || x.LastName.Contains(searchString));
+            }
+
+            switch (sortby)
+            {
+                case "firstname_desc":
+                    tangata = tangata.OrderByDescending(s => s.FirstName);
+                    break;
+
+                case "firstname":
+                    tangata = tangata.OrderBy(s => s.FirstName);
+                    break;
+
+                case "lastname_desc":
+                    tangata = tangata.OrderByDescending(s => s.LastName);
+                    break;
+
+                default:
+                    tangata = tangata.OrderBy(s => s.LastName);
+                    break;
+            }
+            return await tangata.ToListAsync();
+        }
+
+        public async Task<Tangata> GetTangataByIdAsync(int id)
+        {
+            return await tangataContext.NgaTangata.FindAsync(id);
+        }
     }
 }

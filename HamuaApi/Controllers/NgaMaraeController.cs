@@ -53,14 +53,14 @@ namespace HamuaRegistrationApi.Controllers
         }
 
         [HttpPost("[controller]/")]
-        public async Task<IActionResult> GetByIdAsync(Marae newMarae)
+        public async Task<IActionResult> CreateMaraeAsync(Marae newMarae)
         {
             var marae = await maraeUpdater.CreateMaraeAsync(newMarae);
             return Ok(marae);
         }
 
         [HttpPut("[controller]/{id}")]
-        public async Task<IActionResult> GetByIdAsync(int id, string area = "", string maraeName = "", string hapu = "")
+        public async Task<IActionResult> UpdateMaraeAsync(int id, string area = "", string maraeName = "", string hapu = "")
         {
             var marae = await maraeUpdater.UpdateMaraeAsync(id, area, maraeName, hapu);
             return Ok(marae);

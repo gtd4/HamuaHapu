@@ -11,7 +11,6 @@ namespace HamuaRegistrationApi.DAL.Models
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-        public string Hapu { get; set; }
 
         public IEnumerable<Marae> NgaMarae { get; set; }
 

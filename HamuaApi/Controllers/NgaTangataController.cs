@@ -27,49 +27,45 @@ namespace HamuaRegistrationApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync(string orderby, string searchString)
         {
-            //var ngamarae = await tangataProvider.GetAllTangataAsync(orderby, searchString);
-            //return Ok(ngamarae);
-            return Ok();
+            var ngaTangata = await tangataProvider.GetAllTangataAsync(orderby, searchString);
+            return Ok(ngaTangata);
         }
 
-        [HttpGet("[controller]/area/{areaname}")]
-        public async Task<IActionResult> GetByAreaNameAsync(string areaname, string sortby, string searchString)
-        {
-            //var ngamarae = await tangataProvider.GetAllTangataByAreaAsync(areaname, sortby, searchString);
-            //return Ok(ngamarae);
-            return Ok();
-        }
+        //[HttpGet("[controller]/area/{areaname}")]
+        //public async Task<IActionResult> GetByAreaNameAsync(string areaname, string sortby, string searchString)
+        //{
+        //    //var ngamarae = await tangataProvider.GetAllTangataByAreaAsync(areaname, sortby, searchString);
+        //    //return Ok(ngamarae);
+        //    return Ok();
+        //}
 
-        [HttpGet("[controller]/hapu/{hapuname}")]
-        public async Task<IActionResult> GetByHapuNameAsync(string hapuname, string sortby, string searchString)
-        {
-            //var ngamarae = await tangataProvider.GetAllTangataByHapuAsync(hapuname, sortby, searchString);
-            //return Ok(ngamarae);
-            return Ok();
-        }
+        //[HttpGet("[controller]/hapu/{hapuname}")]
+        //public async Task<IActionResult> GetByHapuNameAsync(string hapuname, string sortby, string searchString)
+        //{
+        //    //var ngamarae = await tangataProvider.GetAllTangataByHapuAsync(hapuname, sortby, searchString);
+        //    //return Ok(ngamarae);
+        //    return Ok();
+        //}
 
         [HttpGet("[controller]/{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-            //var ngamarae = await tangataProvider.GetTangataByIdAsync(id);
-            //return Ok(ngamarae);
-            return Ok();
+            var ngaTangata = await tangataProvider.GetTangataByIdAsync(id);
+            return Ok(ngaTangata);
         }
 
         [HttpPost("[controller]/")]
-        public async Task<IActionResult> GetByIdAsync(Tangata newTangata)
+        public async Task<IActionResult> CreateTangataAsync(Tangata newTangata)
         {
-            //var tangata = await tangataUpdater.CreateTangataAsync(newTangata);
-            //return Ok(tangata);
-            return Ok();
+            var tangata = await tangataUpdater.CreateTangataAsync(newTangata);
+            return Ok(tangata);
         }
 
         [HttpPut("[controller]/{id}")]
-        public async Task<IActionResult> GetByIdAsync(int id, string area = "", string maraeName = "", string hapu = "")
+        public async Task<IActionResult> UpdateTangataAsync(int id, string firstName = "", string lastname = "")
         {
-            //var marae = await tangataUpdater.UpdateTangataAsync(id, area, maraeName, hapu);
-            //return Ok(marae);
-            return Ok();
+            var tangata = await tangataUpdater.UpdateTangataAsync(id, firstName, lastname);
+            return Ok(tangata);
         }
     }
 }

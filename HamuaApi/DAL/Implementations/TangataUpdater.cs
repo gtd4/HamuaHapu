@@ -11,13 +11,55 @@ namespace HamuaRegistrationApi.DAL.Implementations
 {
     public class TangataUpdater : ITangataUpdater
     {
-        private HamuaContext maraeContext;
-        private IMaraeProvider maraeProvider;
+        private HamuaContext tangataContext;
+        private ITangataProvider tangataProvider;
 
-        public TangataUpdater(HamuaContext context, IMaraeProvider provider)
+        public TangataUpdater(HamuaContext context, ITangataProvider provider)
         {
-            maraeContext = context;
-            maraeProvider = provider;
+            tangataContext = context;
+            tangataProvider = provider;
+        }
+
+        public async Task<Tangata> CreateTangataAsync(Tangata newTangata)
+        {
+            try
+            {
+                await tangataContext.NgaTangata.AddAsync(newTangata);
+                await tangataContext.SaveChangesAsync();
+
+                return newTangata;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Tangata> UpdateTangataAsync(int id, string firstName, string lastName)
+        {
+            try
+            {
+                var tangata = await tangataProvider.GetTangataByIdAsync(id);
+
+                if (!string.IsNullOrEmpty(firstName))
+                {
+                    tangata.FirstName = firstName;
+                }
+
+                if (!string.IsNullOrEmpty(lastName))
+                {
+                    tangata.LastName = lastName;
+                }
+
+                tangataContext.Update(tangata);
+                tangataContext.SaveChanges();
+
+                return tangata;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

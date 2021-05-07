@@ -9,9 +9,9 @@ namespace HamuaRegistrationApi.DAL.Interfaces
 {
     public interface ITangataUpdater
     {
-        //Task<Marae> CreateTangataAsync(Tangata newTangata);
+        Task<Tangata> CreateTangataAsync(Tangata newTangata);
 
-        //Task<Marae> UpdateTangataAsync(int id, string area, string maraeName, string hapu);
+        Task<Tangata> UpdateTangataAsync(int id, string firstName, string lastName);
 
         //Task<Marae> DeleteTangataAsync(int id);
     }
