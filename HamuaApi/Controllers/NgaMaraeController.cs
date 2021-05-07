@@ -29,18 +29,25 @@ namespace HamuaRegistrationApi.Controllers
             return ngamarae;
         }
 
-        [HttpGet("/area/{areaname}")]
+        [HttpGet("[controller]/area/{areaname}")]
         public IEnumerable<NgaMarae> GetByAreaName(string areaname, string sortby, string searchString)
         {
             var ngamarae = maraeProvider.GetAllOrdersByArea(areaname, sortby, searchString);
             return ngamarae;
         }
 
-        [HttpGet("/hapu/{hapuname}")]
+        [HttpGet("[controller]/hapu/{hapuname}")]
         public IEnumerable<NgaMarae> GetByHapuName(string hapuname, string sortby, string searchString)
         {
             var ngamarae = maraeProvider.GetAllOrdersByHapu(hapuname, sortby, searchString);
             return ngamarae;
+        }
+
+        [HttpGet("[controller]/{id}")]
+        public NgaMarae GetById(int id)
+        {
+            var marae = maraeProvider.GetMaraeById(id);
+            return marae;
         }
     }
 }

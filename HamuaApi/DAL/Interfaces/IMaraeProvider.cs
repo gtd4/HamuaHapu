@@ -14,5 +14,7 @@ namespace HamuaRegistrationApi.DAL.Interfaces
         IEnumerable<NgaMarae> GetAllOrdersByArea(string areaName, string sortby = "", string searchString = "");
 
         IEnumerable<NgaMarae> GetAllOrdersByHapu(string hapuName, string sortby = "", string searchString = "");
+
+        NgaMarae GetMaraeById(int id);
     }
 }

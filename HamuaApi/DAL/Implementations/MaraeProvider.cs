@@ -60,5 +60,10 @@ namespace HamuaRegistrationApi.DAL.Implementations
 
             return marae.Where(x => x.Hapu.Equals(hapuName)); ;
         }
+
+        public NgaMarae GetMaraeById(int id)
+        {
+            return maraeContext.NgaMarae.Find(id);
+        }
     }
 }
