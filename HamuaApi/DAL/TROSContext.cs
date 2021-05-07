@@ -15,8 +15,8 @@ namespace HamuaRegistrationApi.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<NgaMarae>()
-            .HasKey(o => new { o.ID });
+            modelBuilder.Entity<Marae>()
+            .HasKey(o => new { o.MaraeId });
 
             //Add contraint to stop double up orders being created
 
@@ -24,7 +24,7 @@ namespace HamuaRegistrationApi.DAL
             //    .HasKey(x => new { x.Id });
         }
 
-        public DbSet<NgaMarae> NgaMarae { get; set; }
+        public DbSet<Marae> NgaMarae { get; set; }
 
         //public DbSet<TROSClassShipToAddress> ShipToAddresses { get; set; }
     }

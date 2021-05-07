@@ -18,19 +18,19 @@ namespace HamuaRegistrationApi.DAL.Implementations
             maraeContext = context;
         }
 
-        public async Task<IEnumerable<NgaMarae>> GetAllMaraeAsync(string sortby, string searchString = "")
+        public async Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby, string searchString = "")
         {
             var marae = maraeContext.NgaMarae.Select(x => x);
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                marae = marae.Where(x => x.Area.Contains(searchString) || x.Hapu.Contains(searchString) || x.Marae.Contains(searchString));
+                marae = marae.Where(x => x.Area.Contains(searchString) || x.Hapu.Contains(searchString) || x.Name.Contains(searchString));
             }
 
             switch (sortby)
             {
                 case "marae_desc":
-                    marae = marae.OrderByDescending(s => s.Marae);
+                    marae = marae.OrderByDescending(s => s.Name);
                     break;
 
                 case "hapu":
@@ -42,27 +42,27 @@ namespace HamuaRegistrationApi.DAL.Implementations
                     break;
 
                 default:
-                    marae = marae.OrderBy(s => s.Marae);
+                    marae = marae.OrderBy(s => s.Name);
                     break;
             }
             return await marae.ToListAsync();
         }
 
-        public async Task<IEnumerable<NgaMarae>> GetAllOrdersByAreaAsync(string areaName, string sortby, string searchString = "")
+        public async Task<IEnumerable<Marae>> GetAllOrdersByAreaAsync(string areaName, string sortby, string searchString = "")
         {
             var marae = await GetAllMaraeAsync(sortby, searchString);
 
             return marae.Where(x => x.Area.Equals(areaName)); ;
         }
 
-        public async Task<IEnumerable<NgaMarae>> GetAllOrdersByHapuAsync(string hapuName, string sortby, string searchString = "")
+        public async Task<IEnumerable<Marae>> GetAllOrdersByHapuAsync(string hapuName, string sortby, string searchString = "")
         {
             var marae = await GetAllMaraeAsync(sortby, searchString);
 
             return marae.Where(x => x.Hapu.Equals(hapuName)); ;
         }
 
-        public async Task<NgaMarae> GetMaraeByIdAsync(int id)
+        public async Task<Marae> GetMaraeByIdAsync(int id)
         {
             return await maraeContext.NgaMarae.FindAsync(id);
         }

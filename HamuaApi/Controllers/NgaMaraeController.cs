@@ -13,11 +13,11 @@ namespace HamuaRegistrationApi.Controllers
     [Route("[controller]")]
     public class NgaMaraeController : ControllerBase
     {
-        private readonly ILogger<NgaMarae> _logger;
+        private readonly ILogger<Marae> _logger;
         private IMaraeProvider maraeProvider;
         private IMaraeUpdater maraeUpdater;
 
-        public NgaMaraeController(ILogger<NgaMarae> logger, IMaraeProvider provider, IMaraeUpdater updater)
+        public NgaMaraeController(ILogger<Marae> logger, IMaraeProvider provider, IMaraeUpdater updater)
         {
             _logger = logger;
             maraeProvider = provider;
@@ -53,7 +53,7 @@ namespace HamuaRegistrationApi.Controllers
         }
 
         [HttpPost("[controller]/")]
-        public async Task<IActionResult> GetByIdAsync(NgaMarae newMarae)
+        public async Task<IActionResult> GetByIdAsync(Marae newMarae)
         {
             var marae = await maraeUpdater.CreateMaraeAsync(newMarae);
             return Ok(marae);

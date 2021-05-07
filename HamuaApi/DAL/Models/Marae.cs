@@ -5,17 +5,21 @@ using System.Threading.Tasks;
 
 namespace HamuaRegistrationApi.DAL.Models
 {
-    public class NgaMarae
+    public class Marae
     {
-        public int ID { get; set; }
+        public int MaraeId { get; set; }
         public string Area { get; set; }
 
-        public string Marae { get; set; }
+        public string Name { get; set; }
         public string Hapu { get; set; }
+
+        public IEnumerable<Tangata> NgaTangata { get; set; }
+
+        public int TangataId { get; set; }
 
         //public bool? IsDeleted { get; set; }
 
-        public NgaMarae()
+        public Marae()
         {
         }
     }
