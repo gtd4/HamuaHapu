@@ -13,38 +13,33 @@ namespace HamuaRegistrationApi.Controllers
     [Route("[controller]")]
     public class NgaMaraeController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<NgaMarae> _logger;
-        private IMaraeProvider orderProvider;
+        private IMaraeProvider maraeProvider;
 
         public NgaMaraeController(ILogger<NgaMarae> logger, IMaraeProvider provider)
         {
             _logger = logger;
-            orderProvider = provider;
+            maraeProvider = provider;
         }
 
         [HttpGet]
-        public IEnumerable<NgaMarae> Get()
+        public IEnumerable<NgaMarae> Get(string orderby, string searchString)
         {
-            var ngamarae = orderProvider.GetAllOrders();
+            var ngamarae = maraeProvider.GetAllMarae(orderby, searchString);
             return ngamarae;
         }
 
         [HttpGet("/area/{areaname}")]
-        public IEnumerable<NgaMarae> GetByAreaName(string areaname)
+        public IEnumerable<NgaMarae> GetByAreaName(string areaname, string sortby, string searchString)
         {
-            var ngamarae = orderProvider.GetAllOrdersByArea(areaname);
+            var ngamarae = maraeProvider.GetAllOrdersByArea(areaname, sortby, searchString);
             return ngamarae;
         }
 
         [HttpGet("/hapu/{hapuname}")]
-        public IEnumerable<NgaMarae> GetByHapuName(string hapuname)
+        public IEnumerable<NgaMarae> GetByHapuName(string hapuname, string sortby, string searchString)
         {
-            var ngamarae = orderProvider.GetAllOrdersByHapu(hapuname);
+            var ngamarae = maraeProvider.GetAllOrdersByHapu(hapuname, sortby, searchString);
             return ngamarae;
         }
     }

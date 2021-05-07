@@ -9,10 +9,10 @@ namespace HamuaRegistrationApi.DAL.Interfaces
 {
     public interface IMaraeProvider
     {
-        IEnumerable<NgaMarae> GetAllOrders();
+        IEnumerable<NgaMarae> GetAllMarae(string sortby = "", string searchString = "");
 
-        IEnumerable<NgaMarae> GetAllOrdersByArea(string areaName);
+        IEnumerable<NgaMarae> GetAllOrdersByArea(string areaName, string sortby = "", string searchString = "");
 
-        IEnumerable<NgaMarae> GetAllOrdersByHapu(string areaName);
+        IEnumerable<NgaMarae> GetAllOrdersByHapu(string hapuName, string sortby = "", string searchString = "");
     }
 }
