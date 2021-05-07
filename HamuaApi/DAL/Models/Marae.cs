@@ -13,9 +13,9 @@ namespace HamuaRegistrationApi.DAL.Models
         public string Name { get; set; }
         public string Hapu { get; set; }
 
-        public IEnumerable<Tangata> NgaTangata { get; set; }
+        public ICollection<Tangata> NgaTangata { get; set; } = new List<Tangata>();
 
-        public int TangataId { get; set; }
+        //public int TangataId { get; set; }
 
         //public bool? IsDeleted { get; set; }
 

@@ -31,35 +31,35 @@ namespace HamuaRegistrationApi.Controllers
             return Ok(ngamarae);
         }
 
-        [HttpGet("[controller]/area/{areaname}")]
+        [HttpGet("area/{areaname}")]
         public async Task<IActionResult> GetByAreaNameAsync(string areaname, string sortby, string searchString)
         {
             var ngamarae = await maraeProvider.GetAllMaraeByAreaAsync(areaname, sortby, searchString);
             return Ok(ngamarae);
         }
 
-        [HttpGet("[controller]/hapu/{hapuname}")]
+        [HttpGet("hapu/{hapuname}")]
         public async Task<IActionResult> GetByHapuNameAsync(string hapuname, string sortby, string searchString)
         {
             var ngamarae = await maraeProvider.GetAllMaraeByHapuAsync(hapuname, sortby, searchString);
             return Ok(ngamarae);
         }
 
-        [HttpGet("[controller]/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             var ngamarae = await maraeProvider.GetMaraeByIdAsync(id);
             return Ok(ngamarae);
         }
 
-        [HttpPost("[controller]/")]
+        [HttpPost("")]
         public async Task<IActionResult> CreateMaraeAsync(Marae newMarae)
         {
             var marae = await maraeUpdater.CreateMaraeAsync(newMarae);
             return Ok(marae);
         }
 
-        [HttpPut("[controller]/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateMaraeAsync(int id, string area = "", string maraeName = "", string hapu = "")
         {
             var marae = await maraeUpdater.UpdateMaraeAsync(id, area, maraeName, hapu);

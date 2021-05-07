@@ -47,21 +47,22 @@ namespace HamuaRegistrationApi.Controllers
         //    return Ok();
         //}
 
-        [HttpGet("[controller]/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
             var ngaTangata = await tangataProvider.GetTangataByIdAsync(id);
             return Ok(ngaTangata);
         }
 
-        [HttpPost("[controller]/")]
-        public async Task<IActionResult> CreateTangataAsync(Tangata newTangata)
+        [HttpPost("")]
+        public async Task<IActionResult> CreateTangataAsync([FromBody] Tangata newTangata)
         {
+            //ToDo: Investigate how many to many relationships work
             var tangata = await tangataUpdater.CreateTangataAsync(newTangata);
             return Ok(tangata);
         }
 
-        [HttpPut("[controller]/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTangataAsync(int id, string firstName = "", string lastname = "")
         {
             var tangata = await tangataUpdater.UpdateTangataAsync(id, firstName, lastname);

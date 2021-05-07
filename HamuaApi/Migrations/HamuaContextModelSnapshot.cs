@@ -34,9 +34,6 @@ namespace HamuaRegistrationApi.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TangataId")
-                        .HasColumnType("int");
-
                     b.HasKey("MaraeId");
 
                     b.ToTable("NgaMarae");
@@ -47,304 +44,266 @@ namespace HamuaRegistrationApi.Migrations
                             MaraeId = 1,
                             Area = "Rūātoki",
                             Hapu = "Ngāti Tāwhaki",
-                            Name = "Ngāhina",
-                            TangataId = 0
+                            Name = "Ngāhina"
                         },
                         new
                         {
                             MaraeId = 2,
                             Area = "Rūātoki",
                             Hapu = "Te Whānau Pani",
-                            Name = "Ōhotu",
-                            TangataId = 0
+                            Name = "Ōhotu"
                         },
                         new
                         {
                             MaraeId = 3,
                             Area = "Rūātoki",
                             Hapu = "Ngāti Kōura",
-                            Name = "Ōtenuku",
-                            TangataId = 0
+                            Name = "Ōtenuku"
                         },
                         new
                         {
                             MaraeId = 4,
                             Area = "Rūātoki",
                             Hapu = "Ngāti Rongo",
-                            Name = "Ōwhakatoro",
-                            TangataId = 0
+                            Name = "Ōwhakatoro"
                         },
                         new
                         {
                             MaraeId = 5,
                             Area = "Rūātoki",
                             Hapu = "Ngāti Rongo",
-                            Name = "Paneteure",
-                            TangataId = 0
+                            Name = "Paneteure"
                         },
                         new
                         {
                             MaraeId = 6,
                             Area = "Rūātok",
                             Hapu = "Ngāti Kōura",
-                            Name = "Papakāinga",
-                            TangataId = 0
+                            Name = "Papakāinga"
                         },
                         new
                         {
                             MaraeId = 7,
                             Area = "Rūātoki",
                             Hapu = "Te Māhurehure",
-                            Name = "Te Rewarewa",
-                            TangataId = 0
+                            Name = "Te Rewarewa"
                         },
                         new
                         {
                             MaraeId = 8,
                             Area = "Rūātoki",
                             Hapu = "Ngāti Rongo",
-                            Name = "Tauarau",
-                            TangataId = 0
+                            Name = "Tauarau"
                         },
                         new
                         {
                             MaraeId = 9,
                             Area = "Rūātoki",
                             Hapu = "Ngāti Mura",
-                            Name = "Te Poho o Te Rangimōnoa",
-                            TangataId = 0
+                            Name = "Te Poho o Te Rangimōnoa"
                         },
                         new
                         {
                             MaraeId = 10,
                             Area = "Rūātoki",
                             Hapu = "Te Urewera",
-                            Name = "Te Tōtara",
-                            TangataId = 0
+                            Name = "Te Tōtara"
                         },
                         new
                         {
                             MaraeId = 11,
                             Area = "Ruatāhuna",
                             Hapu = "Te Urewera",
-                            Name = "Mātatua",
-                            TangataId = 0
+                            Name = "Mātatua"
                         },
                         new
                         {
                             MaraeId = 12,
                             Area = "Ruatāhuna",
                             Hapu = "Ngāti Rongo",
-                            Name = "Ōhāua",
-                            TangataId = 0
+                            Name = "Ōhāua"
                         },
                         new
                         {
                             MaraeId = 13,
                             Area = "Ruatāhuna",
                             Hapu = "Ngāti Tāwhaki",
-                            Name = "Ōpūtao",
-                            TangataId = 0
+                            Name = "Ōpūtao"
                         },
                         new
                         {
                             MaraeId = 14,
                             Area = "Ruatāhuna",
                             Hapu = "Tamakaimoana",
-                            Name = "Ōtekura",
-                            TangataId = 0
+                            Name = "Ōtekura"
                         },
                         new
                         {
                             MaraeId = 15,
                             Area = "Ruatāhuna",
                             Hapu = "Ngāti Tāwhaki",
-                            Name = "Pāpueru",
-                            TangataId = 0
+                            Name = "Pāpueru"
                         },
                         new
                         {
                             MaraeId = 16,
                             Area = "Ruatāhuna",
                             Hapu = "Ngāi Te Riu",
-                            Name = "Tātāhoata",
-                            TangataId = 0
+                            Name = "Tātāhoata"
                         },
                         new
                         {
                             MaraeId = 17,
                             Area = "Ruatāhuna",
                             Hapu = "Ngāti Manunui",
-                            Name = "Te Umuroa",
-                            TangataId = 0
+                            Name = "Te Umuroa"
                         },
                         new
                         {
                             MaraeId = 18,
                             Area = "Ruatāhuna",
                             Hapu = "Ngāti Kurīkino",
-                            Name = "Te Wai-iti",
-                            TangataId = 0
+                            Name = "Te Wai-iti"
                         },
                         new
                         {
                             MaraeId = 19,
                             Area = "Ruatāhuna",
                             Hapu = "Kākahu Tāpiki",
-                            Name = "Tīpapa",
-                            TangataId = 0
+                            Name = "Tīpapa"
                         },
                         new
                         {
                             MaraeId = 20,
                             Area = "Ruatāhuna",
                             Hapu = "Ngāi Te Paena",
-                            Name = "Uwhiārae",
-                            TangataId = 0
+                            Name = "Uwhiārae"
                         },
                         new
                         {
                             MaraeId = 21,
                             Area = "Te Whāiti",
                             Hapu = "Te Karaha Warahoe",
-                            Name = "Waikotikoti",
-                            TangataId = 0
+                            Name = "Waikotikoti"
                         },
                         new
                         {
                             MaraeId = 22,
                             Area = "Waikaremoana",
                             Hapu = "Ngāti Ruapani ki Waikaremoana Ngāti Hinekura",
-                            Name = "Te Kūhā Tārewa",
-                            TangataId = 0
+                            Name = "Te Kūhā Tārewa"
                         },
                         new
                         {
                             MaraeId = 23,
                             Area = "Waikaremoana",
                             Hapu = "Te Whānau Pani",
-                            Name = "Waimako",
-                            TangataId = 0
+                            Name = "Waimako"
                         },
                         new
                         {
                             MaraeId = 24,
                             Area = "Waiōhau",
                             Hapu = "Ngāti Haka Patuheuheu",
-                            Name = "Waiōhau",
-                            TangataId = 0
+                            Name = "Waiōhau"
                         },
                         new
                         {
                             MaraeId = 25,
                             Area = "Waimana",
                             Hapu = "Ngāti Kōura",
-                            Name = "Kahikatea",
-                            TangataId = 0
+                            Name = "Kahikatea"
                         },
                         new
                         {
                             MaraeId = 26,
                             Area = "Waimana",
                             Hapu = "Tūranga Pikitoi",
-                            Name = "Kutarere",
-                            TangataId = 0
+                            Name = "Kutarere"
                         },
                         new
                         {
                             MaraeId = 27,
                             Area = "Waimana",
                             Hapu = "Ngāi Tamatea",
-                            Name = "Maromahue",
-                            TangataId = 0
+                            Name = "Maromahue"
                         },
                         new
                         {
                             MaraeId = 28,
                             Area = "Waimana",
                             Hapu = "Ngāi Tamatuhirae",
-                            Name = "Matahī",
-                            TangataId = 0
+                            Name = "Matahī"
                         },
                         new
                         {
                             MaraeId = 29,
                             Area = "Waimana",
                             Hapu = "Ngāi Tātua Tamakaimoana",
-                            Name = "Piripari",
-                            TangataId = 0
+                            Name = "Piripari"
                         },
                         new
                         {
                             MaraeId = 30,
                             Area = "Waimana",
                             Hapu = "Ngāti Rere",
-                            Name = "Rāhiri",
-                            TangataId = 0
+                            Name = "Rāhiri"
                         },
                         new
                         {
                             MaraeId = 31,
                             Area = "Waimana",
                             Hapu = "Tamaruarangi",
-                            Name = "Rāroa",
-                            TangataId = 0
+                            Name = "Rāroa"
                         },
                         new
                         {
                             MaraeId = 32,
                             Area = "Waimana",
                             Hapu = "Ngāti Rere",
-                            Name = "Tanatana",
-                            TangataId = 0
+                            Name = "Tanatana"
                         },
                         new
                         {
                             MaraeId = 33,
                             Area = "Waimana",
                             Hapu = "Ngāti Raka",
-                            Name = "Tātaiāhape",
-                            TangataId = 0
+                            Name = "Tātaiāhape"
                         },
                         new
                         {
                             MaraeId = 34,
                             Area = "Waimana",
                             Hapu = "Te Whakatāne",
-                            Name = "Tauanui",
-                            TangataId = 0
+                            Name = "Tauanui"
                         },
                         new
                         {
                             MaraeId = 35,
                             Area = "Waimana",
                             Hapu = "Tūranga Pikitoi')",
-                            Name = "Te Pou a Hīnau",
-                            TangataId = 0
+                            Name = "Te Pou a Hīnau"
                         },
                         new
                         {
                             MaraeId = 36,
                             Area = "Waimana",
                             Hapu = "Tamakaimoana",
-                            Name = "Tuapō",
-                            TangataId = 0
+                            Name = "Tuapō"
                         },
                         new
                         {
                             MaraeId = 37,
                             Area = "Waimana",
                             Hapu = "Te Whakatāne",
-                            Name = "Whakara",
-                            TangataId = 0
+                            Name = "Whakara"
                         },
                         new
                         {
                             MaraeId = 38,
                             Area = "Maungapōhatu",
                             Hapu = "Tamakaimoana Ngāti Huri",
-                            Name = "ManungapōhatuT",
-                            TangataId = 0
+                            Name = "ManungapōhatuT"
                         });
                 });
 
@@ -361,7 +320,7 @@ namespace HamuaRegistrationApi.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MaraeId")
+                    b.Property<int>("ParentId")
                         .HasColumnType("int");
 
                     b.HasKey("TangataId");

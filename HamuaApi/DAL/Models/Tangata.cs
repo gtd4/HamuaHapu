@@ -12,9 +12,10 @@ namespace HamuaRegistrationApi.DAL.Models
 
         public string LastName { get; set; }
 
-        public IEnumerable<Marae> NgaMarae { get; set; }
+        public int ParentId { get; set; }
 
-        public int MaraeId { get; set; }
+        public ICollection<Marae> NgaMarae { get; set; } = new List<Marae>();
+        //public int MaraeId { get; set; }
 
         //public bool? IsDeleted { get; set; }
 

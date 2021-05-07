@@ -24,10 +24,18 @@ namespace HamuaRegistrationApi.DAL.Implementations
         {
             try
             {
-                await tangataContext.NgaTangata.AddAsync(newTangata);
-                await tangataContext.SaveChangesAsync();
+                var tangata = new Tangata { FirstName = newTangata.FirstName, LastName = newTangata.LastName };
 
-                return newTangata;
+                foreach (var marae in newTangata.NgaMarae)
+                {
+                    var savedMarae = await tangataContext.NgaMarae.FindAsync(marae.MaraeId);
+                    tangata.NgaMarae.Add(marae);
+                }
+
+                //await tangataContext.NgaTangata.AddAsync(tangata);
+                var id = await tangataContext.SaveChangesAsync();
+
+                return await tangataContext.NgaTangata.FindAsync(id);
             }
             catch (Exception)
             {
