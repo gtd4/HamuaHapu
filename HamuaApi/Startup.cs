@@ -34,6 +34,8 @@ namespace WebApplication1
             services.AddSwaggerGen();
             services.AddScoped<IMaraeProvider, MaraeProvider>();
             services.AddScoped<IMaraeUpdater, MaraeUpdater>();
+            services.AddScoped<ITangataProvider, TangataProvider>();
+            services.AddScoped<ITangataUpdater, TangataUpdater>();
 
             var con = Configuration.GetConnectionString("Default");
 

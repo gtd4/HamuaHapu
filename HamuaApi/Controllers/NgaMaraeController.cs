@@ -34,14 +34,14 @@ namespace HamuaRegistrationApi.Controllers
         [HttpGet("[controller]/area/{areaname}")]
         public async Task<IActionResult> GetByAreaNameAsync(string areaname, string sortby, string searchString)
         {
-            var ngamarae = await maraeProvider.GetAllOrdersByAreaAsync(areaname, sortby, searchString);
+            var ngamarae = await maraeProvider.GetAllMaraeByAreaAsync(areaname, sortby, searchString);
             return Ok(ngamarae);
         }
 
         [HttpGet("[controller]/hapu/{hapuname}")]
         public async Task<IActionResult> GetByHapuNameAsync(string hapuname, string sortby, string searchString)
         {
-            var ngamarae = await maraeProvider.GetAllOrdersByHapuAsync(hapuname, sortby, searchString);
+            var ngamarae = await maraeProvider.GetAllMaraeByHapuAsync(hapuname, sortby, searchString);
             return Ok(ngamarae);
         }
 

@@ -56,14 +56,14 @@ namespace HamuaRegistrationApi.DAL.Implementations
             return await marae.ToListAsync();
         }
 
-        public async Task<IEnumerable<Marae>> GetAllOrdersByAreaAsync(string areaName, string sortby, string searchString = "")
+        public async Task<IEnumerable<Marae>> GetAllMaraeByAreaAsync(string areaName, string sortby, string searchString = "")
         {
             var marae = await GetAllMaraeAsync(sortby, searchString);
 
             return marae.Where(x => x.Area.Equals(areaName)); ;
         }
 
-        public async Task<IEnumerable<Marae>> GetAllOrdersByHapuAsync(string hapuName, string sortby, string searchString = "")
+        public async Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby, string searchString = "")
         {
             var marae = await GetAllMaraeAsync(sortby, searchString);
 

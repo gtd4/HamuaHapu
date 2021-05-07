@@ -11,9 +11,9 @@ namespace HamuaRegistrationApi.DAL.Interfaces
     {
         Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby = "", string searchString = "");
 
-        Task<IEnumerable<Marae>> GetAllOrdersByAreaAsync(string areaName, string sortby = "", string searchString = "");
+        Task<IEnumerable<Marae>> GetAllMaraeByAreaAsync(string areaName, string sortby = "", string searchString = "");
 
-        Task<IEnumerable<Marae>> GetAllOrdersByHapuAsync(string hapuName, string sortby = "", string searchString = "");
+        Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby = "", string searchString = "");
 
         Task<Marae> GetMaraeByIdAsync(int id);
     }
