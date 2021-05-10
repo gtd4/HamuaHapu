@@ -7,6 +7,7 @@ using HamuaRegistrationApi.DAL.Implementations;
 using HamuaRegistrationApi.DAL.Interfaces;
 using HamuaRegistrationApi.DAL.Services.Implementations;
 using HamuaRegistrationApi.DAL.Services.Interfaces;
+using HamuaRegistrationApi.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,7 +34,7 @@ namespace WebApplication1
         {
             services.AddControllers();
             //ToDo: Sort out automapper config
-            //services.AddAutoMapper();
+            services.AddAutoMapper(typeof(ModelToResourceProfile));
 
             services.AddSwaggerGen();
             services.AddControllers().AddNewtonsoftJson(options =>
