@@ -27,24 +27,24 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby = "", string searchString = "", bool include = false)
+        public async Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby = "", string searchString = "", bool include = false)
         {
-            throw new NotImplementedException();
+            return await maraeProvider.GetAllMaraeAsync(sortby, searchString, include);
         }
 
-        public Task<IEnumerable<Marae>> GetAllMaraeByAreaAsync(string areaName, string sortby = "", string searchString = "", bool include = false)
+        public async Task<IEnumerable<Marae>> GetAllMaraeByAreaAsync(string areaName, string sortby = "", string searchString = "", bool include = false)
         {
-            throw new NotImplementedException();
+            return await maraeProvider.GetAllMaraeByAreaAsync(areaName, sortby, searchString, include);
         }
 
-        public Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby = "", string searchString = "", bool include = false)
+        public async Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby = "", string searchString = "", bool include = false)
         {
-            throw new NotImplementedException();
+            return await maraeProvider.GetAllMaraeByHapuAsync(hapuName, sortby, searchString, include);
         }
 
-        public Task<Marae> GetMaraeByIdAsync(int id, bool include = false)
+        public async Task<Marae> GetMaraeByIdAsync(int id, bool include = false)
         {
-            throw new NotImplementedException();
+            return await maraeProvider.GetMaraeByIdAsync(id, include);
         }
 
         public Task<Marae> UpdateMaraeAsync(int id, string area, string maraeName, string hapu)

@@ -9,18 +9,15 @@ using System.Threading.Tasks;
 namespace HamuaRegistrationApi.DAL.Implementations
 
 {
-    public class TangataProvider : ITangataProvider
+    public class TangataProvider : BaseProvider, ITangataProvider
     {
-        private HamuaContext tangataContext;
-
-        public TangataProvider(HamuaContext context)
+        public TangataProvider(HamuaContext context) : base(context)
         {
-            tangataContext = context;
         }
 
         public async Task<IEnumerable<Tangata>> GetAllTangataAsync(string sortby = "", string searchString = "", bool include = false)
         {
-            var tangata = tangataContext.NgaTangata.Select(x => x);
+            var tangata = hamuaContext.NgaTangata.Select(x => x);
 
             if (include)
             {
@@ -57,10 +54,10 @@ namespace HamuaRegistrationApi.DAL.Implementations
         {
             if (include)
             {
-                return await tangataContext.NgaTangata.Include(x => x.NgaMarae).FirstOrDefaultAsync(x => x.TangataId == id);
+                return await hamuaContext.NgaTangata.Include(x => x.NgaMarae).FirstOrDefaultAsync(x => x.TangataId == id);
             }
 
-            return await tangataContext.NgaTangata.FindAsync(id);
+            return await hamuaContext.NgaTangata.FindAsync(id);
         }
     }
 }

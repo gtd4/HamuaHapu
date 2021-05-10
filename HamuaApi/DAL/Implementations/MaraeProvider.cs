@@ -9,18 +9,15 @@ using System.Threading.Tasks;
 namespace HamuaRegistrationApi.DAL.Implementations
 
 {
-    public class MaraeProvider : IMaraeProvider
+    public class MaraeProvider : BaseProvider, IMaraeProvider
     {
-        private HamuaContext maraeContext;
-
-        public MaraeProvider(HamuaContext context)
+        public MaraeProvider(HamuaContext context) : base(context)
         {
-            maraeContext = context;
         }
 
         public async Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby = "", string searchString = "", bool include = false)
         {
-            var marae = maraeContext.NgaMarae.Select(x => x);
+            var marae = hamuaContext.NgaMarae.Select(x => x);
 
             if (include)
             {
@@ -79,10 +76,10 @@ namespace HamuaRegistrationApi.DAL.Implementations
         {
             if (include)
             {
-                return await maraeContext.NgaMarae.Include(x => x.NgaTangata).FirstOrDefaultAsync();
+                return await hamuaContext.NgaMarae.Include(x => x.NgaTangata).FirstOrDefaultAsync();
             }
 
-            return await maraeContext.NgaMarae.FindAsync(id);
+            return await hamuaContext.NgaMarae.FindAsync(id);
         }
     }
 }

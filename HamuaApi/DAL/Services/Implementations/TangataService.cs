@@ -27,14 +27,14 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Tangata>> GetAllTangataAsync(string sortby = "", string searchString = "", bool include = false)
+        public async Task<IEnumerable<Tangata>> GetAllTangataAsync(string sortby = "", string searchString = "", bool include = false)
         {
-            throw new NotImplementedException();
+            return await tangataProvider.GetAllTangataAsync(sortby, searchString, include);
         }
 
-        public Task<Tangata> GetTangataByIdAsync(int id, bool include = false)
+        public async Task<Tangata> GetTangataByIdAsync(int id, bool include = false)
         {
-            throw new NotImplementedException();
+            return await tangataProvider.GetTangataByIdAsync(id, include);
         }
 
         public Task<Tangata> UpdateTangataAsync(int id, string firstName, string lastName)
