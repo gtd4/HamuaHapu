@@ -20,7 +20,7 @@ namespace HamuaRegistrationApi.DAL.Implementations
             tangataProvider = provider;
         }
 
-        public async Task<Tangata> CreateTangataAsync(Tangata newTangata, int parentId = 0)
+        public async Task<Tangata> CreateTangataAsync(Tangata newTangata, int parentId = 0, int childId = 0)
         {
             try
             {
@@ -63,6 +63,23 @@ namespace HamuaRegistrationApi.DAL.Implementations
                         else
                         {
                             tangata.Father = parent;
+                        }
+                    }
+                }
+
+                if (childId > 0)
+                {
+                    var child = await tangataProvider.GetTangataByIdAsync(parentId);
+
+                    if (child != null)
+                    {
+                        if (tangata.Gender.ToUpper().Equals("FEMALE"))
+                        {
+                            child.Mother = tangata;
+                        }
+                        else
+                        {
+                            child.Father = tangata;
                         }
                     }
                 }
@@ -114,6 +131,11 @@ namespace HamuaRegistrationApi.DAL.Implementations
         public async Task<Tangata> AddChild(Tangata newTangata, int parentId)
         {
             return await CreateTangataAsync(newTangata, parentId);
+        }
+
+        public async Task<Tangata> AddParent(Tangata newTangata, int childId)
+        {
+            return await CreateTangataAsync(newTangata, 0, childId);
         }
     }
 }

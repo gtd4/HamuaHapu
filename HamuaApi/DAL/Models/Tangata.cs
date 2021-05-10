@@ -32,6 +32,10 @@ namespace HamuaRegistrationApi.DAL.Models
         public bool ReturnToRuatokiToLive { get; set; }
         public string ReturnComment { get; set; }
 
+        public string Facebook { get; set; }
+        public string Twitter { get; set; }
+        public string Instagram { get; set; }
+
         //public string FathersName { get; set; }
         //public string FathersPrimaryIwi { get; set; }
         //public string FathersPrimaryHapu { get; set; }
