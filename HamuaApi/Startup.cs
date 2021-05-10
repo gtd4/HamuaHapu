@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using HamuaRegistrationApi.DAL;
 using HamuaRegistrationApi.DAL.Implementations;
 using HamuaRegistrationApi.DAL.Interfaces;
+using HamuaRegistrationApi.DAL.Services.Implementations;
+using HamuaRegistrationApi.DAL.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +32,8 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            //ToDo: Sort out automapper config
+            //services.AddAutoMapper();
 
             services.AddSwaggerGen();
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -39,6 +43,9 @@ namespace WebApplication1
             services.AddScoped<IMaraeUpdater, MaraeUpdater>();
             services.AddScoped<ITangataProvider, TangataProvider>();
             services.AddScoped<ITangataUpdater, TangataUpdater>();
+
+            services.AddScoped<IMaraeService, MaraeService>();
+            services.AddScoped<ITangataService, TangataService>();
 
             var con = Configuration.GetConnectionString("Default");
 

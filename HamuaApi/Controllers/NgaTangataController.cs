@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HamuaRegistrationApi.DAL.Interfaces;
 using HamuaRegistrationApi.DAL.Models;
+using HamuaRegistrationApi.DAL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -14,27 +15,27 @@ namespace HamuaRegistrationApi.Controllers
     public class NgaTangataController : ControllerBase
     {
         private readonly ILogger<Marae> _logger;
-        private ITangataProvider tangataProvider;
+        private ITangataService tangataService;
         private ITangataUpdater tangataUpdater;
 
-        public NgaTangataController(ILogger<Marae> logger, ITangataProvider provider, ITangataUpdater updater)
+        public NgaTangataController(ILogger<Marae> logger, ITangataService service, ITangataUpdater updater)
         {
             _logger = logger;
-            tangataProvider = provider;
+            tangataService = service;
             tangataUpdater = updater;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAsync(string orderby, string searchString, bool include)
         {
-            var ngaTangata = await tangataProvider.GetAllTangataAsync(orderby, searchString, include);
+            var ngaTangata = await tangataService.GetAllTangataAsync(orderby, searchString, include);
             return Ok(ngaTangata);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id, bool include)
         {
-            var ngaTangata = await tangataProvider.GetTangataByIdAsync(id, include);
+            var ngaTangata = await tangataService.GetTangataByIdAsync(id, include);
             return Ok(ngaTangata);
         }
 
@@ -42,7 +43,7 @@ namespace HamuaRegistrationApi.Controllers
         public async Task<IActionResult> CreateTangataAsync([FromBody] Tangata newTangata)
         {
             //ToDo: Investigate how many to many relationships work
-            var tangata = await tangataUpdater.CreateTangataAsync(newTangata);
+            var tangata = await tangataService.CreateTangataAsync(newTangata);
             return Ok(tangata);
         }
 
@@ -51,7 +52,7 @@ namespace HamuaRegistrationApi.Controllers
         {
             //ToDo: Investigate how many to many relationships work
 
-            var tangata = await tangataUpdater.AddChild(newTangata, parentId);
+            var tangata = await tangataService.AddChild(newTangata, parentId);
             return Ok(tangata);
         }
 
@@ -60,14 +61,14 @@ namespace HamuaRegistrationApi.Controllers
         {
             //ToDo: Investigate how many to many relationships work
 
-            var tangata = await tangataUpdater.AddChild(newTangata, parentId);
+            var tangata = await tangataService.AddChild(newTangata, parentId);
             return Ok(tangata);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTangataAsync(int id, string firstName = "", string lastname = "")
         {
-            var tangata = await tangataUpdater.UpdateTangataAsync(id, firstName, lastname);
+            var tangata = await tangataService.UpdateTangataAsync(id, firstName, lastname);
             return Ok(tangata);
         }
     }
