@@ -66,6 +66,11 @@ namespace HamuaRegistrationApi.DAL
             //    .HasKey(x => new { x.Id });
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
+
         public DbSet<Marae> NgaMarae { get; set; }
         public DbSet<Tangata> NgaTangata { get; set; }
 

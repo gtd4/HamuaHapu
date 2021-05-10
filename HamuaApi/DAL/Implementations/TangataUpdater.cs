@@ -24,12 +24,36 @@ namespace HamuaRegistrationApi.DAL.Implementations
         {
             try
             {
-                var tangata = new Tangata { FirstName = newTangata.FirstName, LastName = newTangata.LastName };
+                var tangata = new Tangata
+                {
+                    FirstName = newTangata.FirstName,
+                    LastName = newTangata.LastName,
+                    DOB = newTangata.DOB,
+                    PlaceOfBirth = newTangata.PlaceOfBirth,
+                    Occupation = newTangata.Occupation,
+                    SpecialtySkills = newTangata.SpecialtySkills,
+                    Address1 = newTangata.Address1,
+                    Address2 = newTangata.Address2,
+                    Address3 = newTangata.Address3,
+                    PostCode = newTangata.PostCode,
+                    Country = newTangata.Country,
+                    HomePhone = newTangata.HomePhone,
+                    Mobile = newTangata.Mobile,
+                    Email = newTangata.Email,
+                    IsTeReoFirstLanguage = newTangata.IsTeReoFirstLanguage,
+                    CanYouSpeakTeReo = newTangata.CanYouSpeakTeReo,
+                    TeReoProficiency = newTangata.TeReoProficiency,
+                    ReturnToRuatokiToLive = newTangata.ReturnToRuatokiToLive,
+                    ReturnComment = newTangata.ReturnComment,
+                    ParentId = newTangata.ParentId
+                };
+
+                await tangataContext.NgaTangata.AddAsync(tangata);
 
                 foreach (var marae in newTangata.NgaMarae)
                 {
                     var savedMarae = await tangataContext.NgaMarae.FindAsync(marae.MaraeId);
-                    tangata.NgaMarae.Add(marae);
+                    savedMarae.NgaTangata.Add(tangata);
                 }
 
                 //await tangataContext.NgaTangata.AddAsync(tangata);

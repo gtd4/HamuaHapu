@@ -18,9 +18,14 @@ namespace HamuaRegistrationApi.DAL.Implementations
             maraeContext = context;
         }
 
-        public async Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby, string searchString = "")
+        public async Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby = "", string searchString = "", bool include = false)
         {
             var marae = maraeContext.NgaMarae.Select(x => x);
+
+            if (include)
+            {
+                marae = marae.Include(x => x.NgaTangata);
+            }
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -56,23 +61,25 @@ namespace HamuaRegistrationApi.DAL.Implementations
             return await marae.ToListAsync();
         }
 
-        public async Task<IEnumerable<Marae>> GetAllMaraeByAreaAsync(string areaName, string sortby, string searchString = "")
+        public async Task<IEnumerable<Marae>> GetAllMaraeByAreaAsync(string areaName, string sortby, string searchString = "", bool include = false)
         {
-            var marae = await GetAllMaraeAsync(sortby, searchString);
+            var marae = await GetAllMaraeAsync(sortby, searchString, include);
 
             return marae.Where(x => x.Area.Equals(areaName)); ;
         }
 
-        public async Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby, string searchString = "")
+        public async Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby, string searchString = "", bool include = false)
         {
-            var marae = await GetAllMaraeAsync(sortby, searchString);
+            var marae = await GetAllMaraeAsync(sortby, searchString, include);
 
             return marae.Where(x => x.Hapu.Equals(hapuName)); ;
         }
 
-        public async Task<Marae> GetMaraeByIdAsync(int id)
+        public async Task<Marae> GetMaraeByIdAsync(int id, bool include = false)
         {
-            return await maraeContext.NgaMarae.FindAsync(id);
+            var marae = await GetAllMaraeAsync("", "", include);
+
+            return marae.Where(x => x.MaraeId == id).FirstOrDefault();
         }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HamuaRegistrationApi.Migrations
 {
     [DbContext(typeof(HamuaContext))]
-    [Migration("20210507200416_first")]
+    [Migration("20210510041251_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -316,14 +316,65 @@ namespace HamuaRegistrationApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Address1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("CanYouSpeakTeReo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DOB")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HomePhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsTeReoFirstLanguage")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Mobile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Occupation")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ParentId")
                         .HasColumnType("int");
+
+                    b.Property<string>("PlaceOfBirth")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReturnComment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ReturnToRuatokiToLive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SpecialtySkills")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TeReoProficiency")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TangataId");
 

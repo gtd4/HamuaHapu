@@ -25,30 +25,30 @@ namespace HamuaRegistrationApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAsync(string orderby, string searchString)
+        public async Task<IActionResult> GetAsync(string orderby, string searchString, bool include)
         {
-            var ngamarae = await maraeProvider.GetAllMaraeAsync(orderby, searchString);
+            var ngamarae = await maraeProvider.GetAllMaraeAsync(orderby, searchString, include);
             return Ok(ngamarae);
         }
 
         [HttpGet("area/{areaname}")]
-        public async Task<IActionResult> GetByAreaNameAsync(string areaname, string sortby, string searchString)
+        public async Task<IActionResult> GetByAreaNameAsync(string areaname, string sortby, string searchString, bool include)
         {
-            var ngamarae = await maraeProvider.GetAllMaraeByAreaAsync(areaname, sortby, searchString);
+            var ngamarae = await maraeProvider.GetAllMaraeByAreaAsync(areaname, sortby, searchString, include);
             return Ok(ngamarae);
         }
 
         [HttpGet("hapu/{hapuname}")]
-        public async Task<IActionResult> GetByHapuNameAsync(string hapuname, string sortby, string searchString)
+        public async Task<IActionResult> GetByHapuNameAsync(string hapuname, string sortby, string searchString, bool include)
         {
-            var ngamarae = await maraeProvider.GetAllMaraeByHapuAsync(hapuname, sortby, searchString);
+            var ngamarae = await maraeProvider.GetAllMaraeByHapuAsync(hapuname, sortby, searchString, include);
             return Ok(ngamarae);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync(int id)
+        public async Task<IActionResult> GetByIdAsync(int id, bool include)
         {
-            var ngamarae = await maraeProvider.GetMaraeByIdAsync(id);
+            var ngamarae = await maraeProvider.GetMaraeByIdAsync(id, include);
             return Ok(ngamarae);
         }
 

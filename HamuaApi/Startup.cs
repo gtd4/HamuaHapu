@@ -32,6 +32,9 @@ namespace WebApplication1
             services.AddControllers();
 
             services.AddSwaggerGen();
+            services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
             services.AddScoped<IMaraeProvider, MaraeProvider>();
             services.AddScoped<IMaraeUpdater, MaraeUpdater>();
             services.AddScoped<ITangataProvider, TangataProvider>();
