@@ -18,6 +18,20 @@ namespace HamuaRegistrationApi.DAL
             //modelBuilder.Entity<Marae>()
             //.HasKey(o => new { o.MaraeId });
 
+            modelBuilder.Entity<Tangata>()
+                .HasOne(mother => mother.Mother)
+                .WithMany(x => x.Children)
+                .HasForeignKey(x => x.MotherID);
+
+            modelBuilder.Entity<Tangata>()
+                .Ignore(x => x.Children)
+                .HasOne(father => father.Father)
+                .WithMany(x => x.Children)
+                .HasForeignKey(x => x.FatherID);
+
+            //modelBuilder.Entity<Tangata>()
+            //    .HasMany(x => x.Children);
+
             modelBuilder.Entity<Marae>().HasData(
                 new Marae { MaraeId = 1, Area = "Rūātoki", Name = "Ngāhina", Hapu = "Ngāti Tāwhaki" },
                 new Marae { MaraeId = 2, Area = "Rūātoki", Name = "Ōhotu", Hapu = "Te Whānau Pani" },

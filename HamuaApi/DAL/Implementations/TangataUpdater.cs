@@ -20,7 +20,7 @@ namespace HamuaRegistrationApi.DAL.Implementations
             tangataProvider = provider;
         }
 
-        public async Task<Tangata> CreateTangataAsync(Tangata newTangata)
+        public async Task<Tangata> CreateTangataAsync(Tangata newTangata, int parentId = 0)
         {
             try
             {
@@ -45,10 +45,27 @@ namespace HamuaRegistrationApi.DAL.Implementations
                     TeReoProficiency = newTangata.TeReoProficiency,
                     ReturnToRuatokiToLive = newTangata.ReturnToRuatokiToLive,
                     ReturnComment = newTangata.ReturnComment,
-                    ParentId = newTangata.ParentId
+                    //ParentId = newTangata.ParentId
                 };
 
                 await tangataContext.NgaTangata.AddAsync(tangata);
+
+                if (parentId > 0)
+                {
+                    var parent = await tangataProvider.GetTangataByIdAsync(parentId);
+
+                    if (parent != null)
+                    {
+                        if (parent.Gender.ToUpper().Equals("FEMALE"))
+                        {
+                            tangata.Mother = parent;
+                        }
+                        else
+                        {
+                            tangata.Father = parent;
+                        }
+                    }
+                }
 
                 foreach (var marae in newTangata.NgaMarae)
                 {
@@ -57,9 +74,9 @@ namespace HamuaRegistrationApi.DAL.Implementations
                 }
 
                 //await tangataContext.NgaTangata.AddAsync(tangata);
-                var id = await tangataContext.SaveChangesAsync();
+                await tangataContext.SaveChangesAsync();
 
-                return await tangataContext.NgaTangata.FindAsync(id);
+                return tangata;
             }
             catch (Exception)
             {
@@ -92,6 +109,11 @@ namespace HamuaRegistrationApi.DAL.Implementations
             {
                 throw;
             }
+        }
+
+        public async Task<Tangata> AddChild(Tangata newTangata, int parentId)
+        {
+            return await CreateTangataAsync(newTangata, parentId);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace HamuaRegistrationApi.DAL.Models
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+        public string Gender { get; set; }
 
         public string DOB { get; set; }
         public string PlaceOfBirth { get; set; }
@@ -31,7 +32,19 @@ namespace HamuaRegistrationApi.DAL.Models
         public bool ReturnToRuatokiToLive { get; set; }
         public string ReturnComment { get; set; }
 
-        public int ParentId { get; set; }
+        //public string FathersName { get; set; }
+        //public string FathersPrimaryIwi { get; set; }
+        //public string FathersPrimaryHapu { get; set; }
+        //public string MothersName { get; set; }
+        //public string MothersPrimaryIwi { get; set; }
+        //public string MothersPrimaryHapu { get; set; }
+
+        public Tangata Mother { get; set; }
+        public int? MotherID { get; set; }
+        public Tangata Father { get; set; }
+        public int? FatherID { get; set; }
+
+        public ICollection<Tangata> Children { get; set; } = new List<Tangata>();
 
         public ICollection<Marae> NgaMarae { get; set; } = new List<Marae>();
         //public int MaraeId { get; set; }

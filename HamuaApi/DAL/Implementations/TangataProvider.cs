@@ -18,9 +18,14 @@ namespace HamuaRegistrationApi.DAL.Implementations
             tangataContext = context;
         }
 
-        public async Task<IEnumerable<Tangata>> GetAllTangataAsync(string sortby = "", string searchString = "")
+        public async Task<IEnumerable<Tangata>> GetAllTangataAsync(string sortby = "", string searchString = "", bool include = false)
         {
             var tangata = tangataContext.NgaTangata.Select(x => x);
+
+            if (include)
+            {
+                tangata = tangata.Include(x => x.NgaMarae);
+            }
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -48,8 +53,13 @@ namespace HamuaRegistrationApi.DAL.Implementations
             return await tangata.ToListAsync();
         }
 
-        public async Task<Tangata> GetTangataByIdAsync(int id)
+        public async Task<Tangata> GetTangataByIdAsync(int id, bool include = false)
         {
+            if (include)
+            {
+                return await tangataContext.NgaTangata.Include(x => x.NgaMarae).FirstOrDefaultAsync(x => x.TangataId == id);
+            }
+
             return await tangataContext.NgaTangata.FindAsync(id);
         }
     }

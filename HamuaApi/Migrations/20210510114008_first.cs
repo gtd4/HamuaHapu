@@ -46,11 +46,24 @@ namespace HamuaRegistrationApi.Migrations
                     TeReoProficiency = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReturnToRuatokiToLive = table.Column<bool>(type: "bit", nullable: false),
                     ReturnComment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ParentId = table.Column<int>(type: "int", nullable: false)
+                    MotherID = table.Column<int>(type: "int", nullable: true),
+                    FatherID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_NgaTangata", x => x.TangataId);
+                    table.ForeignKey(
+                        name: "FK_NgaTangata_NgaTangata_FatherID",
+                        column: x => x.FatherID,
+                        principalTable: "NgaTangata",
+                        principalColumn: "TangataId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_NgaTangata_NgaTangata_MotherID",
+                        column: x => x.MotherID,
+                        principalTable: "NgaTangata",
+                        principalColumn: "TangataId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -126,6 +139,16 @@ namespace HamuaRegistrationApi.Migrations
                 name: "IX_MaraeTangata_NgaTangataTangataId",
                 table: "MaraeTangata",
                 column: "NgaTangataTangataId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NgaTangata_FatherID",
+                table: "NgaTangata",
+                column: "FatherID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NgaTangata_MotherID",
+                table: "NgaTangata",
+                column: "MotherID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

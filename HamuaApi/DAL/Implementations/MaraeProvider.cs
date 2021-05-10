@@ -77,9 +77,12 @@ namespace HamuaRegistrationApi.DAL.Implementations
 
         public async Task<Marae> GetMaraeByIdAsync(int id, bool include = false)
         {
-            var marae = await GetAllMaraeAsync("", "", include);
+            if (include)
+            {
+                return await maraeContext.NgaMarae.Include(x => x.NgaTangata).FirstOrDefaultAsync();
+            }
 
-            return marae.Where(x => x.MaraeId == id).FirstOrDefault();
+            return await maraeContext.NgaMarae.FindAsync(id);
         }
     }
 }

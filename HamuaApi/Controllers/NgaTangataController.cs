@@ -25,9 +25,9 @@ namespace HamuaRegistrationApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAsync(string orderby, string searchString)
+        public async Task<IActionResult> GetAsync(string orderby, string searchString, bool include)
         {
-            var ngaTangata = await tangataProvider.GetAllTangataAsync(orderby, searchString);
+            var ngaTangata = await tangataProvider.GetAllTangataAsync(orderby, searchString, include);
             return Ok(ngaTangata);
         }
 
@@ -48,9 +48,9 @@ namespace HamuaRegistrationApi.Controllers
         //}
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync(int id)
+        public async Task<IActionResult> GetByIdAsync(int id, bool include)
         {
-            var ngaTangata = await tangataProvider.GetTangataByIdAsync(id);
+            var ngaTangata = await tangataProvider.GetTangataByIdAsync(id, include);
             return Ok(ngaTangata);
         }
 
@@ -59,6 +59,15 @@ namespace HamuaRegistrationApi.Controllers
         {
             //ToDo: Investigate how many to many relationships work
             var tangata = await tangataUpdater.CreateTangataAsync(newTangata);
+            return Ok(tangata);
+        }
+
+        [HttpPost("{parentId}/child")]
+        public async Task<IActionResult> CreateChildAsync([FromBody] Tangata newTangata, int parentId)
+        {
+            //ToDo: Investigate how many to many relationships work
+
+            var tangata = await tangataUpdater.AddChild(newTangata, parentId);
             return Ok(tangata);
         }
 
