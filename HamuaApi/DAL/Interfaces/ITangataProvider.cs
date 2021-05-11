@@ -13,6 +13,8 @@ namespace HamuaRegistrationApi.DAL.Interfaces
 
         Task<Tangata> GetTangataByIdAsync(int id, bool include = false);
 
+        Task AddAsync(Tangata tangata, IEnumerable<Marae> ngaMarae);
+
         //Task<IEnumerable<Tangata>> GetAllTangataByAreaAsync(string areaName, string sortby = "", string searchString = "");
 
         //Task<IEnumerable<Tangata>> GetAllTangataByHapuAsync(string hapuName, string sortby = "", string searchString = "");

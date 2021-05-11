@@ -1,4 +1,5 @@
 ﻿using HamuaRegistrationApi.DAL.Models;
+using HamuaRegistrationApi.DAL.Services.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace HamuaRegistrationApi.DAL.Services.Interfaces
 
         Task<Marae> GetMaraeByIdAsync(int id, bool include = false);
 
-        Task<Marae> CreateMaraeAsync(Marae newMarae);
+        Task<SaveMaraeResponse> CreateMaraeAsync(Marae newMarae);
 
         Task<Marae> UpdateMaraeAsync(int id, string area, string maraeName, string hapu);
 

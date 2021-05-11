@@ -59,5 +59,16 @@ namespace HamuaRegistrationApi.DAL.Implementations
 
             return await hamuaContext.NgaTangata.FindAsync(id);
         }
+
+        public async Task AddAsync(Tangata tangata, IEnumerable<Marae> ngaMarae)
+        {
+            await hamuaContext.AddAsync(tangata);
+
+            foreach (var marae in ngaMarae)
+            {
+                var savedMarae = await hamuaContext.NgaMarae.FindAsync(marae.MaraeId);
+                savedMarae.NgaTangata.Add(tangata);
+            }
+        }
     }
 }

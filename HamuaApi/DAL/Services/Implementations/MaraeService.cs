@@ -1,5 +1,6 @@
 ﻿using HamuaRegistrationApi.DAL.Interfaces;
 using HamuaRegistrationApi.DAL.Models;
+using HamuaRegistrationApi.DAL.Services.Communication;
 using HamuaRegistrationApi.DAL.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,28 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
     public class MaraeService : IMaraeService
     {
         public IMaraeProvider maraeProvider;
+        public IUnitOfWork maraeUnitOfWork;
 
-        public MaraeService(IMaraeProvider provider)
+        public MaraeService(IMaraeProvider provider, IUnitOfWork uow)
         {
             maraeProvider = provider;
+            maraeUnitOfWork = uow;
         }
 
-        public Task<Marae> CreateMaraeAsync(Marae newMarae)
+        public async Task<SaveMaraeResponse> CreateMaraeAsync(Marae newMarae)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await maraeProvider.AddAsync(newMarae);
+                await maraeUnitOfWork.CompleteAsync();
+
+                return new SaveMaraeResponse(newMarae);
+            }
+            catch (Exception ex)
+            {
+                // Do some logging stuff
+                return new SaveMaraeResponse($"An error occurred when saving the Tangata: {ex.Message}");
+            }
         }
 
         public Task<Marae> DeleteMaraeAsync(int id)

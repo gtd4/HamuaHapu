@@ -47,6 +47,7 @@ namespace WebApplication1
 
             services.AddScoped<IMaraeService, MaraeService>();
             services.AddScoped<ITangataService, TangataService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var con = Configuration.GetConnectionString("Default");
 

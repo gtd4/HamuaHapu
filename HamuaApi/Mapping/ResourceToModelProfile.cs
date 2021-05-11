@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace HamuaRegistrationApi.Mapping
 {
-    public class ModelToResourceProfile : Profile
+    public class ResourceToModelProfile : Profile
     {
-        public ModelToResourceProfile()
+        public ResourceToModelProfile()
         {
-            CreateMap<Marae, MaraeResource>();
-            CreateMap<Tangata, TangataResource>();
+            CreateMap<CreateTangataResource, Tangata>();
         }
     }
 }

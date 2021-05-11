@@ -16,5 +16,7 @@ namespace HamuaRegistrationApi.DAL.Interfaces
         Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby = "", string searchString = "", bool include = false);
 
         Task<Marae> GetMaraeByIdAsync(int id, bool include = false);
+
+        Task AddAsync(Marae marae);
     }
 }

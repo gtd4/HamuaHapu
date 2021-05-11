@@ -81,5 +81,10 @@ namespace HamuaRegistrationApi.DAL.Implementations
 
             return await hamuaContext.NgaMarae.FindAsync(id);
         }
+
+        public async Task AddAsync(Marae marae)
+        {
+            await hamuaContext.AddAsync(marae);
+        }
     }
 }
