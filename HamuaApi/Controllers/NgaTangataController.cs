@@ -46,12 +46,12 @@ namespace HamuaRegistrationApi.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> CreateTangataAsync([FromBody] CreateTangataResource newTangata)
+        public async Task<IActionResult> CreateTangataAsync([FromBody] SaveTangataResource newTangata)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var tangata = tangataMapper.Map<CreateTangataResource, Tangata>(newTangata);
+            var tangata = tangataMapper.Map<SaveTangataResource, Tangata>(newTangata);
             var marae = newTangata.NgaMaraeList;
 
             //ToDo: Investigate how many to many relationships work

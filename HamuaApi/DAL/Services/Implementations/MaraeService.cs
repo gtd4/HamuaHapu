@@ -20,22 +20,6 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
             maraeUnitOfWork = uow;
         }
 
-        public async Task<SaveMaraeResponse> CreateMaraeAsync(Marae newMarae)
-        {
-            try
-            {
-                await maraeProvider.AddAsync(newMarae);
-                await maraeUnitOfWork.CompleteAsync();
-
-                return new SaveMaraeResponse(newMarae);
-            }
-            catch (Exception ex)
-            {
-                // Do some logging stuff
-                return new SaveMaraeResponse($"An error occurred when saving the Tangata: {ex.Message}");
-            }
-        }
-
         public Task<Marae> DeleteMaraeAsync(int id)
         {
             throw new NotImplementedException();
@@ -61,9 +45,45 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
             return await maraeProvider.GetMaraeByIdAsync(id, include);
         }
 
-        public Task<Marae> UpdateMaraeAsync(int id, string area, string maraeName, string hapu)
+        public async Task<SaveMaraeResponse> CreateMaraeAsync(Marae newMarae)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await maraeProvider.AddAsync(newMarae);
+                await maraeUnitOfWork.CompleteAsync();
+
+                return new SaveMaraeResponse(newMarae);
+            }
+            catch (Exception ex)
+            {
+                // Do some logging stuff
+                return new SaveMaraeResponse($"An error occurred when saving the Marae: {ex.Message}");
+            }
+        }
+
+        public async Task<SaveMaraeResponse> UpdateMaraeAsync(int id, Marae editMarae)
+        {
+            var existingMarae = await maraeProvider.GetMaraeByIdAsync(id);
+
+            if (existingMarae == null)
+                return new SaveMaraeResponse("Marae not found.");
+
+            existingMarae.Name = editMarae.Name;
+            existingMarae.Area = editMarae.Area;
+            existingMarae.Hapu = editMarae.Hapu;
+
+            try
+            {
+                maraeProvider.Update(existingMarae);
+                await maraeUnitOfWork.CompleteAsync();
+
+                return new SaveMaraeResponse(existingMarae);
+            }
+            catch (Exception ex)
+            {
+                // Do some logging stuff
+                return new SaveMaraeResponse($"An error occurred when saving the Tangata: {ex.Message}");
+            }
         }
     }
 }

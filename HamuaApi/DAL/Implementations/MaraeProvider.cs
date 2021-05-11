@@ -76,7 +76,7 @@ namespace HamuaRegistrationApi.DAL.Implementations
         {
             if (include)
             {
-                return await hamuaContext.NgaMarae.Include(x => x.NgaTangata).FirstOrDefaultAsync();
+                return await hamuaContext.NgaMarae.Include(x => x.NgaTangata).FirstOrDefaultAsync(x => x.MaraeId.Equals(id));
             }
 
             return await hamuaContext.NgaMarae.FindAsync(id);
@@ -84,7 +84,12 @@ namespace HamuaRegistrationApi.DAL.Implementations
 
         public async Task AddAsync(Marae marae)
         {
-            await hamuaContext.AddAsync(marae);
+            await hamuaContext.NgaMarae.AddAsync(marae);
+        }
+
+        public void Update(Marae marae)
+        {
+            hamuaContext.NgaMarae.Update(marae);
         }
     }
 }

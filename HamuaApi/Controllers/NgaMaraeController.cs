@@ -6,6 +6,7 @@ using AutoMapper;
 using HamuaRegistrationApi.DAL.Interfaces;
 using HamuaRegistrationApi.DAL.Models;
 using HamuaRegistrationApi.DAL.Services.Interfaces;
+using HamuaRegistrationApi.Extensions;
 using HamuaRegistrationApi.Resources;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -89,17 +90,37 @@ namespace HamuaRegistrationApi.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> CreateMaraeAsync(Marae newMarae)
+        public async Task<IActionResult> CreateMaraeAsync([FromBody] SaveMaraeResource newMarae)
         {
-            var marae = await maraeService.CreateMaraeAsync(newMarae);
-            return Ok(marae);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            var marae = maraeMapper.Map<SaveMaraeResource, Marae>(newMarae);
+
+            //ToDo: Investigate how many to many relationships work
+            var result = await maraeService.CreateMaraeAsync(marae);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var maraeResource = maraeMapper.Map<Marae, MaraeResource>(result.Marae);
+            return Ok(maraeResource);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateMaraeAsync(int id, string area = "", string maraeName = "", string hapu = "")
+        public async Task<IActionResult> UpdateMaraeAsync(int id, [FromBody] SaveMaraeResource editMarae)
         {
-            var marae = await maraeUpdater.UpdateMaraeAsync(id, area, maraeName, hapu);
-            return Ok(marae);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            var marae = maraeMapper.Map<SaveMaraeResource, Marae>(editMarae);
+            var result = await maraeService.UpdateMaraeAsync(id, marae);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var categoryResource = maraeMapper.Map<Marae, MaraeResource>(result.Marae);
+            return Ok(categoryResource);
         }
     }
 }

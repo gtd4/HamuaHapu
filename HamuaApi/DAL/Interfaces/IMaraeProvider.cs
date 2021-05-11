@@ -18,5 +18,7 @@ namespace HamuaRegistrationApi.DAL.Interfaces
         Task<Marae> GetMaraeByIdAsync(int id, bool include = false);
 
         Task AddAsync(Marae marae);
+
+        void Update(Marae editMarae);
     }
 }

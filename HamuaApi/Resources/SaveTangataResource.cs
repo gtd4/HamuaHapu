@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HamuaRegistrationApi.Resources
 {
-    public class CreateTangataResource
+    public class SaveTangataResource
     {
         [Required]
         public string FirstName { get; set; }
