@@ -91,5 +91,9 @@ namespace HamuaRegistrationApi.DAL.Implementations
         {
             hamuaContext.NgaMarae.Update(marae);
         }
+
+        public void Remove(Marae marae)
+        {
+        }
     }
 }

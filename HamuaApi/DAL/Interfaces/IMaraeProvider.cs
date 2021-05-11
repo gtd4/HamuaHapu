@@ -20,5 +20,7 @@ namespace HamuaRegistrationApi.DAL.Interfaces
         Task AddAsync(Marae marae);
 
         void Update(Marae editMarae);
+
+        void Remove(Marae marae);
     }
 }

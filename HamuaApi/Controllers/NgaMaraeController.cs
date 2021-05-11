@@ -122,5 +122,17 @@ namespace HamuaRegistrationApi.Controllers
             var categoryResource = maraeMapper.Map<Marae, MaraeResource>(result.Marae);
             return Ok(categoryResource);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var result = await maraeService.DeleteMaraeAsync(id);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var maraeResource = maraeMapper.Map<Marae, MaraeResource>(result.Marae);
+            return Ok(maraeResource);
+        }
     }
 }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace HamuaRegistrationApi.DAL.Services.Communication
 {
-    public class SaveMaraeResponse : BaseResponse
+    public class MaraeResponse : BaseResponse
     {
         public Marae Marae { get; private set; }
 
-        private SaveMaraeResponse(bool success, string message, Marae marae) : base(success, message)
+        private MaraeResponse(bool success, string message, Marae marae) : base(success, message)
         {
             Marae = marae;
         }
@@ -20,7 +20,7 @@ namespace HamuaRegistrationApi.DAL.Services.Communication
         /// </summary>
         /// <param name="category">Saved category.</param>
         /// <returns>Response.</returns>
-        public SaveMaraeResponse(Marae marae) : this(true, string.Empty, marae)
+        public MaraeResponse(Marae marae) : this(true, string.Empty, marae)
         { }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace HamuaRegistrationApi.DAL.Services.Communication
         /// </summary>
         /// <param name="message">Error message.</param>
         /// <returns>Response.</returns>
-        public SaveMaraeResponse(string message) : this(false, message, null)
+        public MaraeResponse(string message) : this(false, message, null)
         { }
     }
 }

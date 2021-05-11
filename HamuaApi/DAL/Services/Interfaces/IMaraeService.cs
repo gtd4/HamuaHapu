@@ -17,10 +17,10 @@ namespace HamuaRegistrationApi.DAL.Services.Interfaces
 
         Task<Marae> GetMaraeByIdAsync(int id, bool include = false);
 
-        Task<SaveMaraeResponse> CreateMaraeAsync(Marae newMarae);
+        Task<MaraeResponse> CreateMaraeAsync(Marae newMarae);
 
-        Task<SaveMaraeResponse> UpdateMaraeAsync(int id, Marae editMarae);
+        Task<MaraeResponse> UpdateMaraeAsync(int id, Marae editMarae);
 
-        Task<Marae> DeleteMaraeAsync(int id);
+        Task<MaraeResponse> DeleteMaraeAsync(int id);
     }
 }
