@@ -20,24 +20,24 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
             maraeUnitOfWork = uow;
         }
 
-        public async Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby = "", string searchString = "", bool include = false)
+        public async Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby = "", string searchString = "", bool includeTangata = false)
         {
-            return await maraeProvider.GetAllMaraeAsync(sortby, searchString, include);
+            return await maraeProvider.GetAllMaraeAsync(sortby, searchString, includeTangata);
         }
 
-        public async Task<IEnumerable<Marae>> GetAllMaraeByAreaAsync(string areaName, string sortby = "", string searchString = "", bool include = false)
+        public async Task<IEnumerable<Marae>> GetAllMaraeByAreaAsync(string areaName, string sortby = "", string searchString = "", bool includeTangata = false)
         {
-            return await maraeProvider.GetAllMaraeByAreaAsync(areaName, sortby, searchString, include);
+            return await maraeProvider.GetAllMaraeByAreaAsync(areaName, sortby, searchString, includeTangata);
         }
 
-        public async Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby = "", string searchString = "", bool include = false)
+        public async Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby = "", string searchString = "", bool includeTangata = false)
         {
-            return await maraeProvider.GetAllMaraeByHapuAsync(hapuName, sortby, searchString, include);
+            return await maraeProvider.GetAllMaraeByHapuAsync(hapuName, sortby, searchString, includeTangata);
         }
 
-        public async Task<Marae> GetMaraeByIdAsync(int id, bool include = false)
+        public async Task<Marae> GetMaraeByIdAsync(int id, bool includeTangata = false)
         {
-            return await maraeProvider.GetMaraeByIdAsync(id, include);
+            return await maraeProvider.GetMaraeByIdAsync(id, includeTangata);
         }
 
         public async Task<MaraeResponse> CreateMaraeAsync(Marae newMarae)

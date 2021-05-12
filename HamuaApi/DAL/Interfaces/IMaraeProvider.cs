@@ -9,13 +9,13 @@ namespace HamuaRegistrationApi.DAL.Interfaces
 {
     public interface IMaraeProvider
     {
-        Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby = "", string searchString = "", bool include = false);
+        Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby = "", string searchString = "", bool includeTangata = false);
 
-        Task<IEnumerable<Marae>> GetAllMaraeByAreaAsync(string areaName, string sortby = "", string searchString = "", bool include = false);
+        Task<IEnumerable<Marae>> GetAllMaraeByAreaAsync(string areaName, string sortby = "", string searchString = "", bool includeTangata = false);
 
-        Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby = "", string searchString = "", bool include = false);
+        Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby = "", string searchString = "", bool includeTangata = false);
 
-        Task<Marae> GetMaraeByIdAsync(int id, bool include = false);
+        Task<Marae> GetMaraeByIdAsync(int id, bool includeTangata = false);
 
         Task AddAsync(Marae marae);
 

@@ -15,11 +15,11 @@ namespace HamuaRegistrationApi.DAL.Implementations
         {
         }
 
-        public async Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby = "", string searchString = "", bool include = false)
+        public async Task<IEnumerable<Marae>> GetAllMaraeAsync(string sortby = "", string searchString = "", bool includeTangata = false)
         {
             var marae = hamuaContext.NgaMarae.Select(x => x);
 
-            if (include)
+            if (includeTangata)
             {
                 marae = marae.Include(x => x.NgaTangata);
             }
@@ -58,23 +58,23 @@ namespace HamuaRegistrationApi.DAL.Implementations
             return await marae.ToListAsync();
         }
 
-        public async Task<IEnumerable<Marae>> GetAllMaraeByAreaAsync(string areaName, string sortby, string searchString = "", bool include = false)
+        public async Task<IEnumerable<Marae>> GetAllMaraeByAreaAsync(string areaName, string sortby, string searchString = "", bool includeTangata = false)
         {
-            var marae = await GetAllMaraeAsync(sortby, searchString, include);
+            var marae = await GetAllMaraeAsync(sortby, searchString, includeTangata);
 
             return marae.Where(x => x.Area.Equals(areaName)); ;
         }
 
-        public async Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby, string searchString = "", bool include = false)
+        public async Task<IEnumerable<Marae>> GetAllMaraeByHapuAsync(string hapuName, string sortby, string searchString = "", bool includeTangata = false)
         {
-            var marae = await GetAllMaraeAsync(sortby, searchString, include);
+            var marae = await GetAllMaraeAsync(sortby, searchString, includeTangata);
 
             return marae.Where(x => x.Hapu.Equals(hapuName)); ;
         }
 
-        public async Task<Marae> GetMaraeByIdAsync(int id, bool include = false)
+        public async Task<Marae> GetMaraeByIdAsync(int id, bool includeTangata = false)
         {
-            if (include)
+            if (includeTangata)
             {
                 return await hamuaContext.NgaMarae.Include(x => x.NgaTangata).FirstOrDefaultAsync(x => x.MaraeId.Equals(id));
             }

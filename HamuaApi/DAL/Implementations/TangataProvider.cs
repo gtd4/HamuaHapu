@@ -15,13 +15,18 @@ namespace HamuaRegistrationApi.DAL.Implementations
         {
         }
 
-        public async Task<IEnumerable<Tangata>> GetAllTangataAsync(string sortby = "", string searchString = "", bool include = false)
+        public async Task<IEnumerable<Tangata>> GetAllTangataAsync(string sortby = "", string searchString = "", bool includeMarae = false, bool includeChildren = false)
         {
             var tangata = hamuaContext.NgaTangata.Select(x => x);
 
-            if (include)
+            if (includeMarae)
             {
                 tangata = tangata.Include(x => x.NgaMarae);
+            }
+
+            if (includeChildren)
+            {
+                tangata = tangata.Include(x => x.Children);
             }
 
             if (!string.IsNullOrEmpty(searchString))
@@ -50,14 +55,21 @@ namespace HamuaRegistrationApi.DAL.Implementations
             return await tangata.ToListAsync();
         }
 
-        public async Task<Tangata> GetTangataByIdAsync(int id, bool include = false)
+        public async Task<Tangata> GetTangataByIdAsync(int id, bool includeMarae = false, bool includeChildren = false)
         {
-            if (include)
+            var tangata = hamuaContext.NgaTangata.Select(x => x);
+
+            if (includeMarae)
             {
-                return await hamuaContext.NgaTangata.Include(x => x.NgaMarae).FirstOrDefaultAsync(x => x.TangataId == id);
+                tangata = tangata.Include(x => x.NgaMarae);
             }
 
-            return await hamuaContext.NgaTangata.FindAsync(id);
+            if (includeMarae)
+            {
+                tangata = tangata.Include(x => x.Children);
+            }
+
+            return await tangata.FirstOrDefaultAsync(x => x.TangataId.Equals(id));
         }
 
         public async Task AddAsync(Tangata tangata, IEnumerable<Marae> ngaMarae)

@@ -9,9 +9,9 @@ namespace HamuaRegistrationApi.DAL.Interfaces
 {
     public interface ITangataProvider
     {
-        Task<IEnumerable<Tangata>> GetAllTangataAsync(string sortby = "", string searchString = "", bool include = false);
+        Task<IEnumerable<Tangata>> GetAllTangataAsync(string sortby = "", string searchString = "", bool includeMarae = false, bool includeChildren = false);
 
-        Task<Tangata> GetTangataByIdAsync(int id, bool include = false);
+        Task<Tangata> GetTangataByIdAsync(int id, bool includeMarae = false, bool includeChildren = false);
 
         Task AddAsync(Tangata tangata, IEnumerable<Marae> ngaMarae);
 

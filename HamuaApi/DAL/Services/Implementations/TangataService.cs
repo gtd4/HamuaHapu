@@ -41,14 +41,14 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
             }
         }
 
-        public async Task<IEnumerable<Tangata>> GetAllTangataAsync(string sortby = "", string searchString = "", bool include = false)
+        public async Task<IEnumerable<Tangata>> GetAllTangataAsync(string sortby = "", string searchString = "", bool includeMarae = false, bool includeChildren = false)
         {
-            return await tangataProvider.GetAllTangataAsync(sortby, searchString, include);
+            return await tangataProvider.GetAllTangataAsync(sortby, searchString, includeMarae, includeChildren);
         }
 
-        public async Task<Tangata> GetTangataByIdAsync(int id, bool include = false)
+        public async Task<Tangata> GetTangataByIdAsync(int id, bool includeMarae = false, bool includeChildren = false)
         {
-            return await tangataProvider.GetTangataByIdAsync(id, include);
+            return await tangataProvider.GetTangataByIdAsync(id, includeMarae, includeChildren);
         }
 
         public Task<Tangata> UpdateTangataAsync(int id, string firstName, string lastName)

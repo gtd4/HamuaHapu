@@ -41,7 +41,7 @@ namespace WebApplication1
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
             services.AddScoped<IMaraeProvider, MaraeProvider>();
-            services.AddScoped<IMaraeUpdater, MaraeUpdater>();
+
             services.AddScoped<ITangataProvider, TangataProvider>();
             services.AddScoped<ITangataUpdater, TangataUpdater>();
 

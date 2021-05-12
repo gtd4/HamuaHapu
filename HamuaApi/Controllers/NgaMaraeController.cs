@@ -19,23 +19,23 @@ namespace HamuaRegistrationApi.Controllers
     {
         private readonly ILogger<Marae> _logger;
         private IMaraeService maraeService;
-        private IMaraeUpdater maraeUpdater;
+
         private IMapper maraeMapper;
 
-        public NgaMaraeController(ILogger<Marae> logger, IMaraeService service, IMaraeUpdater updater, IMapper mapper)
+        public NgaMaraeController(ILogger<Marae> logger, IMaraeService service, IMapper mapper)
         {
             _logger = logger;
             maraeService = service;
-            maraeUpdater = updater;
+
             maraeMapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAsync(string orderby, string searchString, bool include)
+        public async Task<IActionResult> GetAsync(string orderby, string searchString, bool includeTangata)
         {
-            var ngamarae = await maraeService.GetAllMaraeAsync(orderby, searchString, include);
+            var ngamarae = await maraeService.GetAllMaraeAsync(orderby, searchString, includeTangata);
 
-            if (include)
+            if (includeTangata)
             {
                 return Ok(ngamarae);
             }
@@ -45,11 +45,11 @@ namespace HamuaRegistrationApi.Controllers
         }
 
         [HttpGet("area/{areaname}")]
-        public async Task<IActionResult> GetByAreaNameAsync(string areaname, string sortby, string searchString, bool include)
+        public async Task<IActionResult> GetByAreaNameAsync(string areaname, string sortby, string searchString, bool includeTangata)
         {
-            var ngamarae = await maraeService.GetAllMaraeByAreaAsync(areaname, sortby, searchString, include);
+            var ngamarae = await maraeService.GetAllMaraeByAreaAsync(areaname, sortby, searchString, includeTangata);
 
-            if (include)
+            if (includeTangata)
             {
                 return Ok(ngamarae);
             }
@@ -60,11 +60,11 @@ namespace HamuaRegistrationApi.Controllers
         }
 
         [HttpGet("hapu/{hapuname}")]
-        public async Task<IActionResult> GetByHapuNameAsync(string hapuname, string sortby, string searchString, bool include)
+        public async Task<IActionResult> GetByHapuNameAsync(string hapuname, string sortby, string searchString, bool includeTangata)
         {
-            var ngamarae = await maraeService.GetAllMaraeByHapuAsync(hapuname, sortby, searchString, include);
+            var ngamarae = await maraeService.GetAllMaraeByHapuAsync(hapuname, sortby, searchString, includeTangata);
 
-            if (include)
+            if (includeTangata)
             {
                 return Ok(ngamarae);
             }
@@ -75,11 +75,11 @@ namespace HamuaRegistrationApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync(int id, bool include)
+        public async Task<IActionResult> GetMaraeByIdAsync(int id, bool includeTangata)
         {
-            var ngamarae = await maraeService.GetMaraeByIdAsync(id, include);
+            var ngamarae = await maraeService.GetMaraeByIdAsync(id, includeTangata);
 
-            if (include)
+            if (includeTangata)
             {
                 return Ok(ngamarae);
             }
@@ -104,7 +104,7 @@ namespace HamuaRegistrationApi.Controllers
                 return BadRequest(result.Message);
 
             var maraeResource = maraeMapper.Map<Marae, MaraeResource>(result.Marae);
-            return Ok(maraeResource);
+            return Created(nameof(GetMaraeByIdAsync), maraeResource);
         }
 
         [HttpPut("{id}")]
