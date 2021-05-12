@@ -1,46 +1,76 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using HamuaHapuRegistration.Data;
 using HamuaHapuRegistration.Models;
+using System.Net.Http;
+using Microsoft.Extensions.Configuration;
+using System.Text;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using HamuaHapuCommon.Resources;
 
 namespace HamuaHapuRegistration.Controllers
 {
     public class NgaMaraeController : Controller
     {
-        private readonly HamuaHapuRegistrationContext _context;
+        private IConfiguration config;
+        private string apiBaseUrl;
 
-        public NgaMaraeController(HamuaHapuRegistrationContext context)
+        public NgaMaraeController(IConfiguration _config)
         {
-            _context = context;
+            config = _config;
+            apiBaseUrl = config.GetValue<string>("hamuaApiBaseUrl");
         }
 
         // GET: NgaMarae
         public async Task<IActionResult> Index()
         {
-            return View(await _context.NgaMarae.ToListAsync());
+            using (HttpClient client = new HttpClient())
+            {
+                //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+                string endpoint = apiBaseUrl + "/ngamarae";
+
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var stringResult = await response.Content.ReadAsStringAsync();
+                        var ngaMarae = JsonConvert.DeserializeObject<IEnumerable<MaraeResource>>(stringResult);
+                        return View(ngaMarae);
+                    }
+                    else
+                    {
+                        ModelState.Clear();
+                        ModelState.AddModelError(string.Empty, "Error Getting Marae");
+                        return View();
+                    }
+                }
+            }
         }
 
         // GET: NgaMarae/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            using (HttpClient client = new HttpClient())
             {
-                return NotFound();
-            }
+                //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+                string endpoint = $"{apiBaseUrl}/ngamarae/{id}";
 
-            var ngaMarae = await _context.NgaMarae
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (ngaMarae == null)
-            {
-                return NotFound();
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var stringResult = await response.Content.ReadAsStringAsync();
+                        var marae = JsonConvert.DeserializeObject<MaraeResource>(stringResult);
+                        return View(marae);
+                    }
+                    else
+                    {
+                        ModelState.Clear();
+                        ModelState.AddModelError(string.Empty, "Error Getting Marae");
+                        return View();
+                    }
+                }
             }
-
-            return View(ngaMarae);
         }
 
         // GET: NgaMarae/Create
@@ -50,88 +80,78 @@ namespace HamuaHapuRegistration.Controllers
         }
 
         // POST: NgaMarae/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Area,Marae,Hapu")] NgaMarae ngaMarae)
+        public async Task<IActionResult> Create([Bind("Area,Name,Hapu")] NgaMarae ngaMarae)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(ngaMarae);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(ngaMarae);
+            return View();
         }
 
         // GET: NgaMarae/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            using (HttpClient client = new HttpClient())
             {
-                return NotFound();
-            }
+                //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+                string endpoint = $"{apiBaseUrl}/ngamarae/{id}";
 
-            var ngaMarae = await _context.NgaMarae.FindAsync(id);
-            if (ngaMarae == null)
-            {
-                return NotFound();
-            }
-            return View(ngaMarae);
-        }
-
-        // POST: NgaMarae/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Area,Marae,Hapu")] NgaMarae ngaMarae)
-        {
-            if (id != ngaMarae.ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                using (var response = await client.GetAsync(endpoint))
                 {
-                    _context.Update(ngaMarae);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!NgaMaraeExists(ngaMarae.ID))
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        return NotFound();
+                        var stringResult = await response.Content.ReadAsStringAsync();
+                        var marae = JsonConvert.DeserializeObject<MaraeResource>(stringResult);
+                        return View(marae);
                     }
                     else
                     {
-                        throw;
+                        ModelState.Clear();
+                        ModelState.AddModelError(string.Empty, "Error Getting Marae");
+                        return View();
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(ngaMarae);
+        }
+
+        // POST: NgaMarae/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("MaraeId,Area,Name,Hapu")] MaraeResource ngaMarae)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+                string endpoint = $"{apiBaseUrl}/ngamarae/{id}";
+                var jsonString = JsonConvert.SerializeObject(ngaMarae);
+
+                var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                using (var response = await client.PutAsync(endpoint, httpContent))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var stringResult = await response.Content.ReadAsStringAsync();
+                        var marae = JsonConvert.DeserializeObject<MaraeResource>(stringResult);
+                        return View(marae);
+                    }
+                    else
+                    {
+                        ModelState.Clear();
+                        ModelState.AddModelError(string.Empty, "Error Getting Marae");
+                        return View();
+                    }
+                }
+            }
         }
 
         // GET: NgaMarae/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var ngaMarae = await _context.NgaMarae
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (ngaMarae == null)
-            {
-                return NotFound();
-            }
-
-            return View(ngaMarae);
+            return View();
         }
 
         // POST: NgaMarae/Delete/5
@@ -139,15 +159,7 @@ namespace HamuaHapuRegistration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ngaMarae = await _context.NgaMarae.FindAsync(id);
-            _context.NgaMarae.Remove(ngaMarae);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool NgaMaraeExists(int id)
-        {
-            return _context.NgaMarae.Any(e => e.ID == id);
+            return View();
         }
     }
 }
