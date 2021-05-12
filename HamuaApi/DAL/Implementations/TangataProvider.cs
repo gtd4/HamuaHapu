@@ -82,5 +82,21 @@ namespace HamuaRegistrationApi.DAL.Implementations
                 tangata.NgaMarae.Add(marae);
             }
         }
+
+        public async Task UpdateAsync(Tangata tangata, IEnumerable<int> ngaMarae)
+        {
+            var maraeList = new List<Marae>();
+
+            foreach (var marae in ngaMarae)
+            {
+                var existingMarae = await hamuaContext.NgaMarae.FindAsync(marae);
+
+                maraeList.Add(existingMarae);
+            }
+
+            tangata.NgaMarae = maraeList;
+
+            hamuaContext.NgaTangata.Update(tangata);
+        }
     }
 }

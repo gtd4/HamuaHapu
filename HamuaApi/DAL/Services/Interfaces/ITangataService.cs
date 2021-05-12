@@ -17,6 +17,6 @@ namespace HamuaRegistrationApi.DAL.Services.Interfaces
 
         Task<Tangata> AddChild(Tangata newTangata, int parentId);
 
-        Task<TangataResponse> UpdateTangataAsync(int id, Tangata editTangata);
+        Task<TangataResponse> UpdateTangataAsync(int id, Tangata editTangata, IEnumerable<int> ngaMarae);
     }
 }

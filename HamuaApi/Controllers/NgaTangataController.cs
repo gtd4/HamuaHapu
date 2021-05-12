@@ -99,6 +99,22 @@ namespace HamuaRegistrationApi.Controllers
             return Ok(tangataResource);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTangataAsync(int id, [FromBody] SaveTangataResource editTangata)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            var tangata = tangataMapper.Map<SaveTangataResource, Tangata>(editTangata);
+            var marae = editTangata.NgaMaraeIdList;
+
+            var result = await tangataService.UpdateTangataAsync(id, tangata, marae);
+
+            var updatedTangata = tangataMapper.Map<Tangata, TangataResourceWithNgaMaraeChildren>(result.Tangata);
+
+            return Ok(updatedTangata);
+        }
+
         [HttpPost("{parentId}/child")]
         public async Task<IActionResult> CreateChildAsync([FromBody] Tangata newTangata, int parentId)
         {
@@ -115,20 +131,6 @@ namespace HamuaRegistrationApi.Controllers
 
             var tangata = await tangataService.AddChild(newTangata, parentId);
             return Created(nameof(GetByIdAsync), tangata);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTangataAsync(int id, [FromBody] SaveTangataResource editTangata)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState.GetErrorMessages());
-
-            var tangata = tangataMapper.Map<SaveTangataResource, Tangata>(editTangata);
-            var result = await tangataService.UpdateTangataAsync(id, tangata);
-
-            var updatedTangata = tangataMapper.Map<Tangata, SaveTangataResource>(result.Tangata);
-
-            return Ok(updatedTangata);
         }
     }
 }

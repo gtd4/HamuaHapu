@@ -15,6 +15,8 @@ namespace HamuaRegistrationApi.DAL.Interfaces
 
         Task AddAsync(Tangata tangata, IEnumerable<int> ngaMarae);
 
+        Task UpdateAsync(Tangata editTangata, IEnumerable<int> ngaMarae);
+
         //Task<IEnumerable<Tangata>> GetAllTangataByAreaAsync(string areaName, string sortby = "", string searchString = "");
 
         //Task<IEnumerable<Tangata>> GetAllTangataByHapuAsync(string hapuName, string sortby = "", string searchString = "");

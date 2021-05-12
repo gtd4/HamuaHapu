@@ -51,9 +51,49 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
             return await tangataProvider.GetTangataByIdAsync(id, includeMarae, includeChildren);
         }
 
-        public Task<TangataResponse> UpdateTangataAsync(int id, Tangata editTangata)
+        public async Task<TangataResponse> UpdateTangataAsync(int id, Tangata editTangata, IEnumerable<int> ngaMarae)
         {
-            throw new NotImplementedException();
+            var existingTangata = await tangataProvider.GetTangataByIdAsync(id, true);
+
+            existingTangata.FirstName = editTangata.FirstName;
+            existingTangata.LastName = editTangata.LastName;
+            existingTangata.Gender = editTangata.Gender;
+            existingTangata.DOB = editTangata.DOB;
+            existingTangata.PlaceOfBirth = editTangata.PlaceOfBirth;
+            existingTangata.Address1 = editTangata.Address1;
+            existingTangata.Address2 = editTangata.Address2;
+            existingTangata.Address3 = editTangata.Address3;
+            existingTangata.Occupation = editTangata.Occupation;
+            existingTangata.SpecialtySkills = editTangata.SpecialtySkills;
+            existingTangata.PostCode = editTangata.PostCode;
+            existingTangata.Country = editTangata.Country;
+            existingTangata.HomePhone = editTangata.HomePhone;
+            existingTangata.Mobile = editTangata.Mobile;
+            existingTangata.Email = editTangata.Email;
+            existingTangata.IsTeReoFirstLanguage = editTangata.IsTeReoFirstLanguage;
+            existingTangata.CanYouSpeakTeReo = editTangata.CanYouSpeakTeReo;
+            existingTangata.TeReoProficiency = editTangata.TeReoProficiency;
+            existingTangata.ReturnComment = editTangata.ReturnComment;
+            existingTangata.ReturnToRuatokiToLive = editTangata.ReturnToRuatokiToLive;
+            existingTangata.Facebook = editTangata.Facebook;
+            existingTangata.Twitter = editTangata.Twitter;
+            existingTangata.Instagram = editTangata.Instagram;
+            //existingTangata.NgaMarae = editTangata.NgaMarae;
+            //existingTangata.Mother = editTangata.Mother;
+            //existingTangata.Father = editTangata.Father;
+            //existingTangata.Children = editTangata.Children;
+
+            try
+            {
+                await tangataProvider.UpdateAsync(existingTangata, ngaMarae);
+                await tangataUnitOfWork.CompleteAsync();
+
+                return new TangataResponse(existingTangata);
+            }
+            catch (Exception ex)
+            {
+                return new TangataResponse($"Error Updating Tangata: {ex.Message}");
+            }
         }
     }
 }
