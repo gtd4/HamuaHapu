@@ -25,19 +25,19 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public async Task<SaveTangataResponse> CreateTangataAsync(Tangata newTangata, IEnumerable<int> ngaMarae, int parentId = 0, int childId = 0)
+        public async Task<TangataResponse> CreateTangataAsync(Tangata newTangata, IEnumerable<int> ngaMarae, int parentId = 0, int childId = 0)
         {
             try
             {
                 await tangataProvider.AddAsync(newTangata, ngaMarae);
                 await tangataUnitOfWork.CompleteAsync();
 
-                return new SaveTangataResponse(newTangata);
+                return new TangataResponse(newTangata);
             }
             catch (Exception ex)
             {
                 // Do some logging stuff
-                return new SaveTangataResponse($"An error occurred when saving the Tangata: {ex.Message}");
+                return new TangataResponse($"An error occurred when saving the Tangata: {ex.Message}");
             }
         }
 
@@ -51,7 +51,7 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
             return await tangataProvider.GetTangataByIdAsync(id, includeMarae, includeChildren);
         }
 
-        public Task<Tangata> UpdateTangataAsync(int id, string firstName, string lastName)
+        public Task<TangataResponse> UpdateTangataAsync(int id, Tangata editTangata)
         {
             throw new NotImplementedException();
         }

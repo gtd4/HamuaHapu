@@ -114,14 +114,21 @@ namespace HamuaRegistrationApi.Controllers
             //ToDo: Investigate how many to many relationships work
 
             var tangata = await tangataService.AddChild(newTangata, parentId);
-            return Ok(tangata);
+            return Created(nameof(GetByIdAsync), tangata);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTangataAsync(int id, string firstName = "", string lastname = "")
+        public async Task<IActionResult> UpdateTangataAsync(int id, [FromBody] SaveTangataResource editTangata)
         {
-            var tangata = await tangataService.UpdateTangataAsync(id, firstName, lastname);
-            return Ok(tangata);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            var tangata = tangataMapper.Map<SaveTangataResource, Tangata>(editTangata);
+            var result = await tangataService.UpdateTangataAsync(id, tangata);
+
+            var updatedTangata = tangataMapper.Map<Tangata, SaveTangataResource>(result.Tangata);
+
+            return Ok(updatedTangata);
         }
     }
 }
