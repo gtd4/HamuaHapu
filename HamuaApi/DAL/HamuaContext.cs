@@ -67,7 +67,7 @@ namespace HamuaRegistrationApi.DAL
                 new Marae { MaraeId = 32, Area = "Waimana", Name = "Tanatana", Hapu = "Ngāti Rere" },
                 new Marae { MaraeId = 33, Area = "Waimana", Name = "Tātaiāhape", Hapu = "Ngāti Raka" },
                 new Marae { MaraeId = 34, Area = "Waimana", Name = "Tauanui", Hapu = "Te Whakatāne" },
-                new Marae { MaraeId = 35, Area = "Waimana", Name = "Te Pou a Hīnau", Hapu = "Tūranga Pikitoi')" },
+                new Marae { MaraeId = 35, Area = "Waimana", Name = "Te Pou a Hīnau", Hapu = "Tūranga Pikitoi" },
                 new Marae { MaraeId = 36, Area = "Waimana", Name = "Tuapō", Hapu = "Tamakaimoana" },
                 new Marae { MaraeId = 37, Area = "Waimana", Name = "Whakara", Hapu = "Te Whakatāne" },
                 new Marae { MaraeId = 38, Area = "Maungapōhatu", Name = "ManungapōhatuT", Hapu = "Tamakaimoana Ngāti Huri" }

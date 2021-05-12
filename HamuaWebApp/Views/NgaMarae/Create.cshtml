@@ -1,4 +1,4 @@
-﻿@model HamuaHapuRegistration.Models.NgaMarae
+﻿@model HamuaHapuCommon.Resources.SaveMaraeResource
 
 @{
     ViewData["Title"] = "Create";
@@ -18,9 +18,9 @@
                 <span asp-validation-for="Area" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Marae" class="control-label"></label>
-                <input asp-for="Marae" class="form-control" />
-                <span asp-validation-for="Marae" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Hapu" class="control-label"></label>
