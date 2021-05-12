@@ -16,6 +16,8 @@ namespace HamuaRegistrationApi.Mapping
             CreateMap<Marae, MaraeResourceWithNgaTangata>();
             CreateMap<Tangata, TangataResource>();
             CreateMap<Tangata, TangataResourceWithNgaMarae>();
+            CreateMap<Tangata, TangataResourceWithChildren>();
+            CreateMap<Tangata, TangataResourceWithNgaMaraeChildren>();
         }
     }
 }

@@ -33,15 +33,50 @@ namespace HamuaRegistrationApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync(string orderby, string searchString, bool includeMarae, bool includeChildren)
         {
+            //ToDo: Improve this action
             var ngaTangata = await tangataService.GetAllTangataAsync(orderby, searchString, includeMarae, includeChildren);
-            var resources = tangataMapper.Map<IEnumerable<Tangata>, IEnumerable<TangataResource>>(ngaTangata);
-            return Ok(resources);
+
+            if (includeMarae && !includeChildren)
+            {
+                return Ok(tangataMapper.Map<IEnumerable<Tangata>, IEnumerable<TangataResourceWithNgaMarae>>(ngaTangata));
+            }
+            else if (!includeMarae && includeChildren)
+            {
+                return Ok(tangataMapper.Map<IEnumerable<Tangata>, IEnumerable<TangataResourceWithChildren>>(ngaTangata));
+            }
+            else if (includeMarae && includeChildren)
+            {
+                return Ok(tangataMapper.Map<IEnumerable<Tangata>, IEnumerable<TangataResourceWithNgaMaraeChildren>>(ngaTangata));
+            }
+            else
+            {
+                var resources = tangataMapper.Map<IEnumerable<Tangata>, IEnumerable<TangataResource>>(ngaTangata);
+                return Ok(resources);
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id, bool includeMarae, bool includeChildren)
         {
             var ngaTangata = await tangataService.GetTangataByIdAsync(id, includeMarae, includeChildren);
+
+            if (includeMarae && !includeChildren)
+            {
+                return Ok(tangataMapper.Map<Tangata, TangataResourceWithNgaMarae>(ngaTangata));
+            }
+            else if (!includeMarae && includeChildren)
+            {
+                return Ok(tangataMapper.Map<Tangata, TangataResourceWithChildren>(ngaTangata));
+            }
+            else if (includeMarae && includeChildren)
+            {
+                return Ok(tangataMapper.Map<Tangata, TangataResourceWithNgaMaraeChildren>(ngaTangata));
+            }
+            else
+            {
+                var resources = tangataMapper.Map<Tangata, TangataResource>(ngaTangata);
+                return Ok(resources);
+            }
             return Ok(ngaTangata);
         }
 
