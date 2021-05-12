@@ -43,7 +43,6 @@ namespace WebApplication1
             services.AddScoped<IMaraeProvider, MaraeProvider>();
 
             services.AddScoped<ITangataProvider, TangataProvider>();
-            services.AddScoped<ITangataUpdater, TangataUpdater>();
 
             services.AddScoped<IMaraeService, MaraeService>();
             services.AddScoped<ITangataService, TangataService>();

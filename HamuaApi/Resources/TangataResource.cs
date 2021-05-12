@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HamuaRegistrationApi.DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,5 +36,6 @@ namespace HamuaRegistrationApi.Resources
         public string Facebook { get; set; }
         public string Twitter { get; set; }
         public string Instagram { get; set; }
+        public IEnumerable<MaraeResource> NgaMarae { get; set; }
     }
 }

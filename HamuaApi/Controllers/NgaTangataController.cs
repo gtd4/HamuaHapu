@@ -19,29 +19,29 @@ namespace HamuaRegistrationApi.Controllers
     {
         private readonly ILogger<Marae> _logger;
         private ITangataService tangataService;
-        private ITangataUpdater tangataUpdater;
+
         private IMapper tangataMapper;
 
-        public NgaTangataController(ILogger<Marae> logger, ITangataService service, ITangataUpdater updater, IMapper mapper)
+        public NgaTangataController(ILogger<Marae> logger, ITangataService service, IMapper mapper)
         {
             _logger = logger;
             tangataService = service;
-            tangataUpdater = updater;
+
             tangataMapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAsync(string orderby, string searchString, bool include)
+        public async Task<IActionResult> GetAsync(string orderby, string searchString, bool includeMarae, bool includeChildren)
         {
-            var ngaTangata = await tangataService.GetAllTangataAsync(orderby, searchString, include);
+            var ngaTangata = await tangataService.GetAllTangataAsync(orderby, searchString, includeMarae, includeChildren);
             var resources = tangataMapper.Map<IEnumerable<Tangata>, IEnumerable<TangataResource>>(ngaTangata);
             return Ok(resources);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByIdAsync(int id, bool include)
+        public async Task<IActionResult> GetByIdAsync(int id, bool includeMarae, bool includeChildren)
         {
-            var ngaTangata = await tangataService.GetTangataByIdAsync(id, include);
+            var ngaTangata = await tangataService.GetTangataByIdAsync(id, includeMarae, includeChildren);
             return Ok(ngaTangata);
         }
 
@@ -52,7 +52,7 @@ namespace HamuaRegistrationApi.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
 
             var tangata = tangataMapper.Map<SaveTangataResource, Tangata>(newTangata);
-            var marae = newTangata.NgaMaraeList;
+            var marae = newTangata.NgaMaraeIdList;
 
             //ToDo: Investigate how many to many relationships work
             var result = await tangataService.CreateTangataAsync(tangata, marae);

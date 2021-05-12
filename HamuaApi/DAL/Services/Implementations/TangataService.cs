@@ -25,7 +25,7 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public async Task<SaveTangataResponse> CreateTangataAsync(Tangata newTangata, IEnumerable<Marae> ngaMarae, int parentId = 0, int childId = 0)
+        public async Task<SaveTangataResponse> CreateTangataAsync(Tangata newTangata, IEnumerable<int> ngaMarae, int parentId = 0, int childId = 0)
         {
             try
             {
