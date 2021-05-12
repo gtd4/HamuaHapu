@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamuaHapuRegistration", "Ha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamuaRegistrationApi", "HamuaApi\HamuaRegistrationApi.csproj", "{23DEA09B-6B1A-46F9-A776-5E0B4DE6F223}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamuaHapuCommon", "HamuaHapuCommon\HamuaHapuCommon.csproj", "{48A848B4-4F7C-4E09-BCEB-96148D0C2D15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{23DEA09B-6B1A-46F9-A776-5E0B4DE6F223}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23DEA09B-6B1A-46F9-A776-5E0B4DE6F223}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23DEA09B-6B1A-46F9-A776-5E0B4DE6F223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48A848B4-4F7C-4E09-BCEB-96148D0C2D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48A848B4-4F7C-4E09-BCEB-96148D0C2D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48A848B4-4F7C-4E09-BCEB-96148D0C2D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48A848B4-4F7C-4E09-BCEB-96148D0C2D15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
