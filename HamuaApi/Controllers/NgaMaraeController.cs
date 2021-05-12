@@ -37,11 +37,10 @@ namespace HamuaRegistrationApi.Controllers
 
             if (includeTangata)
             {
-                return Ok(ngamarae);
+                return Ok(maraeMapper.Map<IEnumerable<Marae>, IEnumerable<MaraeResourceWithNgaTangata>>(ngamarae));
             }
 
-            var resources = maraeMapper.Map<IEnumerable<Marae>, IEnumerable<MaraeResource>>(ngamarae);
-            return Ok(resources);
+            return Ok(maraeMapper.Map<IEnumerable<Marae>, IEnumerable<MaraeResource>>(ngamarae));
         }
 
         [HttpGet("area/{areaname}")]

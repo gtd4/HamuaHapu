@@ -13,7 +13,9 @@ namespace HamuaRegistrationApi.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<Marae, MaraeResource>();
+            CreateMap<Marae, MaraeResourceWithNgaTangata>();
             CreateMap<Tangata, TangataResource>();
+            CreateMap<Tangata, TangataResourceWithNgaMarae>();
         }
     }
 }
