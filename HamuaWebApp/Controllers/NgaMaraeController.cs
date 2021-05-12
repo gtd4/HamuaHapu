@@ -7,6 +7,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using HamuaHapuCommon.Resources;
+using System.Linq;
 
 namespace HamuaHapuRegistration.Controllers
 {
@@ -22,12 +23,45 @@ namespace HamuaHapuRegistration.Controllers
         }
 
         // GET: NgaMarae
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string orderby = "", string searchString = "", bool includeTangata = false)
         {
             using (HttpClient client = new HttpClient())
             {
                 //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
                 string endpoint = apiBaseUrl + "/ngamarae";
+                var queryString = new List<string>();
+
+                if (!string.IsNullOrEmpty(orderby))
+                {
+                    queryString.Add($"orderby={orderby}");
+                }
+
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    queryString.Add($"searchString={searchString}");
+                }
+
+                if (includeTangata)
+                {
+                    queryString.Add($"includeTangata={includeTangata}");
+                }
+                var sb = new StringBuilder();
+                var count = 0;
+                if (queryString.Any())
+                {
+                    foreach (var queryParam in queryString)
+                    {
+                        if (count == 0)
+                        {
+                            sb.Append($"?{queryParam}");
+                        }
+                        else
+                        {
+                            sb.Append($"&{queryParam}");
+                        }
+                    }
+                    endpoint += sb.ToString();
+                }
 
                 using (var response = await client.GetAsync(endpoint))
                 {
