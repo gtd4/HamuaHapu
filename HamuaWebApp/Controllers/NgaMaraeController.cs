@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using HamuaHapuCommon.Resources;
 using System.Linq;
 using System;
+using HamuaHapuRegistration.ApiClients.Interfaces;
 
 namespace HamuaHapuRegistration.Controllers
 {
@@ -16,11 +17,13 @@ namespace HamuaHapuRegistration.Controllers
     {
         private IConfiguration config;
         private string apiBaseUrl;
+        private INgaMaraeClient ngaMaraeClient;
 
-        public NgaMaraeController(IConfiguration _config)
+        public NgaMaraeController(IConfiguration _config, INgaMaraeClient client)
         {
             config = _config;
             apiBaseUrl = config.GetValue<string>("hamuaApiBaseUrl") + "/ngamarae";
+            ngaMaraeClient = client;
         }
 
         // GET: NgaMarae
@@ -30,53 +33,53 @@ namespace HamuaHapuRegistration.Controllers
             ViewData["HapuSortParm"] = orderby == "hapu" ? "hapu_desc" : "hapu";
             ViewData["AreaSortParm"] = orderby == "area" ? "area_desc" : "area";
 
-            using (HttpClient client = new HttpClient())
+            var url = SetQueryParams(orderby, searchString, includeTangata, apiBaseUrl);
+
+            var ngaMarae = await ngaMaraeClient.GetNgaMaraeAsync(url);
+
+            //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+
+            if (ngaMarae.Any())
             {
-                //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-
-                var endpoint = SetQueryParams(orderby, searchString, includeTangata, apiBaseUrl);
-
-                using (var response = await client.GetAsync(endpoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var stringResult = await response.Content.ReadAsStringAsync();
-                        var ngaMarae = JsonConvert.DeserializeObject<IEnumerable<MaraeResource>>(stringResult);
-                        return View(ngaMarae);
-                    }
-                    else
-                    {
-                        ModelState.Clear();
-                        ModelState.AddModelError(string.Empty, "Error Getting Marae");
-                        return View();
-                    }
-                }
+                return View(ngaMarae);
+            }
+            else
+            {
+                //ModelState.Clear();
+                //ModelState.AddModelError(string.Empty, "Error Getting Marae");
+                return NotFound();
             }
         }
 
         // GET: NgaMarae/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, string success_msg = "")
         {
-            using (HttpClient client = new HttpClient())
+            if (id == null)
             {
-                //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-                string endpoint = $"{apiBaseUrl}/ngamarae/{id}";
+                return NotFound();
+            }
 
-                using (var response = await client.GetAsync(endpoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var stringResult = await response.Content.ReadAsStringAsync();
-                        var marae = JsonConvert.DeserializeObject<MaraeResource>(stringResult);
-                        return View(marae);
-                    }
-                    else
-                    {
-                        ModelState.Clear();
-                        ModelState.AddModelError(string.Empty, "Error Getting Marae");
-                        return View();
-                    }
-                }
+            if (success_msg.ToLower().Equals("created") || success_msg.ToLower().Equals("updated"))
+            {
+                success_msg = "";
+            }
+
+            ViewData["Created"] = success_msg;
+
+            //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+            string endpoint = $"{apiBaseUrl}/{id}";
+
+            var marae = await ngaMaraeClient.GetMaraeByIdAsync((int)id);
+
+            if (marae == null)
+            {
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, "Error Getting Marae");
+                return NotFound();
+            }
+            else
+            {
+                return View(marae);
             }
         }
 
@@ -93,53 +96,43 @@ namespace HamuaHapuRegistration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Area,Name,Hapu")] SaveMaraeResource ngaMarae)
         {
-            using (HttpClient client = new HttpClient())
+            if (!ModelState.IsValid)
             {
-                var jsonString = JsonConvert.SerializeObject(ngaMarae);
+            }
 
-                var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            var marae = await ngaMaraeClient.CreateAsync(ngaMarae);
 
-                using (var response = await client.PostAsync(apiBaseUrl, httpContent))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.Created)
-                    {
-                        var stringResult = await response.Content.ReadAsStringAsync();
-                        var marae = JsonConvert.DeserializeObject<MaraeResource>(stringResult);
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        ModelState.Clear();
-                        ModelState.AddModelError(string.Empty, "Error Creating Marae");
-                        return View(ngaMarae);
-                    }
-                }
+            if (marae == null)
+            {
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, "Error Creating Marae");
+                return View(ngaMarae);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Details), new { id = marae.MaraeId, success_msg = "Created" });
             }
         }
 
         // GET: NgaMarae/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            using (HttpClient client = new HttpClient())
+            if (id == null)
             {
-                //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-                string endpoint = $"{apiBaseUrl}/{id}";
+                return NotFound();
+            }
 
-                using (var response = await client.GetAsync(endpoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var stringResult = await response.Content.ReadAsStringAsync();
-                        var marae = JsonConvert.DeserializeObject<MaraeResource>(stringResult);
-                        return View(marae);
-                    }
-                    else
-                    {
-                        ModelState.Clear();
-                        ModelState.AddModelError(string.Empty, "Error Getting Marae");
-                        return View();
-                    }
-                }
+            var marae = await ngaMaraeClient.GetMaraeByIdAsync((int)id);
+
+            if (marae == null)
+            {
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, "Error Getting Marae");
+                return View();
+            }
+            else
+            {
+                return View(marae);
             }
         }
 
@@ -150,29 +143,17 @@ namespace HamuaHapuRegistration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MaraeId,Area,Name,Hapu")] MaraeResource ngaMarae)
         {
-            using (HttpClient client = new HttpClient())
+            var marae = await ngaMaraeClient.EditAsync(id, ngaMarae);
+
+            if (marae == null)
             {
-                //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-                string endpoint = $"{apiBaseUrl}/{id}";
-                var jsonString = JsonConvert.SerializeObject(ngaMarae);
-
-                var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-                using (var response = await client.PutAsync(endpoint, httpContent))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var stringResult = await response.Content.ReadAsStringAsync();
-                        var marae = JsonConvert.DeserializeObject<MaraeResource>(stringResult);
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        ModelState.Clear();
-                        ModelState.AddModelError(string.Empty, "Error Getting Marae");
-                        return View(ngaMarae);
-                    }
-                }
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, "Error Getting Marae");
+                return View(ngaMarae);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Details), new { id = marae.MaraeId, success_msg = "Updated" });
             }
         }
 

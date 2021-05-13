@@ -1,0 +1,168 @@
+﻿@model IEnumerable<HamuaHapuCommon.Resources.TangataResource>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DOB)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceOfBirth)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Occupation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SpecialtySkills)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Address1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomePhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.IsTeReoFirstLanguage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CanYouSpeakTeReo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TeReoProficiency)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReturnToRuatokiToLive)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReturnComment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Facebook)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Twitter)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Instagram
+                </th>)*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DOB)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Occupation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SpecialtySkills)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HomePhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.IsTeReoFirstLanguage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CanYouSpeakTeReo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeReoProficiency)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReturnToRuatokiToLive)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReturnComment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Facebook)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Twitter)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Instagram)
+                    </td>*@
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TangataId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TangataId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TangataId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

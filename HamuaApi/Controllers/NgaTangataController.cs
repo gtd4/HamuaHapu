@@ -77,7 +77,6 @@ namespace HamuaRegistrationApi.Controllers
                 var resources = tangataMapper.Map<Tangata, TangataResource>(ngaTangata);
                 return Ok(resources);
             }
-            return Ok(ngaTangata);
         }
 
         [HttpPost("")]
@@ -96,7 +95,7 @@ namespace HamuaRegistrationApi.Controllers
                 return BadRequest(result.Message);
 
             var tangataResource = tangataMapper.Map<Tangata, TangataResource>(result.Tangata);
-            return Ok(tangataResource);
+            return Created(nameof(GetByIdAsync), tangataResource);
         }
 
         [HttpPut("{id}")]

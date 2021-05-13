@@ -10,31 +10,32 @@ namespace HamuaHapuRegistration.Models
     {
         public int ID { get; set; }
 
-        [Required]
         public string FirstName { get; set; }
 
-        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string Gender { get; set; }
 
-        [Required]
-        public string Surname { get; set; }
-
-        //public DateTime DOB { get; set; }
-        [Required]
-        public string Birthplace { get; set; }
-
+        public string DOB { get; set; }
+        public string PlaceOfBirth { get; set; }
         public string Occupation { get; set; }
+        public string SpecialtySkills { get; set; }
 
-        [Required]
-        public string EmailAddress { get; set; }
-
-        public string HomePhone { get; set; }
-
-        [Required]
-        public string Mobile { get; set; }
-
-        public string Street { get; set; }
-        public string Suburb { get; set; }
-        public string City { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string Address3 { get; set; }
         public string PostCode { get; set; }
+        public string Country { get; set; }
+        public string HomePhone { get; set; }
+        public string Mobile { get; set; }
+        public string Email { get; set; }
+        public bool IsTeReoFirstLanguage { get; set; }
+        public bool CanYouSpeakTeReo { get; set; }
+        public string TeReoProficiency { get; set; }
+        public bool ReturnToRuatokiToLive { get; set; }
+        public string ReturnComment { get; set; }
+
+        public string Facebook { get; set; }
+        public string Twitter { get; set; }
+        public string Instagram { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace HamuaRegistrationApi.DAL
                 new Marae { MaraeId = 3, Area = "Rūātoki", Name = "Ōtenuku", Hapu = "Ngāti Kōura" },
                 new Marae { MaraeId = 4, Area = "Rūātoki", Name = "Ōwhakatoro", Hapu = "Ngāti Rongo" },
                 new Marae { MaraeId = 5, Area = "Rūātoki", Name = "Paneteure", Hapu = "Ngāti Rongo" },
-                new Marae { MaraeId = 6, Area = "Rūātok", Name = "Papakāinga", Hapu = "Ngāti Kōura" },
+                new Marae { MaraeId = 6, Area = "Rūātoki", Name = "Papakāinga", Hapu = "Ngāti Kōura" },
                 new Marae { MaraeId = 7, Area = "Rūātoki", Name = "Te Rewarewa", Hapu = "Te Māhurehure" },
                 new Marae { MaraeId = 8, Area = "Rūātoki", Name = "Tauarau", Hapu = "Ngāti Rongo" },
                 new Marae { MaraeId = 9, Area = "Rūātoki", Name = "Te Poho o Te Rangimōnoa", Hapu = "Ngāti Mura" },
