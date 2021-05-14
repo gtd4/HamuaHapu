@@ -4,9 +4,6 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Register with Hāmua Hapū</h1>
-
-<hr />
 <div class="row">
 
     <div class="col-md-12">
@@ -16,7 +13,7 @@
             <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <h2>Your Info</h2>
+                        <h1>Your Info</h1>
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label asp-for="@Model.Member.FirstName" class="control-label"></label>
@@ -28,36 +25,28 @@
                             <input asp-for="@Model.Member.LastName" class="form-control" />
                             <span asp-validation-for="@Model.Member.LastName" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="@Model.Member.Facebook" class="control-label"></label>
-                            <input asp-for="@Model.Member.Facebook" class="form-control" />
-                            <span asp-validation-for="@Model.Member.Facebook" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@Model.Member.Twitter" class="control-label"></label>
-                            <input asp-for="@Model.Member.Twitter" class="form-control" />
-                            <span asp-validation-for="@Model.Member.Twitter" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@Model.Member.Instagram" class="control-label"></label>
-                            <input asp-for="@Model.Member.Instagram" class="form-control" />
-                            <span asp-validation-for="@Model.Member.Instagram" class="text-danger"></span>
-                        </div>
+
                         <div class="form-group">
                             <label asp-for="@Model.Member.Gender" class="control-label"></label>
-                            <input asp-for="@Model.Member.Gender" class="form-control" />
+                            <select asp-for="@Model.Member.Gender" class="form-control">
+                                <option>Please Choose Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
                             <span asp-validation-for="@Model.Member.Gender" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@Model.Member.DOB" class="control-label"></label>
-                            <input asp-for="@Model.Member.DOB" class="form-control" />
-                            <span asp-validation-for="@Model.Member.DOB" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="@Model.Member.PlaceOfBirth" class="control-label"></label>
                             <input asp-for="@Model.Member.PlaceOfBirth" class="form-control" />
                             <span asp-validation-for="@Model.Member.PlaceOfBirth" class="text-danger"></span>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Member.DOB" class="control-label"></label>
+                            <input asp-for="@Model.Member.DOB" class="form-control" />
+                            <span asp-validation-for="@Model.Member.DOB" class="text-danger"></span>
+                        </div>
+
                         <div class="form-group">
                             <label asp-for="@Model.Member.Occupation" class="control-label"></label>
                             <input asp-for="@Model.Member.Occupation" class="form-control" />
@@ -70,7 +59,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <h2>Contact Details</h2>
+                        <h1>Address</h1>
                         <div class="form-group">
                             <label asp-for="@Model.Member.Address1" class="control-label"></label>
                             <input asp-for="@Model.Member.Address1" class="form-control" />
@@ -96,6 +85,9 @@
                             <input asp-for="@Model.Member.Country" class="form-control" />
                             <span asp-validation-for="@Model.Member.Country" class="text-danger"></span>
                         </div>
+                    </div>
+                    <div class="carousel-item">
+                        <h1>Contact Details</h1>
                         <div class="form-group">
                             <label asp-for="@Model.Member.HomePhone" class="control-label"></label>
                             <input asp-for="@Model.Member.HomePhone" class="form-control" />
@@ -111,9 +103,24 @@
                             <input asp-for="@Model.Member.Email" class="form-control" />
                             <span asp-validation-for="@Model.Member.Email" class="text-danger"></span>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Member.Facebook" class="control-label"></label>
+                            <input asp-for="@Model.Member.Facebook" class="form-control" />
+                            <span asp-validation-for="@Model.Member.Facebook" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Member.Twitter" class="control-label"></label>
+                            <input asp-for="@Model.Member.Twitter" class="form-control" />
+                            <span asp-validation-for="@Model.Member.Twitter" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Member.Instagram" class="control-label"></label>
+                            <input asp-for="@Model.Member.Instagram" class="form-control" />
+                            <span asp-validation-for="@Model.Member.Instagram" class="text-danger"></span>
+                        </div>
                     </div>
                     <div class="carousel-item">
-                        <h2>Marae and Hapū</h2>
+                        <h1>Marae and Hapū</h1>
                         @foreach (var group in Model.NgaMaraeGoup)
                         {
                             var groupKey = group.Key;
@@ -138,7 +145,7 @@
                     </div>
 
                     <div class="carousel-item">
-                        <h2>Te Reo</h2>
+                        <h1>Te Reo</h1>
                         <div class="form-group form-check">
                             <label class="form-check-label">
                                 <input class="form-check-input" asp-for="@Model.Member.IsTeReoFirstLanguage" /> @Html.DisplayNameFor(model => model.Member.IsTeReoFirstLanguage)
@@ -155,13 +162,12 @@
                             <span asp-validation-for="@Model.Member.TeReoProficiency" class="text-danger"></span>
                         </div>
                         <div class="form-group form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" asp-for="@Model.Member.ReturnToRuatokiToLive" /> @Html.DisplayNameFor(model => model.Member.ReturnToRuatokiToLive)
-                            </label>
+                            <label class="form-check-label"></label>
+                            <input class="form-check-input" asp-for="@Model.Member.ReturnToRuatokiToLive" /> @Html.DisplayNameFor(model => model.Member.ReturnToRuatokiToLive)
                         </div>
                         <div class="form-group">
                             <label asp-for="@Model.Member.ReturnComment" class="control-label"></label>
-                            <input asp-for="@Model.Member.ReturnComment" class="form-control" />
+                            <textarea asp-for="@Model.Member.ReturnComment" class="form-control" />
                             <span asp-validation-for="@Model.Member.ReturnComment" class="text-danger"></span>
                         </div>
                     </div>

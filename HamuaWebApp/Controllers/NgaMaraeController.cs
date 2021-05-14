@@ -128,7 +128,7 @@ namespace HamuaHapuRegistration.Controllers
             {
                 ModelState.Clear();
                 ModelState.AddModelError(string.Empty, "Error Getting Marae");
-                return View();
+                return NotFound();
             }
             else
             {
