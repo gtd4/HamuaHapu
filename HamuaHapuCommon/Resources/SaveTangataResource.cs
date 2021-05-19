@@ -17,7 +17,10 @@ namespace HamuaHapuCommon.Resources
         [Required]
         public string Gender { get; set; }
 
-        public string DOB { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MMM/yyyy}")]
+        public DateTime DOB { get; set; }
+
         public string PlaceOfBirth { get; set; }
         public string Occupation { get; set; }
         public string SpecialtySkills { get; set; }
