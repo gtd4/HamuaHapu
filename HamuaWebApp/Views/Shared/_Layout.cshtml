@@ -7,13 +7,17 @@
     <meta name="description" content="The purpose of Hāmua's hapū registration database is to increase communication between Waikirikiri's Marae Committee and descendants of Hāmua.
         The database is provided by and cared for by the Waikirikiri Marae Committee only." />
     <title>@ViewData["Title"] - Waikirikiri</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="~/lib/bootstrap-multiselect/css/bootstrap-multiselect.css" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Waikirikiri Marae</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -23,19 +27,19 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" aria-label="Return to the home page" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
+                            <a class="nav-link text-light" aria-label="Register as a hapū member" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                            <a class="nav-link text-light" aria-label="Learn more about the Waikirikiri marae committee" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">ContactUs</a>
+                            <a class="nav-link text-light" aria-label="Contact the Waikirikiri marae committee" asp-area="" asp-controller="Home" asp-action="Contact">ContactUs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-light" aria-label="Go to the privacy page" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
@@ -52,16 +56,16 @@
     <div class="footer-basic">
         <footer>
             <div class="container">
-                <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+                <div class="social"><a href="#" aria-label="Instagram"><i class="icon ion-social-instagram"></i></a><a href="#" aria-label="Snapchat"><i class="icon ion-social-snapchat"></i></a><a href="#" aria-label="twitter"><i class="icon ion-social-twitter"></i></a><a href="#" aria-label="facebook"><i class="icon ion-social-facebook"></i></a></div>
                 <ul class="list-inline">
-                    <li class="list-inline-item"><a class="" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="list-inline-item"><a class="" aria-label="Return to the home page" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li class="list-inline-item">
-                        <a class="" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
+                        <a class="" aria-label="Register as a hapū member" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
                     </li>
 
-                    <li class="list-inline-item"><a href="#">About</a></li>
+                    <li class="list-inline-item"><a href="#" aria-label="Learn more about the Waikiriri marae committee">About</a></li>
 
-                    <li class="list-inline-item"><a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+                    <li class="list-inline-item"><a class="" aria-label="Go to the privacy page" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
                 </ul>
                 <p class="copyright">&copy; @DateTime.Now.Year - Waikirikiri Marae</p>
             </div>
@@ -74,6 +78,7 @@
         </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

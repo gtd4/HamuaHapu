@@ -4,5 +4,20 @@
 <img src="~/img/Marae-Preview-ConvertImage (3).png" class="bg" alt="Waikirikiri" />
 <div class="register-container  text-center">
     <h1 class="home-heading">Waikirikiri Marae</h1>
-    <a class="header-link" asp-area="" asp-action="Register">Register Now</a>
+    <a class="header-link" aria-label="Register as a hapū member" asp-area="" asp-action="Register">Register Now</a>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".navbar-dark").addClass("navbar-light");
+            $(".navbar-dark").addClass("bg-transparent");
+            $(".navbar-dark").removeClass("bg-dark");
+            $(".navbar-dark").removeClass("navbar-dark");
+            $(".text-light").addClass("text-dark");
+            $(".text-light").removeClass("text-lightk");
+
+        });
+    </script>
+}

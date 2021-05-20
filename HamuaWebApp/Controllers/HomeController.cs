@@ -43,7 +43,7 @@ namespace HamuaHapuRegistration.Controllers
             var ngaMarae = await maraeClient.GetNgaMaraeAsync();
             var maraeGrouping = ngaMarae.GroupBy(x => x.Area);
 
-            vm.NgaMaraeGoup = maraeGrouping;
+            vm.NgaMaraeGoup = maraeGrouping.OrderBy(x => x.Key);
 
             return View(vm);
         }
