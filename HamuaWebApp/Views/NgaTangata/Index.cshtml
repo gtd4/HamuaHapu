@@ -6,16 +6,16 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="hide-mobile">
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
-            <th>
+            <th class="hide-mobile">
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             @*<th>
@@ -24,7 +24,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.DOB)
                 </th>*@
-            <th>
+            <th class="hide-mobile">
                 @Html.DisplayNameFor(model => model.PlaceOfBirth)
             </th>
             @*<th>
@@ -33,25 +33,25 @@
                 <th>
                     @Html.DisplayNameFor(model => model.SpecialtySkills)
                 </th>*@
-            <th>
+            <th class="hide-mobile">
                 @Html.DisplayNameFor(model => model.Address1)
             </th>
-            <th>
+            <th class="hide-mobile">
                 @Html.DisplayNameFor(model => model.Address2)
             </th>
-            <th>
+            <th class="hide-mobile">
                 @Html.DisplayNameFor(model => model.Address3)
             </th>
-            <th>
+            <th class="hide-mobile">
                 @Html.DisplayNameFor(model => model.PostCode)
             </th>
-            <th>
+            <th class="hide-mobile">
                 @Html.DisplayNameFor(model => model.Country)
             </th>
-            <th>
+            <th class="hide-mobile">
                 @Html.DisplayNameFor(model => model.HomePhone)
             </th>
-            <th>
+            <th class="hide-mobile">
                 @Html.DisplayNameFor(model => model.Mobile)
             </th>
             <th>
@@ -88,10 +88,10 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td class="hide-mobile">
                     @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
-                <td>
+                <td class="hide-mobile">
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
                 @*<td>
@@ -100,7 +100,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.DOB)
                     </td>*@
-                <td>
+                <td class="hide-mobile">
                     @Html.DisplayFor(modelItem => item.PlaceOfBirth)
                 </td>
                 @*<td>
@@ -109,25 +109,25 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.SpecialtySkills)
                     </td>*@
-                <td>
+                <td class="hide-mobile">
                     @Html.DisplayFor(modelItem => item.Address1)
                 </td>
-                <td>
+                <td class="hide-mobile">
                     @Html.DisplayFor(modelItem => item.Address2)
                 </td>
-                <td>
+                <td class="hide-mobile">
                     @Html.DisplayFor(modelItem => item.Address3)
                 </td>
-                <td>
+                <td class="hide-mobile">
                     @Html.DisplayFor(modelItem => item.PostCode)
                 </td>
-                <td>
+                <td class="hide-mobile">
                     @Html.DisplayFor(modelItem => item.Country)
                 </td>
-                <td>
+                <td class="hide-mobile">
                     @Html.DisplayFor(modelItem => item.HomePhone)
                 </td>
-                <td>
+                <td class="hide-mobile">
                     @Html.DisplayFor(modelItem => item.Mobile)
                 </td>
                 <td>

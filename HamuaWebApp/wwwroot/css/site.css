@@ -1,5 +1,13 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+.fa-chevron-down, .fa-chevron-up {
+    padding-right: 10px;
+}
+
+.container {
+    padding-top: 10px;
+}
+
 .navbar {
     height: 100px;
 }
@@ -7,6 +15,14 @@ for details on configuring this project to bundle and minify static web assets. 
 .btn {
     font-size: 24px;
 }
+
+a {
+    color: black;
+}
+
+    a:hover {
+        color: #dc3545;
+    }
 
 .nav-link {
     font-weight: bold;
@@ -28,9 +44,6 @@ a.navbar-brand {
 }
 
 /* Provide sufficient contrast against white background */
-a {
-    color: #0366d6;
-}
 
 .btn-primary {
     color: #fff;
@@ -48,6 +61,7 @@ a {
 -------------------------------------------------- */
 html {
     font-size: 14px;
+    scroll-behavior: smooth;
 }
 
 @media (min-width: 768px) {
@@ -242,6 +256,14 @@ img.bg {
 }
 
 @media (max-width: 768px) {
+    .table td {
+        padding: 6px
+    }
+
+    .hide-mobile {
+        display: none;
+    }
+
     html {
         font-size: 16px;
     }
