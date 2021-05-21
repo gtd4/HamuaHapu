@@ -16,10 +16,10 @@
             <th>
                 <a asp-action="Index" asp-route-orderby="@ViewData["MaraeSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
             </th>
-            <th>
+            <th class="hide-mobile">
                 <a asp-action="Index" asp-route-orderby="@ViewData["AreaSortParm"]">@Html.DisplayNameFor(model => model.Area)</a>
             </th>
-            <th>
+            <th class="hide-mobile">
                 <a asp-action="Index" asp-route-orderby="@ViewData["HapuSortParm"]">@Html.DisplayNameFor(model => model.Hapu)</a>
             </th>
             <th></th>
@@ -32,17 +32,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
+                <td class="hide-mobile">
                     @Html.DisplayFor(modelItem => item.Area)
                 </td>
 
-                <td>
+                <td class="hide-mobile">
                     @Html.DisplayFor(modelItem => item.Hapu)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.MaraeId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.MaraeId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.MaraeId">Delete</a>
+                    <a asp-action="Details" asp-route-id="@item.MaraeId">Details</a>
                 </td>
             </tr>
         }
