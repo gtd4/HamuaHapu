@@ -116,6 +116,10 @@ html {
         font-weight: bold;
         color: black;
     }
+
+    .nav-icon {
+        display: none;
+    }
 }
 
 .border-top {
@@ -311,6 +315,10 @@ img.bg {
 
     .collapse.show {
         color: black;
+    }
+
+    .btn-prev, .btn-next {
+        width: 130px;
     }
 
     /*.navbar-nav {

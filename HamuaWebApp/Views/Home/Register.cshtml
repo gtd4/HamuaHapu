@@ -140,7 +140,7 @@
                             <span asp-validation-for="@Model.Member.Address1" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="@Model.Member.Address2" class="control-label"></label>
+                            <label asp-for="@Model.Member.Address2" class="control-label">Apartment, unit, suite, or floor #</label>
                             <input asp-for="@Model.Member.Address2" class="form-control" />
                             <span asp-validation-for="@Model.Member.Address2" class="text-danger"></span>
                         </div>
@@ -216,14 +216,14 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <a class="btn btn-danger btn-prev float-left" href="#carouselExampleFade" role="button" data-slide="prev">
-                            <i class="fas fa-chevron-left"></i> Previous
+                            <i class="fas fa-chevron-left"></i> Back
                         </a>
 
                         <a class="btn btn-dark btn-next float-right" href="#carouselExampleFade" role="button" data-slide="next">
                             Next <i class="fas fa-chevron-right"></i>
                         </a>
 
-                        <input type="submit" value="Register me as a member of Hāmua hapū " class="btn btn-dark float-right btn-submit" />
+                        <input type="submit" value="Register Me" class="btn btn-dark float-right btn-submit" />
                     </div>
                 </div>
             </div>
@@ -237,11 +237,114 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-AmH2Cb8BLG_RblE-XDdZgBQkbe7_WIY&libraries=places&callback=initAutoComplete">
+    </script>
     <script type="text/javascript">
+        let autocomplete;
+
+        function fillInAddress() {
+            // Get the place details from the autocomplete object.
+            const place = autocomplete.getPlace();
+            let address1 = "";
+            let postcode = "";
+            let address3 = "";
+            let sublocality = "";
+            let locality = "";
+            let state = "";
+            let country = "";
+
+            let addy3 = [];
+
+            // Get each component of the address from the place details,
+            // and then fill-in the corresponding field on the form.
+            // place.address_components are google.maps.GeocoderAddressComponent objects
+            // which are documented at http://goo.gle/3l5i5Mr
+            for (const component of place.address_components) {
+                const componentType = component.types[0];
+
+                switch (componentType) {
+                    case "street_number": {
+                        address1 = `${component.long_name} ${address1}`;
+                        break;
+                    }
+
+                    case "route": {
+                        address1 += component.long_name;
+                        break;
+                    }
+
+                    case "sublocality_level_1": {
+                        addy3.push(component.long_name);
+                        break;
+                    }
+
+                    case "postal_code": {
+                        postcode = `${component.long_name}${postcode}`;
+                        break;
+                    }
+
+                    case "postal_code_suffix": {
+                        postcode = `${postcode}-${component.long_name}`;
+                        break;
+                    }
+                    case "locality":
+                        addy3.push(component.long_name);
+                        break;
+
+                    case "administrative_area_level_1": {
+                        addy3.push(component.short_name);
+                        break;
+                    }
+                    case "country":
+                        country = component.long_name;
+                        break;
+                }
+            }
+
+            for (var i = 0; i < addy3.length; i++) {
+
+                if (i === 0) {
+                    address3 = addy3[i];
+                } else {
+                    address3 += ", " + addy3[i];
+                }
+
+            }
+
+            $('#Member_Address1').val(address1);
+            $('#Member_Address3').val(address3);
+            $('#Member_PostCode').val(postcode);
+            $('#Member_Country').val(country);
+            //address1Field.value = address1;
+            //postalField.value = postcode;
+            // After filling the form with address components from the Autocomplete
+            // prediction, set cursor focus on the second address line to encourage
+            // entry of subpremise information such as apartment, unit, or floor number.
+            //address2Field.focus();
+
+            console.log("Yo");
+        }
+
+        function initAutoComplete() {
+            const input = document.getElementById("Member_Address1");
+            const options = {
+                //bounds: defaultBounds,
+                //componentRestrictions: { country: "us" },
+                fields: ["address_components", "geometry", "icon", "name"],
+                //origin: center,
+                strictBounds: false,
+                types: ["address"],
+            };
+
+            autocomplete = new google.maps.places.Autocomplete(input, options);
+
+            autocomplete.addListener("place_changed", fillInAddress);
+        }
 
         $(document).ready(function () {
 
-            //this ir required to create events with loop
+            //this is required to create events with loop
             function generate_handler(iconSelector, currentClass) {
                 return function (event) {
                     switchChevron(iconSelector, currentClass);
