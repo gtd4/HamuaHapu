@@ -52,6 +52,19 @@ namespace HamuaHapuRegistration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register([Bind("FirstName,LastName,Gender,DOB,PlaceOfBirth,Occupation,SpecialtySkills,Address1,Address2,Address3,PostCode,Country,HomePhone,Mobile,Email,IsTeReoFirstLanguage,CanYouSpeakTeReo,TeReoProficiency,ReturnToRuatokiToLive,ReturnComment,Facebook,Twitter,Instagram,NgaMaraeIdList")] SaveTangataResource Member)
         {
+            if (!ModelState.IsValid)
+            {
+                var vm = new RegisterViewModel();
+                var ngaMarae = await maraeClient.GetNgaMaraeAsync();
+                var maraeGrouping = ngaMarae.GroupBy(x => x.Area);
+                vm.Member = Member;
+
+                vm.NgaMaraeGoup = maraeGrouping.OrderBy(x => x.Key);
+
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, "Error Creating Member");
+                return View(vm);
+            }
             using (HttpClient client = new HttpClient())
             {
                 var jsonString = JsonConvert.SerializeObject(Member);

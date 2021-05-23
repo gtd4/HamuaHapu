@@ -21,27 +21,51 @@ namespace HamuaHapuCommon.Resources
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DOB { get; set; }
 
+        [Required]
         public string PlaceOfBirth { get; set; }
+
+        [Required]
         public string Occupation { get; set; }
+
         public string SpecialtySkills { get; set; }
 
+        [Required]
         public string Address1 { get; set; }
+
         public string Address2 { get; set; }
+
+        [Required]
         public string Address3 { get; set; }
+
+        [Required]
         public string PostCode { get; set; }
+
+        [Required]
         public string Country { get; set; }
+
         public string HomePhone { get; set; }
         public string Mobile { get; set; }
+
+        [Required]
         public string Email { get; set; }
+
         public bool IsTeReoFirstLanguage { get; set; }
+
+        [Required]
         public bool CanYouSpeakTeReo { get; set; }
+
         public string TeReoProficiency { get; set; }
+
+        [Required]
         public bool ReturnToRuatokiToLive { get; set; }
+
         public string ReturnComment { get; set; }
 
         public string Facebook { get; set; }
         public string Twitter { get; set; }
         public string Instagram { get; set; }
+
+        [Required, MinLength(1)]
         public IEnumerable<int> NgaMaraeIdList { get; set; } = new List<int>();
     }
 }
