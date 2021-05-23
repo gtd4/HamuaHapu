@@ -16,6 +16,7 @@
                         <h1>Whakapapa</h1>
                         <hr />
                         <h2>Choose Your Marae</h2>
+                        <span asp-validation-for="@Model.Member.NgaMaraeIdList" class="text-danger marae-error-msg"></span>
                         <hr />
                         @foreach (var group in Model.NgaMaraeGoup)
                             {
@@ -30,7 +31,7 @@
                             </h3>
                             <hr />
                             <div class="collapse" id="@groupKey.Replace(' ', '-')-collapse">
-                                <select id="@groupKey.Replace(' ', '-')-marae-list" asp-for="@Model.Member.NgaMaraeIdList" class="form-control custom-select" multiple="multiple">
+                                <select id="@groupKey.Replace(' ', '-')-marae-list" asp-for="@Model.Member.NgaMaraeIdList" class="form-control custom-select marae-select-list" multiple="multiple">
 
                                     @foreach (var groupedItem in group)
                                         {
@@ -100,20 +101,20 @@
                     </div>
                     <div class="carousel-item">
                         <h1>Your Info</h1>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
                         <div class="form-group">
                             <label asp-for="@Model.Member.FirstName" class="control-label"></label>
-                            <input asp-for="@Model.Member.FirstName" class="form-control" />
+                            <input asp-for="@Model.Member.FirstName" class="form-control page-2-field" />
                             <span asp-validation-for="@Model.Member.FirstName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="@Model.Member.LastName" class="control-label"></label>
-                            <input asp-for="@Model.Member.LastName" class="form-control" />
+                            <input asp-for="@Model.Member.LastName" class="form-control page-2-field" />
                             <span asp-validation-for="@Model.Member.LastName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="@Model.Member.Gender" class="control-label"></label>
-                            <select asp-for="@Model.Member.Gender" class="form-control">
+                            <select asp-for="@Model.Member.Gender" class="form-control page-2-field">
                                 <option>Please Choose Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -124,7 +125,7 @@
 
                         <div class="form-group">
                             <label asp-for="@Model.Member.PlaceOfBirth" class="control-label"></label>
-                            <input asp-for="@Model.Member.PlaceOfBirth" class="form-control" />
+                            <input asp-for="@Model.Member.PlaceOfBirth" class="form-control page-2-field" />
                             <span asp-validation-for="@Model.Member.PlaceOfBirth" class="text-danger"></span>
                         </div>
                         @*<div class="form-group">
@@ -136,7 +137,7 @@
                         <h2>Contact Details</h2>
                         <div class="form-group">
                             <label asp-for="@Model.Member.Address1" class="control-label"></label>
-                            <input asp-for="@Model.Member.Address1" class="form-control" />
+                            <input asp-for="@Model.Member.Address1" class="form-control page-2-field" />
                             <span asp-validation-for="@Model.Member.Address1" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -146,7 +147,7 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="@Model.Member.Address3" class="control-label"></label>
-                            <input asp-for="@Model.Member.Address3" class="form-control" />
+                            <input asp-for="@Model.Member.Address3" class="form-control page-2-field" />
                             <span asp-validation-for="@Model.Member.Address3" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -156,7 +157,7 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="@Model.Member.Country" class="control-label"></label>
-                            <input asp-for="@Model.Member.Country" class="form-control" />
+                            <input asp-for="@Model.Member.Country" class="form-control page-2-field" />
                             <span asp-validation-for="@Model.Member.Country" class="text-danger"></span>
                         </div>
                         @*<div class="form-group">
@@ -171,12 +172,12 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="@Model.Member.Email" class="control-label"></label>
-                            <input asp-for="@Model.Member.Email" class="form-control" />
+                            <input asp-for="@Model.Member.Email" class="form-control page-2-field" />
                             <span asp-validation-for="@Model.Member.Email" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="@Model.Member.Occupation" class="control-label"></label>
-                            <input asp-for="@Model.Member.Occupation" class="form-control" />
+                            <input asp-for="@Model.Member.Occupation" class="form-control page-2-field" />
                             <span asp-validation-for="@Model.Member.Occupation" class="text-danger"></span>
                         </div>
 
@@ -242,6 +243,39 @@
     </script>
     <script type="text/javascript">
         let autocomplete;
+
+        function validatePage(pageNum) {
+            var pageSelector = ".page-" + pageNum + "-field";
+            var valid = true;
+            var maraeCount = 0;
+
+            //validate select list
+            if (pageNum === 0) {
+
+                $('.marae-select-list').each(function () {
+
+                    $(this).validate();
+                    maraeCount += $(this).val().length
+
+                });
+
+                if (maraeCount === 0) {
+                    valid = false;
+                    $('.marae-error-msg').show();
+                    $('.marae-error-msg').text("Please pick at least 1 marae");
+                }
+
+            }
+            $(pageSelector).each(function () {
+                $(this).validate();
+
+                if (!$(this).valid()) {
+                    valid = false;
+                }
+            });
+
+            return valid;
+        }
 
         function fillInAddress() {
             // Get the place details from the autocomplete object.
@@ -396,21 +430,36 @@
         var formPages = $('.carousel-item').length;
         var min = 0;
         var max = formPages - 1;
+
         $('#carouselExampleFade').on('slide.bs.carousel', function (event) {
             // do something…
+            var current = event.from;
             var to = event.to;
-            if (to < 1) {
-                $('.btn-prev').hide();
+            var valid = true;
+
+            //Only validate if moving next
+            if (current < to) {
+
+                valid = validatePage(current);
+            }
+
+            if (valid) {
+
+                if (to < 1) {
+                    $('.btn-prev').hide();
+                } else {
+                    $('.btn-prev').show();
+                }
+                if (to === max) {
+                    $('.btn-next').hide();
+                    $('.btn-submit').show();
+                }
+                else {
+                    $('.btn-next').show();
+                    $('.btn-submit').hide();
+                }
             } else {
-                $('.btn-prev').show();
-            }
-            if (to === max) {
-                $('.btn-next').hide();
-                $('.btn-submit').show();
-            }
-            else {
-                $('.btn-next').show();
-                $('.btn-submit').hide();
+                event.preventDefault();
             }
 
             window.scrollTo(0, 0);

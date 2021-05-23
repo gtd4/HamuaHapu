@@ -46,7 +46,7 @@ namespace HamuaHapuCommon.Resources
         public string HomePhone { get; set; }
         public string Mobile { get; set; }
 
-        [Required]
+        [Required, EmailAddress]
         public string Email { get; set; }
 
         public bool IsTeReoFirstLanguage { get; set; }
@@ -65,7 +65,7 @@ namespace HamuaHapuCommon.Resources
         public string Twitter { get; set; }
         public string Instagram { get; set; }
 
-        [Required, MinLength(1)]
+        [Required, MinLength(1, ErrorMessage = "Please pick at least 1 marae")]
         public IEnumerable<int> NgaMaraeIdList { get; set; } = new List<int>();
     }
 }
