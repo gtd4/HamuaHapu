@@ -8,6 +8,7 @@ namespace HamuaRegistrationApi.DAL.Models
     public class Tangata
     {
         public int TangataId { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -51,6 +52,7 @@ namespace HamuaRegistrationApi.DAL.Models
         public ICollection<Tangata> Children { get; set; } = new List<Tangata>();
 
         public ICollection<Marae> NgaMarae { get; set; } = new List<Marae>();
+        public ICollection<Tupuna> NgaTupuna { get; set; } = new List<Tupuna>();
         //public int MaraeId { get; set; }
 
         //public bool? IsDeleted { get; set; }

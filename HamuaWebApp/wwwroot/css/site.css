@@ -358,3 +358,44 @@ img.bg {
     .nav-brand-text p {
         margin-bottom: 0;
     }
+
+.about-us-image {
+    width: 100vw;
+    height: 100vh;
+}
+
+.pepeha {
+    /*
+    width: 50vw;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    outline: 1px solid black;
+    background: white;*/
+    /*color: white;
+
+    top: -10px;
+    height: 100vh;
+    width: 100vw;*/
+    text-align: center;
+}
+
+img.about-us-image {
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    max-width: 100vw;
+    width: 100vw;
+    top: -10px;
+}
+
+img.committee-member {
+    width: 200px;
+}
+
+.about-content {
+}

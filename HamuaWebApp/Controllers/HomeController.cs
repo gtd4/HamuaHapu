@@ -61,7 +61,6 @@ namespace HamuaHapuRegistration.Controllers
 
                 vm.NgaMaraeGoup = maraeGrouping.OrderBy(x => x.Key);
 
-                
                 ModelState.AddModelError(string.Empty, "Error Creating Member");
                 return View(vm);
             }
@@ -88,7 +87,6 @@ namespace HamuaHapuRegistration.Controllers
                         vm.NgaMaraeGoup = maraeGrouping;
                         vm.Member = Member;
 
-                        
                         ModelState.AddModelError(string.Empty, "Error Creating Member");
                         return View(vm);
                     }
@@ -97,6 +95,11 @@ namespace HamuaHapuRegistration.Controllers
         }
 
         public IActionResult RegisterSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult About()
         {
             return View();
         }
