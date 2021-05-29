@@ -74,6 +74,10 @@ namespace HamuaRegistrationApi.DAL.Implementations
 
         public async Task AddAsync(Tangata tangata, IEnumerable<int> ngaMarae)
         {
+            //save tupuna to memory as adding from tangata causes errors
+            //var ngaTupuna = tangata.NgaTupuna;
+            ////once tupuna are saved reset ngatupuna to stop
+            //tangata.NgaTupuna = new List<Tupuna>();
             await hamuaContext.NgaTangata.AddAsync(tangata);
 
             foreach (var maraeId in ngaMarae)
@@ -81,6 +85,11 @@ namespace HamuaRegistrationApi.DAL.Implementations
                 var marae = await hamuaContext.NgaMarae.FindAsync(maraeId);
                 tangata.NgaMarae.Add(marae);
             }
+
+            //foreach (var tupuna in ngaTupuna)
+            //{
+            //    tangata.NgaTupuna.Add(tupuna);
+            //}
         }
 
         public async Task UpdateAsync(Tangata tangata, IEnumerable<int> ngaMarae)

@@ -67,5 +67,8 @@ namespace HamuaHapuCommon.Resources
 
         [Required, MinLength(1, ErrorMessage = "Please pick at least 1 marae")]
         public IEnumerable<int> NgaMaraeIdList { get; set; } = new List<int>();
+
+        [Required, MinLength(1, ErrorMessage = "Please Fill in the details for at least 1 Tupuna")]
+        public IEnumerable<SaveTupunaResource> NgaTupuna { get; set; } = new List<SaveTupunaResource>();
     }
 }

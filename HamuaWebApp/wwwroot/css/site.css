@@ -399,3 +399,13 @@ img.committee-member {
 
 .about-content {
 }
+
+.register-success-msg {
+    text-align: center;
+}
+
+.page-count {
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+}

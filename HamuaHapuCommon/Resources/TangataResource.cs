@@ -35,5 +35,6 @@ namespace HamuaHapuCommon.Resources
         public string Facebook { get; set; }
         public string Twitter { get; set; }
         public string Instagram { get; set; }
+        public IEnumerable<TupunaResource> NgaTupuna { get; set; }
     }
 }

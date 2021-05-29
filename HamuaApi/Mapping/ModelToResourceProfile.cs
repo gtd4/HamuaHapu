@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
+using HamuaHapuCommon.Resources;
 using HamuaRegistrationApi.DAL.Models;
-using HamuaRegistrationApi.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HamuaRegistrationApi.Mapping
 {
@@ -18,6 +14,7 @@ namespace HamuaRegistrationApi.Mapping
             CreateMap<Tangata, TangataResourceWithNgaMarae>();
             CreateMap<Tangata, TangataResourceWithChildren>();
             CreateMap<Tangata, TangataResourceWithNgaMaraeChildren>();
+            CreateMap<Tupuna, TupunaResource>();
         }
     }
 }
