@@ -93,50 +93,8 @@
 
                                 }
                             }
-
-                            @*<div class="form-group">
-                                    <label asp-for="@Model.Member.NgaTupuna.ElementAt(1).Name" class="control-label">Mothers Name</label>
-                                    <input type="text" asp-for="@Model.Member.NgaTupuna.ElementAt(1).Name" class="form-control" />
-                                    <span asp-validation-for="@Model.Member.NgaTupuna.ElementAt(1).Name" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="@Model.Member.NgaTupuna.ElementAt(1).PrimaryIwi" class="control-label">Mothers Primary Iwi</label>
-                                    <input type="text" asp-for="@Model.Member.NgaTupuna.ElementAt(1).PrimaryIwi" class="form-control" />
-                                    <span asp-validation-for="@Model.Member.NgaTupuna.ElementAt(1).PrimaryIwi" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="@Model.Member.NgaTupuna.ElementAt(1).PrimaryHapu" class="control-label">Mothers Primary Hapū</label>
-                                    <input type="text" asp-for="@Model.Member.NgaTupuna.ElementAt(1).PrimaryHapu" class="form-control" />
-                                    <span asp-validation-for="@Model.Member.NgaTupuna.ElementAt(1).PrimaryHapu" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="@Model.Member.NgaTupuna.ElementAt(1).Relationship" class="control-label"></label>
-                                    <input type="hidden" asp-for="@Model.Member.NgaTupuna.ElementAt(1).Relationship" class="form-control" value="Mother" />
-                                    <span asp-validation-for="@Model.Member.NgaTupuna.ElementAt(1).Relationship" class="text-danger"></span>
-                                </div>*@
                         </div>
-                        <div class="tupuna">
-
-                            @*<div class="form-group">
-                                    <label asp-for="@Model.Member.NgaTupuna.ElementAt(2).Name" class="control-label">Fathers Name</label>
-                                    <input type="text" asp-for="@Model.Member.NgaTupuna.ElementAt(2).Name" class="form-control" />
-                                    <span asp-validation-for="@Model.Member.NgaTupuna.ElementAt(2).Name" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="@Model.Member.NgaTupuna.ElementAt(2).PrimaryIwi" class="control-label">Fathers Primary Iwi</label>
-                                    <input type="text" asp-for="@Model.Member.NgaTupuna.ElementAt(2).PrimaryIwi" class="form-control" />
-                                    <span asp-validation-for="@Model.Member.NgaTupuna.ElementAt(2).PrimaryIwi" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="@Model.Member.NgaTupuna.ElementAt(2).PrimaryHapu" class="control-label">Fathers Primary Hapū</label>
-                                    <input type="text" asp-for="@Model.Member.NgaTupuna.ElementAt(2).PrimaryHapu" class="form-control" />
-                                    <span asp-validation-for="@Model.Member.NgaTupuna.ElementAt(2).PrimaryHapu" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="@Model.Member.NgaTupuna.ElementAt(2).Relationship" class="control-label"></label>
-                                    <input type="hidden" asp-for="@Model.Member.NgaTupuna.ElementAt(2).Relationship" class="form-control" value="Father" />
-                                    <span asp-validation-for="@Model.Member.NgaTupuna.ElementAt(2).Relationship" class="text-danger"></span>
-                                </div>*@
+                        <div id="react-tupuna">
                         </div>
                         <h2>Choose Your Marae</h2>
                         <span asp-validation-for="@Model.Member.NgaMaraeIdList" class="text-danger marae-error-msg"></span>
@@ -251,11 +209,11 @@
                             <input asp-for="@Model.Member.PlaceOfBirth" class="form-control page-2-field" />
                             <span asp-validation-for="@Model.Member.PlaceOfBirth" class="text-danger"></span>
                         </div>
-                        @*<div class="form-group">
-                                <label asp-for="@Model.Member.DOB" class="control-label"></label>
-                                <input asp-for="@Model.Member.DOB" class="form-control" />
-                                <span asp-validation-for="@Model.Member.DOB" class="text-danger"></span>
-                            </div>*@
+                        <div class="form-group">
+                            <label asp-for="@Model.Member.DOB" class="control-label"></label>
+                            <input asp-for="@Model.Member.DOB" class="form-control" />
+                            <span asp-validation-for="@Model.Member.DOB" class="text-danger"></span>
+                        </div>
 
                         <h2>Contact Details</h2>
                         <div class="form-group">
@@ -333,6 +291,18 @@
                         <p>I agree to share my contact information with Waikirikiri's Marae Commitee for the express purposes of remaining up to date and engaging with Hāmua hapū initiatives.</p>
 
                         <p>Would you like to be involved in the future planning and evolution of Hāmua affairs?</p>
+
+                        <div class="form-group form-check ">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" asp-for="@Model.Member.KeepMeNotified" value="true" />Yes
+                            </label>
+                        </div>
+                        <div class="form-group form-check ">
+
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" asp-for="@Model.Member.KeepMeNotified" value="false" /> No
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -366,6 +336,14 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript" src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script type="text/javascript" src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- Load our React component. -->
+    <script type="text/babel" src="~/js/tupuna-form.jsx">
+    </script>
+
     <script async
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-AmH2Cb8BLG_RblE-XDdZgBQkbe7_WIY&libraries=places&callback=initAutoComplete">
     </script>

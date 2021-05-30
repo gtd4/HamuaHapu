@@ -37,6 +37,8 @@ namespace HamuaRegistrationApi.DAL.Models
         public string Twitter { get; set; }
         public string Instagram { get; set; }
 
+        public bool KeepMeNotified { get; set; }
+
         //public string FathersName { get; set; }
         //public string FathersPrimaryIwi { get; set; }
         //public string FathersPrimaryHapu { get; set; }

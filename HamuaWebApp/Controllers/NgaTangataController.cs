@@ -12,9 +12,11 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using HamuaHapuCommon.Resources;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HamuaHapuRegistration.Controllers
 {
+    [Authorize]
     public class NgaTangataController : Controller
     {
         private readonly HamuaHapuRegistrationContext _context;

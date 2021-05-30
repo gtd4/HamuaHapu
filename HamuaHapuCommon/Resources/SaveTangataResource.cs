@@ -65,6 +65,9 @@ namespace HamuaHapuCommon.Resources
         public string Twitter { get; set; }
         public string Instagram { get; set; }
 
+        [Required]
+        public bool KeepMeNotified { get; set; }
+
         [Required, MinLength(1, ErrorMessage = "Please pick at least 1 marae")]
         public IEnumerable<int> NgaMaraeIdList { get; set; } = new List<int>();
 

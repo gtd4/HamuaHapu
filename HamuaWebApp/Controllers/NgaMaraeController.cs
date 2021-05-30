@@ -10,9 +10,11 @@ using HamuaHapuCommon.Resources;
 using System.Linq;
 using System;
 using HamuaHapuRegistration.ApiClients.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HamuaHapuRegistration.Controllers
 {
+    [Authorize]
     public class NgaMaraeController : Controller
     {
         private IConfiguration config;
