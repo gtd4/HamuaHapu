@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using HamuaHapuRegistration.Data;
 using HamuaHapuRegistration.ApiClients.Interfaces;
 using HamuaHapuRegistration.ApiClients.Implementations;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.UI;
 
 namespace HamuaHapuRegistration
 {
@@ -65,6 +65,7 @@ namespace HamuaHapuRegistration
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
