@@ -13,9 +13,11 @@ using System.Text;
 using HamuaHapuCommon.Resources;
 using HamuaHapuRegistration.ApiClients.Interfaces;
 using HamuaHapuRegistration.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HamuaHapuRegistration.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
