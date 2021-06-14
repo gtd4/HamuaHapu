@@ -360,3 +360,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/HamuaWebApp/wwwroot/img/HBHS-Day-Enrolment-Form-2021.pdf

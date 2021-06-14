@@ -50,6 +50,10 @@ class TupunaFormComponent extends React.Component {
         this.state = {
             Name: null, PrimaryIwi: null, PrimaryHapu: null, Relationship: null
         };
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(event) {
+        this.setState({ Relationship: event.target.value });
     }
 
     render() {
@@ -59,22 +63,26 @@ class TupunaFormComponent extends React.Component {
                 <hr />
                 <div className="form-group">
                     <label className="control-label">Tupuna Name</label>
-                    <input name="Member.NgaTupuna[{this.props.index}].Name" id="Member.NgaTupuna[{this.props.index}].Name" asp-for="@Model.Member.NgaTupuna.ElementAt({this.props.index}).Name" type="text" className="form-control tupuna-control" />
+                    <input name={"Member.NgaTupuna[" + this.props.index + "].Name"} id={"Member.NgaTupuna[" + this.props.index + "].Name"} type="text" className="form-control tupuna-control" />
+                    
                     <span className="text-danger" />
                 </div>
                 <div className="form-group">
                     <label className="control-label">Tupuna Primary Iwi</label>
-                    <input name="Member.NgaTupuna[{this.props.index}].PrimaryIwi" id="Member.NgaTupuna[{this.props.index}].PrimaryIwi" asp-for="@Model.Member.NgaTupuna.ElementAt({this.props.index}).PrimaryIwi" type="text" className="form-control tupuna-control" />
+                    <input name={"Member.NgaTupuna[" + this.props.index + "].PrimaryIwi"} id={" Member.NgaTupuna[" + this.props.index + "].PrimaryIwi"} type="text" className="form-control tupuna-control" />
+                    
                     <span className="text-danger" />
                 </div>
                 <div className="form-group">
                     <label className="control-label">Tupuna Primary Hapū</label>
-                    <input name="Member.NgaTupuna[{this.props.index}].PrimaryHapu" id="Member.NgaTupuna[{this.props.index}].PrimaryHapu" asp-for="@Model.Member.NgaTupuna.ElementAt({this.props.index}).PrimaryHapu" type="text" className="form-control tupuna-control" />
+                    <input name={"Member.NgaTupuna[" + this.props.index + "].PrimaryHapu"} id={"Member.NgaTupuna[" + this.props.index + "].PrimaryHapu"} type="text" className="form-control tupuna-control" />
+                    
                     <span className="text-danger" />
                 </div>
                 <div className="form-group">
                     <label className="control-label" />
-                    <select defaultValue={"Relationship"} name="Member.NgaTupuna[{this.props.index}].Relationship" id="Member.NgaTupuna[@i].Relationship" asp-for="@Model.Member.NgaTupuna.ElementAt({this.props.index}).Relationship" type="text" className="form-control" value="@relationship">
+                    <select defaultValue={"Relationship"} name={"Member.NgaTupuna[" + this.props.index + "].Relationship"} id={"Member.NgaTupuna[" + this.props.index + "].Relationship"} className="form-control">
+                    
                         <option value={"Relationship"}>Relationship</option>
                         <option value={"GrandMother (Mothers Side)"}>GrandMother (Mothers Side)</option>
                         <option value={"GrandFather (Mothers Side)"}>GrandFather (Mothers Side)</option>
