@@ -12,7 +12,7 @@ class TupunaForm extends React.Component {
         e.preventDefault();
         const ngaTupuna = this.state.ngaTupuna;
         this.setState({
-            ngaTupuna: ngaTupuna.concat(<TupunaFormComponent key={ngaTupuna.length} index={ngaTupuna.length} removeTupuna={this.removeTupuna} />)
+            ngaTupuna: ngaTupuna.concat(<TupunaFormComponent key={ngaTupuna.length} index={ngaTupuna.length + 2} removeTupuna={this.removeTupuna} />)
         });
     }
 
