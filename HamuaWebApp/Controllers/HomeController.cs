@@ -123,6 +123,7 @@ namespace HamuaHapuRegistration.Controllers
         public async Task<IActionResult> Register([Bind("FirstName,LastName,Gender,DOB,PlaceOfBirth,Occupation,SpecialtySkills,Address1,Address2,Address3,PostCode,Country,HomePhone,Mobile,Email,IsTeReoFirstLanguage,CanYouSpeakTeReo,TeReoProficiency,ReturnToRuatokiToLive,ReturnComment,Facebook,Twitter,Instagram,NgaMaraeIdList,NgaTupuna")] SaveTangataResource Member)
         {
             var parentsValid = ValidateParents(Member.NgaTupuna);
+            var validTupuna = new List<SaveTupunaResource>();
 
             if (!parentsValid)
             {
@@ -131,6 +132,20 @@ namespace HamuaHapuRegistration.Controllers
 
             if (!ModelState.IsValid)
             {
+                //Only persist valid
+                foreach (var tupuna in Member.NgaTupuna)
+                {
+                    //Still show Mother and Father after invalid submission
+                    if (tupuna.Relationship != "Mother" || tupuna.Relationship != "Father")
+                    {
+                        if (!string.IsNullOrEmpty(tupuna.Name) || tupuna.Relationship == "Relationship")
+                        {
+                            validTupuna.Add(tupuna);
+                        }
+                    }
+                }
+
+                Member.NgaTupuna = validTupuna;
                 var vm = new RegisterViewModel();
                 var ngaMarae = await maraeClient.GetNgaMaraeAsync();
                 var maraeGrouping = ngaMarae.GroupBy(x => x.Area);
@@ -141,6 +156,18 @@ namespace HamuaHapuRegistration.Controllers
                 ModelState.AddModelError(string.Empty, "Error Creating Member");
                 return View(vm);
             }
+
+            //Only persist valid
+            foreach (var tupuna in Member.NgaTupuna)
+            {
+                if (!string.IsNullOrEmpty(tupuna.Name) || tupuna.Relationship == "Relationship")
+                {
+                    validTupuna.Add(tupuna);
+                }
+            }
+
+            Member.NgaTupuna = validTupuna;
+
             using (HttpClient client = new HttpClient())
             {
                 var jsonString = JsonConvert.SerializeObject(Member);

@@ -14,44 +14,47 @@
             <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <h1>Whakapapa</h1>
+                        <h1>Whakapapa (Please fill in the details for 1 of your parents)</h1>
                         <hr />
                         <div class="tupuna">
                             <span asp-validation-for="@Model.Member.NgaTupuna" class="text-danger parent-error-msg"></span>
                             @if (Model.Member.NgaTupuna.Any())
                             {
-                                @for (var i = 0; i < 2; i++)
+                                @for (var i = 0; i < Model.Member.NgaTupuna.Count(); i++)
                                 {
-                                    if (i == 0)
+                                    if (i == 0 || i == 1)
                                     {
-                                        <h2>Mama</h2>
-                                        relationship = Model.Member.NgaTupuna.Any() & !string.IsNullOrEmpty(Model.Member.NgaTupuna.ElementAt(i).Relationship) ? Model.Member.NgaTupuna.ElementAt(i).Relationship : "Mother";
+                                        if (i == 0)
+                                        {
+                                            <h2>Mama</h2>
+                                            relationship = Model.Member.NgaTupuna.Any() & !string.IsNullOrEmpty(Model.Member.NgaTupuna.ElementAt(i).Relationship) ? Model.Member.NgaTupuna.ElementAt(i).Relationship : "Mother";
+                                        }
+                                        else if (i == 1)
+                                        {
+                                            <h2>Papa</h2>
+                                            relationship = Model.Member.NgaTupuna.Any() & !string.IsNullOrEmpty(Model.Member.NgaTupuna.ElementAt(i).Relationship) ? Model.Member.NgaTupuna.ElementAt(i).Relationship : "Father";
+                                        }
+                                        <div class="form-group">
+                                            <label class="control-label">@relationship's Name</label>
+                                            <input name="Member.NgaTupuna[@i].Name" id="Member.NgaTupuna[@i].Name" asp-for="@Model.Member.NgaTupuna.ElementAt(i).Name" type="text" class="form-control @relationship-control" />
+                                            <span class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">@relationship's Primary Iwi</label>
+                                            <input name="Member.NgaTupuna[@i].PrimaryIwi" id="Member.NgaTupuna[@i].PrimaryIwi" asp-for="@Model.Member.NgaTupuna.ElementAt(i).PrimaryIwi" type="text" class="form-control @relationship-control" />
+                                            <span class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">@relationship's Primary Hapū</label>
+                                            <input name="Member.NgaTupuna[@i].PrimaryHapu" id="Member.NgaTupuna[@i].PrimaryHapu" asp-for="@Model.Member.NgaTupuna.ElementAt(i).PrimaryHapu" type="text" class="form-control @relationship-control" />
+                                            <span class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label"></label>
+                                            <input name="Member.NgaTupuna[@i].Relationship" id="Member.NgaTupuna[@i].Relationship" asp-for="@Model.Member.NgaTupuna.ElementAt(i).Relationship" type="hidden" class="form-control" value="@relationship" />
+                                            <span class="text-danger"></span>
+                                        </div>
                                     }
-                                    else
-                                    {
-                                        <h2>Papa</h2>
-                                        relationship = Model.Member.NgaTupuna.Any() & !string.IsNullOrEmpty(Model.Member.NgaTupuna.ElementAt(i).Relationship) ? Model.Member.NgaTupuna.ElementAt(i).Relationship : "Father";
-                                    }
-                                    <div class="form-group">
-                                        <label class="control-label">@relationship's Name</label>
-                                        <input name="Member.NgaTupuna[@i].Name" id="Member.NgaTupuna[@i].Name" asp-for="@Model.Member.NgaTupuna.ElementAt(i).Name" type="text" class="form-control @relationship-control" />
-                                        <span class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">@relationship's Primary Iwi</label>
-                                        <input name="Member.NgaTupuna[@i].PrimaryIwi" id="Member.NgaTupuna[@i].PrimaryIwi" asp-for="@Model.Member.NgaTupuna.ElementAt(i).PrimaryIwi" type="text" class="form-control @relationship-control" />
-                                        <span class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">@relationship's Primary Hapū</label>
-                                        <input name="Member.NgaTupuna[@i].PrimaryHapu" id="Member.NgaTupuna[@i].PrimaryHapu" asp-for="@Model.Member.NgaTupuna.ElementAt(i).PrimaryHapu" type="text" class="form-control @relationship-control" />
-                                        <span class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label"></label>
-                                        <input name="Member.NgaTupuna[@i].Relationship" id="Member.NgaTupuna[@i].Relationship" asp-for="@Model.Member.NgaTupuna.ElementAt(i).Relationship" type="hidden" class="form-control" value="@relationship" />
-                                        <span class="text-danger"></span>
-                                    </div>
 
                                 }
                             }

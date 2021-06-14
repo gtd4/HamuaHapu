@@ -36,7 +36,7 @@ class TupunaForm extends React.Component {
                     return TupunaFormComponent;
                 })}
                 <hr />
-                <button onClick={this.addTupuna} className="add-tupuna-button">Add {this.state.ngaTupuna.length + 1}</button>
+                <button onClick={this.addTupuna} className="add-tupuna-button btn btn-dark">+</button>
 
             </div>);
     }
@@ -59,30 +59,30 @@ class TupunaFormComponent extends React.Component {
     render() {
         return (
             <div>
-                <button className="remove-tupuna-btn" onClick={(e) => this.props.removeTupuna(e, this.props.index)}>Remove {this.props.index}</button>
+                <button className="remove-tupuna-btn btn btn-danger" onClick={(e) => this.props.removeTupuna(e, this.props.index)}>-</button>
                 <hr />
                 <div className="form-group">
                     <label className="control-label">Tupuna Name</label>
                     <input name={"Member.NgaTupuna[" + this.props.index + "].Name"} id={"Member.NgaTupuna[" + this.props.index + "].Name"} type="text" className="form-control tupuna-control" />
-                    
+
                     <span className="text-danger" />
                 </div>
                 <div className="form-group">
                     <label className="control-label">Tupuna Primary Iwi</label>
                     <input name={"Member.NgaTupuna[" + this.props.index + "].PrimaryIwi"} id={" Member.NgaTupuna[" + this.props.index + "].PrimaryIwi"} type="text" className="form-control tupuna-control" />
-                    
+
                     <span className="text-danger" />
                 </div>
                 <div className="form-group">
                     <label className="control-label">Tupuna Primary Hapū</label>
                     <input name={"Member.NgaTupuna[" + this.props.index + "].PrimaryHapu"} id={"Member.NgaTupuna[" + this.props.index + "].PrimaryHapu"} type="text" className="form-control tupuna-control" />
-                    
+
                     <span className="text-danger" />
                 </div>
                 <div className="form-group">
                     <label className="control-label" />
                     <select defaultValue={"Relationship"} name={"Member.NgaTupuna[" + this.props.index + "].Relationship"} id={"Member.NgaTupuna[" + this.props.index + "].Relationship"} className="form-control">
-                    
+
                         <option value={"Relationship"}>Relationship</option>
                         <option value={"GrandMother (Mothers Side)"}>GrandMother (Mothers Side)</option>
                         <option value={"GrandFather (Mothers Side)"}>GrandFather (Mothers Side)</option>
