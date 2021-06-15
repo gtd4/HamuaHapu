@@ -347,10 +347,34 @@
     <script type="text/babel" src="~/js/tupuna-form-app.jsx">
     </script>
 
+    <script type="text/jsx">
+        var myArray = [];
+
+        @foreach (var d in Model.Member.NgaTupuna)
+        {
+            @:var tupuna = {};
+            @:tupuna.Name = "@d.Name";
+            @:tupuna.PrimaryIwi = "@d.PrimaryIwi";
+            @:tupuna.PrimaryHapu = "@d.PrimaryHapu";
+            @:tupuna.Relationship = "@d.Relationship";
+            @:myArray.push(tupuna);
+        }
+
+        @*for(var i = 0; i < myArray.length; i++)
+            {
+            alert(myArray[i].Relationship);
+            }
+
+            console.log(myArray);*@
+        ReactDOM.render(
+        <TupunaForm data={myArray} />, document.getElementById('react-tupuna'));
+    </script>
+
     <script async
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-AmH2Cb8BLG_RblE-XDdZgBQkbe7_WIY&libraries=places&callback=initAutoComplete">
     </script>
     <script type="text/javascript">
+
         let autocomplete;
 
         /***

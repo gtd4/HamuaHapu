@@ -125,6 +125,7 @@ namespace HamuaHapuRegistration.Controllers
             var parentsValid = ValidateParents(Member.NgaTupuna);
             var validTupuna = new List<SaveTupunaResource>();
 
+            //parentsValid = false;
             if (!parentsValid)
             {
                 ModelState.AddModelError("Member.NgaTupuna", "Please complete the details for 1 of your parents");
@@ -136,12 +137,15 @@ namespace HamuaHapuRegistration.Controllers
                 foreach (var tupuna in Member.NgaTupuna)
                 {
                     //Still show Mother and Father after invalid submission
-                    if (tupuna.Relationship != "Mother" || tupuna.Relationship != "Father")
+                    if (tupuna.Relationship == "Mother" || tupuna.Relationship == "Father")
                     {
-                        if (!string.IsNullOrEmpty(tupuna.Name) || tupuna.Relationship == "Relationship")
-                        {
-                            validTupuna.Add(tupuna);
-                        }
+                        validTupuna.Add(tupuna);
+                        continue;
+                    }
+
+                    if (!string.IsNullOrEmpty(tupuna.Name) || tupuna.Relationship == "Relationship")
+                    {
+                        validTupuna.Add(tupuna);
                     }
                 }
 
