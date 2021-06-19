@@ -29,6 +29,7 @@ namespace HamuaHapuRegistration
         {
             services.AddControllersWithViews();
             services.AddScoped<INgaMaraeClient, NgaMaraeClient>();
+            services.AddScoped<INgaTangataClient, NgaTangataClient>();
 
             services.AddDbContext<HamuaHapuRegistrationContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HamuaHapuRegistrationContext")));

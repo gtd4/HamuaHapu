@@ -25,10 +25,6 @@ namespace HamuaHapuRegistration.ApiClients.Implementations
 
         public async Task<IEnumerable<MaraeResource>> GetNgaMaraeAsync(string url = "")
         {
-            //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-
-            //var endpoint = SetQueryParams(orderby, searchString, includeTangata, apiBaseUrl);
-
             if (string.IsNullOrEmpty(url))
             {
                 url = apiBaseUrl;

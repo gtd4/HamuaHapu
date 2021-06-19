@@ -157,7 +157,7 @@
                             <div class="form-group">
                                 <label asp-for="@Model.Member.TeReoProficiency" class="control-label"></label>
                                 <select asp-for="@Model.Member.TeReoProficiency" class="form-control">
-                                    <option value="">Please Choose</option>
+                                    <option value="Non Te Reo Speaker">Please Choose</option>
                                     <option value="Beginner">Beginner</option>
                                     <option value="Basic">Basic Conversation</option>
                                     <option value="Fluent">Fluent</option>
@@ -244,11 +244,7 @@
                             <input asp-for="@Model.Member.Country" class="form-control page-2-field" />
                             <span asp-validation-for="@Model.Member.Country" class="text-danger"></span>
                         </div>
-                        @*<div class="form-group">
-                                <label asp-for="@Model.Member.HomePhone" class="control-label"></label>
-                                <input asp-for="@Model.Member.HomePhone" class="form-control" />
-                                <span asp-validation-for="@Model.Member.HomePhone" class="text-danger"></span>
-                            </div>*@
+
                         <div class="form-group">
                             <label asp-for="@Model.Member.Mobile" class="control-label"></label>
                             <input asp-for="@Model.Member.Mobile" class="form-control" />
@@ -264,27 +260,6 @@
                             <input asp-for="@Model.Member.Occupation" class="form-control page-2-field" />
                             <span asp-validation-for="@Model.Member.Occupation" class="text-danger"></span>
                         </div>
-
-                        @*<div class="form-group">
-                                <label asp-for="@Model.Member.SpecialtySkills" class="control-label"></label>
-                                <textarea asp-for="@Model.Member.SpecialtySkills" class="form-control"></textarea>
-                                <span asp-validation-for="@Model.Member.SpecialtySkills" class="text-danger"></span>
-                            </div>*@
-                        @*<div class="form-group">
-                                <label asp-for="@Model.Member.Facebook" class="control-label"></label>
-                                <input asp-for="@Model.Member.Facebook" class="form-control" />
-                                <span asp-validation-for="@Model.Member.Facebook" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="@Model.Member.Twitter" class="control-label"></label>
-                                <input asp-for="@Model.Member.Twitter" class="form-control" />
-                                <span asp-validation-for="@Model.Member.Twitter" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="@Model.Member.Instagram" class="control-label"></label>
-                                <input asp-for="@Model.Member.Instagram" class="form-control" />
-                                <span asp-validation-for="@Model.Member.Instagram" class="text-danger"></span>
-                            </div>*@
                     </div>
 
                     <div class="carousel-item">

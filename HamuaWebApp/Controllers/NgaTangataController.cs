@@ -13,48 +13,45 @@ using Newtonsoft.Json;
 using HamuaHapuCommon.Resources;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using HamuaHapuRegistration.ApiClients.Interfaces;
+using HamuaHapuRegistration.ViewModels;
 
 namespace HamuaHapuRegistration.Controllers
 {
-    [Authorize]
+    //ToDo: Uncomment this when going to production
+    //[Authorize]
     public class NgaTangataController : Controller
     {
-        private readonly HamuaHapuRegistrationContext _context;
+        //private readonly HamuaHapuRegistrationContext _context;
 
         private IConfiguration config;
         private string apiBaseUrl;
+        private INgaTangataClient ngaTangataClient;
 
-        public NgaTangataController(HamuaHapuRegistrationContext context, IConfiguration _config)
+        public NgaTangataController(IConfiguration _config, INgaTangataClient client)
         {
-            _context = context;
+            //_context = context;
             config = _config;
             apiBaseUrl = config.GetValue<string>("hamuaApiBaseUrl") + "/ngatangata";
+            ngaTangataClient = client;
         }
 
         // GET: HapuMembers
         public async Task<IActionResult> Index()
         {
-            using (HttpClient client = new HttpClient())
+            var ngaTangata = await ngaTangataClient.GetNgaTangataAsync();
+
+            //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+
+            if (ngaTangata.Any())
             {
-                //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-
-                var endpoint = apiBaseUrl;//SetQueryParams(orderby, searchString, includeTangata, apiBaseUrl);
-
-                using (var response = await client.GetAsync(endpoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var stringResult = await response.Content.ReadAsStringAsync();
-                        var ngaTangata = JsonConvert.DeserializeObject<IEnumerable<TangataResource>>(stringResult);
-                        return View(ngaTangata);
-                    }
-                    else
-                    {
-                        ModelState.Clear();
-                        ModelState.AddModelError(string.Empty, "Error Getting Nga Tangata");
-                        return View();
-                    }
-                }
+                return View(ngaTangata);
+            }
+            else
+            {
+                //ModelState.Clear();
+                //ModelState.AddModelError(string.Empty, "Error Getting Marae");
+                return NotFound();
             }
         }
 
@@ -68,89 +65,39 @@ namespace HamuaHapuRegistration.Controllers
 
             ViewData["Created"] = success_msg;
 
-            using (HttpClient client = new HttpClient())
-            {
-                //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-                string endpoint = $"{apiBaseUrl}/{id}";
+            var tangata = await ngaTangataClient.GetTangataByIdAsync((int)id);
 
-                using (var response = await client.GetAsync(endpoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var stringResult = await response.Content.ReadAsStringAsync();
-                        var marae = JsonConvert.DeserializeObject<TangataResource>(stringResult);
-                        return View(marae);
-                    }
-                    else
-                    {
-                        ModelState.Clear();
-                        ModelState.AddModelError(string.Empty, "Error Getting Marae");
-                        return View();
-                    }
-                }
+            if (tangata == null)
+            {
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, "Error Getting Tangata");
+                return NotFound();
             }
-        }
-
-        // GET: HapuMembers/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: HapuMembers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,LastName,Gender,DOB,PlaceOfBirth,Occupation,SpecialtySkills,Address1,Address2,Address3,PostCode,Country,HomePhone,Mobile,Email,IsTeReoFirstLanguage,CanYouSpeakTeReo,TeReoProficiency,ReturnToRuatokiToLive,ReturnComment,Facebook,Twitter,Instagram")] SaveTangataResource hapuMember)
-        {
-            using (HttpClient client = new HttpClient())
+            else
             {
-                var jsonString = JsonConvert.SerializeObject(hapuMember);
-
-                var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-                using (var response = await client.PostAsync(apiBaseUrl, httpContent))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.Created)
-                    {
-                        var stringResult = await response.Content.ReadAsStringAsync();
-                        var tangata = JsonConvert.DeserializeObject<TangataResource>(stringResult);
-                        return RedirectToAction(nameof(Details), new { id = tangata.TangataId, success_msg = "Created" });
-                    }
-                    else
-                    {
-                        ModelState.Clear();
-                        ModelState.AddModelError(string.Empty, "Error Creating Marae");
-                        return View(hapuMember);
-                    }
-                }
+                return View(tangata);
             }
         }
 
         // GET: HapuMembers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            using (HttpClient client = new HttpClient())
+            if (id == null)
             {
-                //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-                string endpoint = $"{apiBaseUrl}/{id}";
+                return NotFound();
+            }
 
-                using (var response = await client.GetAsync(endpoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var stringResult = await response.Content.ReadAsStringAsync();
-                        var tangata = JsonConvert.DeserializeObject<TangataResource>(stringResult);
-                        return View(tangata);
-                    }
-                    else
-                    {
-                        ModelState.Clear();
-                        ModelState.AddModelError(string.Empty, "Error Getting Marae");
-                        return View();
-                    }
-                }
+            var tangata = await ngaTangataClient.GetTangataByIdAsync((int)id);
+
+            if (tangata == null)
+            {
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, "Error Getting Tangata");
+                return NotFound();
+            }
+            else
+            {
+                return View(tangata);
             }
         }
 
@@ -161,64 +108,167 @@ namespace HamuaHapuRegistration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Gender,DOB,PlaceOfBirth,Occupation,SpecialtySkills,Address1,Address2,Address3,PostCode,Country,HomePhone,Mobile,Email,IsTeReoFirstLanguage,CanYouSpeakTeReo,TeReoProficiency,ReturnToRuatokiToLive,ReturnComment,Facebook,Twitter,Instagram")] TangataResource hapuMember)
         {
-            using (HttpClient client = new HttpClient())
+            var tangata = await ngaTangataClient.EditAsync(id, hapuMember);
+
+            if (tangata == null)
             {
-                //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-                string endpoint = $"{apiBaseUrl}/{id}";
-                var jsonString = JsonConvert.SerializeObject(hapuMember);
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, "Error Getting Tangata");
+                return View(tangata);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Details), new { id = tangata.TangataId, success_msg = "Updated" });
+            }
+        }
 
-                var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
+        public async Task<IActionResult> Stats()
+        {
+            List<ChartDataViewModel> chartDataList = new List<ChartDataViewModel>();
 
-                using (var response = await client.PutAsync(endpoint, httpContent))
+            var tangata = await ngaTangataClient.GetNgaTangataAsync();
+            var genderGrouping = tangata.GroupBy(x => x.Gender);
+            var countryGrouping = tangata.GroupBy(x => x.Country);
+            var reoGrouping = tangata.GroupBy(x => x.TeReoProficiency);
+
+            var genderChartData = new ChartDataViewModel();
+            var countryChartData = new ChartDataViewModel();
+            var reoChartData = new ChartDataViewModel();
+
+            PopulateChartData(genderGrouping, genderChartData, "Gender");
+            PopulateChartData(countryGrouping, countryChartData, "Country");
+            PopulateChartData(reoGrouping, reoChartData, "Te Reo Proficiency");
+
+            chartDataList.Add(reoChartData);
+            chartDataList.Add(countryChartData);
+            chartDataList.Add(genderChartData);
+
+            return View("ChartData", chartDataList);
+        }
+
+        public async Task<IActionResult> GroupByGender()
+        {
+            var tangata = await ngaTangataClient.GetNgaTangataAsync();
+            var tangataGrouping = tangata.GroupBy(x => x.Gender);
+
+            var vm = new ChartDataViewModel();
+
+            if (tangataGrouping == null)
+            {
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, "Error Getting Tangata");
+                return View("ChartData", vm);
+            }
+            else
+            {
+                PopulateChartData(tangataGrouping, vm, "Gender");
+                return View("ChartData", vm);
+            }
+        }
+
+        private static void PopulateChartData(IEnumerable<IGrouping<string, TangataResource>> tangataGrouping, ChartDataViewModel vm, string title)
+        {
+            vm.Title = title;
+            vm.Tangata = tangataGrouping;
+
+            foreach (var group in tangataGrouping)
+            {
+                vm.ChartData.Add(group.Key, group.Count());
+            }
+        }
+
+        public async Task<IActionResult> GroupByCountry()
+        {
+            var tangata = await ngaTangataClient.GetNgaTangataAsync();
+            var tangataGrouping = tangata.GroupBy(x => x.Country);
+
+            var vm = new ChartDataViewModel();
+
+            if (tangataGrouping == null)
+            {
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, "Error Getting Tangata");
+                return View("ChartData", vm);
+            }
+            else
+            {
+                vm.Title = "Country";
+                vm.Tangata = tangataGrouping;
+
+                foreach (var group in tangataGrouping)
                 {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var stringResult = await response.Content.ReadAsStringAsync();
-                        var tangata = JsonConvert.DeserializeObject<TangataResource>(stringResult);
-                        return RedirectToAction(nameof(Details), new { id = tangata.TangataId, success_msg = "Updated" });
-                    }
-                    else
-                    {
-                        ModelState.Clear();
-                        ModelState.AddModelError(string.Empty, "Error Getting Marae");
-                        return View(hapuMember);
-                    }
+                    vm.ChartData.Add(group.Key, group.Count());
                 }
+                return View("ChartData", vm);
             }
         }
 
-        // GET: HapuMembers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> GroupByReoProficiency()
         {
-            if (id == null)
+            var tangata = await ngaTangataClient.GetNgaTangataAsync();
+            var tangataGrouping = tangata.GroupBy(x => x.TeReoProficiency);
+
+            var vm = new ChartDataViewModel();
+
+            if (tangataGrouping == null)
             {
-                return NotFound();
+                ModelState.Clear();
+                ModelState.AddModelError(string.Empty, "Error Getting Tangata");
+                return View("ChartData", vm);
             }
-
-            var hapuMember = await _context.HapuMember
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (hapuMember == null)
+            else
             {
-                return NotFound();
+                vm.Title = "Reo Proficiency";
+                vm.Tangata = tangataGrouping;
+
+                foreach (var group in tangataGrouping)
+                {
+                    var key = group.Key;
+                    var count = group.Count();
+
+                    if (string.IsNullOrEmpty(key))
+                    {
+                        key = "Non Te Reo Speaker";
+                    }
+                    vm.ChartData.Add(key, count);
+                }
+
+                return View("ChartData", vm);
             }
-
-            return View(hapuMember);
         }
 
-        // POST: HapuMembers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var hapuMember = await _context.HapuMember.FindAsync(id);
-            _context.HapuMember.Remove(hapuMember);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //// GET: HapuMembers/Delete/5
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    //if (id == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
 
-        private bool HapuMemberExists(int id)
-        {
-            return _context.HapuMember.Any(e => e.ID == id);
-        }
+        //    //var hapuMember = await _context.HapuMember
+        //    //    .FirstOrDefaultAsync(m => m.ID == id);
+        //    //if (hapuMember == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
+
+        //    //return View(hapuMember);
+        //}
+
+        //// POST: HapuMembers/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var hapuMember = await _context.HapuMember.FindAsync(id);
+        //    _context.HapuMember.Remove(hapuMember);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+        //private bool HapuMemberExists(int id)
+        //{
+        //    return _context.HapuMember.Any(e => e.ID == id);
+        //}
     }
 }

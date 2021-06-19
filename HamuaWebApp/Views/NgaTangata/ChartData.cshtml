@@ -1,0 +1,74 @@
+﻿@model IEnumerable<HamuaHapuRegistration.ViewModels.ChartDataViewModel>;
+
+@{
+    ViewData["Title"] = "Chart Data";
+}
+
+@foreach (var group in Model)
+{
+
+    <partial name="ChartDataPartial" model="group" />
+
+}
+
+<canvas id="myChart"></canvas>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+
+        var populateChart = function (title, dataArray, labelArray) {
+            var selector = 'myChart-' + title;
+            var ctx = document.getElementById(selector).getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labelArray,
+                    datasets: [{
+                        label: title,
+                        data: dataArray,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        };
+
+        @foreach (var chartData in @Model)
+        {
+            @:var labelArray = [];
+            @:var dataArray = [];
+
+            @foreach (var group in chartData.ChartData)
+            {
+                @:labelArray.push("@group.Key");
+                @:dataArray.push(@group.Value);
+            }
+
+            @:populateChart("@chartData.Title", dataArray, labelArray);
+        }
+    </script>
+}

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using HamuaHapuCommon.Resources;
@@ -14,12 +15,13 @@ namespace HamuaRegistrationApi.Controllers
     [Route("[controller]")]
     public class NgaTangataController : ControllerBase
     {
-        private readonly ILogger<Marae> _logger;
+        private readonly ILogger<Tangata> _logger;
         private ITangataService tangataService;
 
         private IMapper tangataMapper;
+        private IEnumerable<IGrouping<string, TangataResource>> languageGroups;
 
-        public NgaTangataController(ILogger<Marae> logger, ITangataService service, IMapper mapper)
+        public NgaTangataController(ILogger<Tangata> logger, ITangataService service, IMapper mapper)
         {
             _logger = logger;
             tangataService = service;
@@ -50,6 +52,39 @@ namespace HamuaRegistrationApi.Controllers
                 var resources = tangataMapper.Map<IEnumerable<Tangata>, IEnumerable<TangataResource>>(ngaTangata);
                 return Ok(resources);
             }
+        }
+
+        [HttpGet("reo-proficiency")]
+        public async Task<IActionResult> GetLanguageProficiencyData()
+        {
+            var ngaTangata = await tangataService.GetAllTangataAsync();
+            var tangataResources = tangataMapper.Map<IEnumerable<Tangata>, IEnumerable<TangataResource>>(ngaTangata);
+
+            languageGroups = tangataResources.GroupBy(x => x.TeReoProficiency);
+
+            return Ok(languageGroups);
+        }
+
+        [HttpGet("residence/country")]
+        public async Task<IActionResult> GetResidencyCountryData()
+        {
+            var ngaTangata = await tangataService.GetAllTangataAsync();
+            var tangataResources = tangataMapper.Map<IEnumerable<Tangata>, IEnumerable<TangataResource>>(ngaTangata);
+
+            var countryGroups = tangataResources.GroupBy(x => x.Country);
+
+            return Ok(countryGroups);
+        }
+
+        [HttpGet("gender")]
+        public async Task<IActionResult> GetGenderData()
+        {
+            var ngaTangata = await tangataService.GetAllTangataAsync();
+            var tangataResources = tangataMapper.Map<IEnumerable<Tangata>, IEnumerable<TangataResource>>(ngaTangata);
+
+            var countryGroups = tangataResources.GroupBy(x => x.Gender);
+
+            return Ok(countryGroups);
         }
 
         [HttpGet("{id}")]

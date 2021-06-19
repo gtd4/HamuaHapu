@@ -1,0 +1,20 @@
+﻿@model HamuaHapuRegistration.ViewModels.ChartDataViewModel;
+
+<h1>@Model.Title</h1>
+<canvas id="myChart-@Model.Title">
+</canvas>
+
+@*@foreach (var group in Model.ChartData)
+    {
+        <hr />
+        <p>@group.Key</p>
+        <p>@group.Value</p>
+        <hr />
+    }*@
+
+<canvas id="myChart-@Model.Title" width="400" height="200"></canvas>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+}

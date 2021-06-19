@@ -5,6 +5,10 @@
     {
       "library": "bootstrap-multiselect@0.9.16",
       "destination": "wwwroot/lib/bootstrap-multiselect/"
+    },
+    {
+      "library": "nvd3@1.8.6",
+      "destination": "wwwroot/lib/nvd3/"
     }
   ]
 }
