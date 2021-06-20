@@ -20,6 +20,7 @@ namespace HamuaHapuRegistration.Controllers
 {
     //ToDo: Uncomment this when going to production
     //[Authorize]
+    [AllowAnonymous]
     public class NgaTangataController : Controller
     {
         //private readonly HamuaHapuRegistrationContext _context;
