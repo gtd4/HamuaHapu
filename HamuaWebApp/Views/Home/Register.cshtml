@@ -20,40 +20,40 @@
                             <span asp-validation-for="@Model.Member.NgaTupuna" class="text-danger parent-error-msg"></span>
                             @if (Model.Member.NgaTupuna.Any())
                             {
-                                @for (var i = 0; i < Model.Member.NgaTupuna.Count(); i++)
+                            @for (var i = 0; i < Model.Member.NgaTupuna.Count(); i++)
                                 {
                                     if (i == 0 || i == 1)
                                     {
                                         if (i == 0)
                                         {
-                                            <h2>Mama</h2>
+                            <h2>Mama</h2>
                                             relationship = Model.Member.NgaTupuna.Any() & !string.IsNullOrEmpty(Model.Member.NgaTupuna.ElementAt(i).Relationship) ? Model.Member.NgaTupuna.ElementAt(i).Relationship : "Mother";
                                         }
                                         else if (i == 1)
                                         {
-                                            <h2>Papa</h2>
+                            <h2>Papa</h2>
                                             relationship = Model.Member.NgaTupuna.Any() & !string.IsNullOrEmpty(Model.Member.NgaTupuna.ElementAt(i).Relationship) ? Model.Member.NgaTupuna.ElementAt(i).Relationship : "Father";
                                         }
-                                        <div class="form-group">
-                                            <label class="control-label">@relationship's Name</label>
-                                            <input name="Member.NgaTupuna[@i].Name" id="Member.NgaTupuna[@i].Name" asp-for="@Model.Member.NgaTupuna.ElementAt(i).Name" type="text" class="form-control @relationship-control" />
-                                            <span class="text-danger"></span>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">@relationship's Primary Iwi</label>
-                                            <input name="Member.NgaTupuna[@i].PrimaryIwi" id="Member.NgaTupuna[@i].PrimaryIwi" asp-for="@Model.Member.NgaTupuna.ElementAt(i).PrimaryIwi" type="text" class="form-control @relationship-control" />
-                                            <span class="text-danger"></span>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">@relationship's Primary Hapū</label>
-                                            <input name="Member.NgaTupuna[@i].PrimaryHapu" id="Member.NgaTupuna[@i].PrimaryHapu" asp-for="@Model.Member.NgaTupuna.ElementAt(i).PrimaryHapu" type="text" class="form-control @relationship-control" />
-                                            <span class="text-danger"></span>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label"></label>
-                                            <input name="Member.NgaTupuna[@i].Relationship" id="Member.NgaTupuna[@i].Relationship" asp-for="@Model.Member.NgaTupuna.ElementAt(i).Relationship" type="hidden" class="form-control" value="@relationship" />
-                                            <span class="text-danger"></span>
-                                        </div>
+                            <div class="form-group">
+                                <label class="control-label">@relationship's Name</label>
+                                <input name="Member.NgaTupuna[@i].Name" id="Member.NgaTupuna[@i].Name" asp-for="@Model.Member.NgaTupuna.ElementAt(i).Name" type="text" class="form-control @relationship-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">@relationship's Primary Iwi</label>
+                                <input name="Member.NgaTupuna[@i].PrimaryIwi" id="Member.NgaTupuna[@i].PrimaryIwi" asp-for="@Model.Member.NgaTupuna.ElementAt(i).PrimaryIwi" type="text" class="form-control @relationship-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">@relationship's Primary Hapū</label>
+                                <input name="Member.NgaTupuna[@i].PrimaryHapu" id="Member.NgaTupuna[@i].PrimaryHapu" asp-for="@Model.Member.NgaTupuna.ElementAt(i).PrimaryHapu" type="text" class="form-control @relationship-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"></label>
+                                <input name="Member.NgaTupuna[@i].Relationship" id="Member.NgaTupuna[@i].Relationship" asp-for="@Model.Member.NgaTupuna.ElementAt(i).Relationship" type="hidden" class="form-control" value="@relationship" />
+                                <span class="text-danger"></span>
+                            </div>
                                     }
 
                                 }
@@ -61,38 +61,38 @@
                             else
                             {
 
-                                @for (var i = 0; i < 2; i++)
+                            @for (var i = 0; i < 2; i++)
                                 {
                                     if (i == 0)
                                     {
-                                        <h2>Mama</h2>
+                            <h2>Mama</h2>
                                         relationship = "Mother";
                                     }
                                     else
                                     {
-                                        <h2>Papa</h2>
+                            <h2>Papa</h2>
                                         relationship = "Father";
                                     }
-                                    <div class="form-group">
-                                        <label class="control-label">@relationship's Name</label>
-                                        <input name="Member.NgaTupuna[@i].Name" id="Member.NgaTupuna[@i].Name" type="text" class="form-control @relationship-control" />
-                                        <span class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">@relationship's Primary Iwi</label>
-                                        <input name="Member.NgaTupuna[@i].PrimaryIwi" id="Member.NgaTupuna[@i].PrimaryIwi" type="text" class="form-control @relationship-control" />
-                                        <span class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">@relationship's Primary Hapū</label>
-                                        <input name="Member.NgaTupuna[@i].PrimaryHapu" id="Member.NgaTupuna[@i].PrimaryHapu" type="text" class="form-control @relationship-control" />
-                                        <span class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label"></label>
-                                        <input name="Member.NgaTupuna[@i].Relationship" id="Member.NgaTupuna[@i].Relationship" type="hidden" class="form-control" value="@relationship" />
-                                        <span class="text-danger"></span>
-                                    </div>
+                            <div class="form-group">
+                                <label class="control-label">@relationship's Name</label>
+                                <input name="Member.NgaTupuna[@i].Name" id="Member.NgaTupuna[@i].Name" type="text" class="form-control @relationship-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">@relationship's Primary Iwi</label>
+                                <input name="Member.NgaTupuna[@i].PrimaryIwi" id="Member.NgaTupuna[@i].PrimaryIwi" type="text" class="form-control @relationship-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">@relationship's Primary Hapū</label>
+                                <input name="Member.NgaTupuna[@i].PrimaryHapu" id="Member.NgaTupuna[@i].PrimaryHapu" type="text" class="form-control @relationship-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"></label>
+                                <input name="Member.NgaTupuna[@i].Relationship" id="Member.NgaTupuna[@i].Relationship" type="hidden" class="form-control" value="@relationship" />
+                                <span class="text-danger"></span>
+                            </div>
 
                                 }
                             }
@@ -106,24 +106,24 @@
                         {
                             var groupKey = group.Key;
 
-                            <div class="form-group">
-                                <h3>
-                                    <a class="" data-toggle="collapse" href="#@groupKey.Replace(' ', '-')-collapse" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="form-group">
+                            <h3>
+                                <a class="" data-toggle="collapse" href="#@groupKey.Replace(' ', '-')-collapse" aria-expanded="false" aria-controls="collapseExample">
 
-                                        <i class="fas fa-chevron-down" id="@groupKey.Replace(' ', '-')-icon"> </i><label asp-for="@Model.Member.NgaMaraeIdList" class="control-label area-names">@groupKey</label>
-                                    </a>
-                                </h3>
-                                <hr />
-                                <div class="collapse" id="@groupKey.Replace(' ', '-')-collapse">
-                                    <select id="@groupKey.Replace(' ', '-')-marae-list" asp-for="@Model.Member.NgaMaraeIdList" class="form-control custom-select marae-select-list" multiple="multiple">
+                                    <i class="fas fa-chevron-down" id="@groupKey.Replace(' ', '-')-icon"> </i><label asp-for="@Model.Member.NgaMaraeIdList" class="control-label area-names">@groupKey</label>
+                                </a>
+                            </h3>
+                            <hr />
+                            <div class="collapse" id="@groupKey.Replace(' ', '-')-collapse">
+                                <select id="@groupKey.Replace(' ', '-')-marae-list" asp-for="@Model.Member.NgaMaraeIdList" class="form-control custom-select marae-select-list" multiple="multiple">
 
-                                        @foreach (var groupedItem in group)
+                                    @foreach (var groupedItem in group)
                                         {
-                                            <option value="@groupedItem.MaraeId">@groupedItem.Name</option>
+                                    <option value="@groupedItem.MaraeId">@groupedItem.Name</option>
                                         }
-                                    </select>
-                                </div>
+                                </select>
                             </div>
+                        </div>
 
                         }
                     </div>
@@ -260,6 +260,18 @@
                             <input asp-for="@Model.Member.Occupation" class="form-control page-2-field" />
                             <span asp-validation-for="@Model.Member.Occupation" class="text-danger"></span>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Member.SalaryRange" class="control-label"></label>
+                            <select asp-for="@Model.Member.SalaryRange" class="form-control page-2-field">
+                                <option value="Not Supplied">Please Choose Salary Range</option>
+                                <option value="0-29,999">0-29,999</option>
+                                <option value="31000 - 59,999">31000 - 59,999</option>
+                                <option value="60,000 - 89,999">60,000 - 89,999</option>
+                                <option value="90,000 - 119,999">90,000 - 119,999</option>
+                                <option value="120,000+">120,000+</option>
+                            </select>
+                            <span asp-validation-for="@Model.Member.SalaryRange" class="text-danger"></span>
+                        </div>
                     </div>
 
                     <div class="carousel-item">
@@ -327,12 +339,12 @@
 
         @foreach (var d in Model.Member.NgaTupuna)
         {
-            @:var tupuna = {};
-            @:tupuna.Name = "@d.Name";
-            @:tupuna.PrimaryIwi = "@d.PrimaryIwi";
-            @:tupuna.PrimaryHapu = "@d.PrimaryHapu";
-            @:tupuna.Relationship = "@d.Relationship";
-            @:myArray.push(tupuna);
+        @:var tupuna = {};
+        @:tupuna.Name = "@d.Name";
+        @:tupuna.PrimaryIwi = "@d.PrimaryIwi";
+        @:tupuna.PrimaryHapu = "@d.PrimaryHapu";
+        @:tupuna.Relationship = "@d.Relationship";
+        @:myArray.push(tupuna);
         }
 
         @*for(var i = 0; i < myArray.length; i++)

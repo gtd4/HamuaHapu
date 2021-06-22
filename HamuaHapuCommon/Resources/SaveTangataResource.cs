@@ -27,6 +27,8 @@ namespace HamuaHapuCommon.Resources
         [Required]
         public string Occupation { get; set; }
 
+        public string SalaryRange { get; set; }
+
         public string SpecialtySkills { get; set; }
 
         [Required]

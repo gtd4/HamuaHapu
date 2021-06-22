@@ -131,18 +131,22 @@ namespace HamuaHapuRegistration.Controllers
             var genderGrouping = tangata.GroupBy(x => x.Gender);
             var countryGrouping = tangata.GroupBy(x => x.Country);
             var reoGrouping = tangata.GroupBy(x => x.TeReoProficiency);
+            var salaryRangeGrouping = tangata.GroupBy(x => x.SalaryRange);
 
             var genderChartData = new ChartDataViewModel();
             var countryChartData = new ChartDataViewModel();
             var reoChartData = new ChartDataViewModel();
+            var salaryChartData = new ChartDataViewModel();
 
             PopulateChartData(genderGrouping, genderChartData, "Gender");
             PopulateChartData(countryGrouping, countryChartData, "Country");
             PopulateChartData(reoGrouping, reoChartData, "Te Reo Proficiency");
+            PopulateChartData(salaryRangeGrouping, salaryChartData, "Salary Range");
 
             chartDataList.Add(reoChartData);
             chartDataList.Add(countryChartData);
             chartDataList.Add(genderChartData);
+            chartDataList.Add(salaryChartData);
 
             return View("ChartData", chartDataList);
         }

@@ -1,19 +1,20 @@
 ﻿@model HamuaHapuRegistration.ViewModels.ChartDataViewModel;
 
-<canvas id="myChart-@Model.Title">
-</canvas>
+<div id="@Model.Title.Replace(" ", "-")-collapse">
+    <div class="">
+        <div class="" id="@Model.Title.Replace(" ", "-")-heading">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#@Model.Title.Replace(" ", "-")" aria-expanded="false" aria-controls="@Model.Title.Replace(" ", "-")">
+                    @Model.Title
+                </button>
+            </h5>
+        </div>
 
-@*@foreach (var group in Model.ChartData)
-    {
-        <hr />
-        <p>@group.Key</p>
-        <p>@group.Value</p>
-        <hr />
-    }*@
-
-<canvas id="myChart-@Model.Title" width="400" height="200"></canvas>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-}
+        <div id="@Model.Title.Replace(" ", "-")" class="collapse" aria-labelledby="@Model.Title.Replace(" ", "-")-heading" data-parent="#@Model.Title.Replace(" ", "-")-collapse">
+            <div class="card-body">
+                <canvas id="myChart-@Model.Title.Replace(" ", "-")">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>

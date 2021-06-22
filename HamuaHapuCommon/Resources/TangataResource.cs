@@ -16,6 +16,7 @@ namespace HamuaHapuCommon.Resources
         public string DOB { get; set; }
         public string PlaceOfBirth { get; set; }
         public string Occupation { get; set; }
+        public string SalaryRange { get; set; }
         public string SpecialtySkills { get; set; }
 
         public string Address1 { get; set; }

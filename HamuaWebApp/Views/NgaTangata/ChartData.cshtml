@@ -6,24 +6,10 @@
 
 @foreach (var group in Model)
 {
-<div id="@group.Title.Replace(" ", "-")-collapse">
-    <div class="">
-        <div class="" id="@group.Title.Replace(" ", "-")-heading">
-            <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#@group.Title.Replace(" ", "-")" aria-expanded="false" aria-controls="@group.Title.Replace(" ", "-")">
-                    @group.Title
-                </button>
-            </h5>
-        </div>
 
-        <div id="@group.Title.Replace(" ", "-")" class="collapse" aria-labelledby="@group.Title.Replace(" ", "-")-heading" data-parent="#@group.Title.Replace(" ", "-")-collapse">
-            <div class="card-body">
-                <partial name="ChartDataPartial" model="group" />
-            </div>
-        </div>
-    </div>
-</div>
-        }
+    <partial name="ChartDataPartial" model="group" />
+
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -76,11 +62,11 @@
 
             @foreach (var group in chartData.ChartData)
             {
-                @:labelArray.push("@group.Key");
+                @:labelArray.push("@Html.Raw(group.Key)");
                 @:dataArray.push(@group.Value);
             }
 
-            @:populateChart("@chartData.Title", dataArray, labelArray);
+            @:populateChart("@chartData.Title.Replace(" ", "-")", dataArray, labelArray);
         }
     </script>
 }
