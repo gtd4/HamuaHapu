@@ -59,7 +59,7 @@ namespace HamuaHapuCommon.Resources
         public string TeReoProficiency { get; set; }
 
         [Required]
-        public bool ReturnToRuatokiToLive { get; set; }
+        public string ReturnToRuatokiToLive { get; set; }
 
         public string ReturnComment { get; set; }
 

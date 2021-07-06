@@ -30,7 +30,7 @@ namespace HamuaHapuCommon.Resources
         public bool IsTeReoFirstLanguage { get; set; }
         public bool CanYouSpeakTeReo { get; set; }
         public string TeReoProficiency { get; set; }
-        public bool ReturnToRuatokiToLive { get; set; }
+        public string ReturnToRuatokiToLive { get; set; }
         public string ReturnComment { get; set; }
 
         public string Facebook { get; set; }

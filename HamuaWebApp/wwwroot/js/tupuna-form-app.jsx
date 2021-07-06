@@ -56,13 +56,14 @@ class TupunaForm extends React.Component {
     render() {
         return (
             <div className="tupuna-container">
-                <h2>Add Tupuna</h2>
+                <h2>Add Grandparents</h2>
+                <hr />
                 {this.state.ngaTupuna.map(function (TupunaFormComponent, index) {
                     return TupunaFormComponent;
                 })}
+                
+                <button onClick={this.addTupuna} className="add-tupuna-button btn btn-dark">+ Add Grandparents</button>
                 <hr />
-                <button onClick={this.addTupuna} className="add-tupuna-button btn btn-dark">+</button>
-
             </div>);
     }
 }
@@ -93,6 +94,26 @@ class TupunaFormComponent extends React.Component {
                 <button className="remove-tupuna-btn btn btn-danger" onClick={(e) => this.props.removeTupuna(e, this.props.index)}>-</button>
                 <hr />
                 <div className="form-group">
+                    <label className="control-label" />
+                    <select defaultValue={this.props.relationship} name={"Member.NgaTupuna[" + this.props.index + "].Relationship"} id={"Member.NgaTupuna[" + this.props.index + "].Relationship"} className="form-control">
+
+                        <option value={"Relationship"}>Relationship</option>
+                        <option value={"GrandMother (Mothers Side)"}>GrandMother (Mothers Side)</option>
+                        <option value={"GrandFather (Mothers Side)"}>GrandFather (Mothers Side)</option>
+                        <option value={"GrandMother (Fathers Side)"}>GrandMother (Fathers Side)</option>
+                        <option value={"GrandFather (Fathers Side)"}>GrandFather (Fathers Side)</option>
+                        <option value={"Great GrandMother (Mothers Side)"}>GrandMother (Mothers Side)</option>
+                        <option value={"Great GrandFather (Mothers Side)"}>GrandFather (Mothers Side)</option>
+                        <option value={"Great GrandMother (Fathers Side)"}>GrandMother (Fathers Side)</option>
+                        <option value={"Great GrandFather (Fathers Side)"}>GrandFather (Fathers Side)</option>
+                        <option value={"Great Greate GrandMother (Mothers Side)"}>GrandMother (Mothers Side)</option>
+                        <option value={"Great Greate GrandFather (Mothers Side)"}>GrandFather (Mothers Side)</option>
+                        <option value={"Great Greate GrandMother (Fathers Side)"}>GrandMother (Fathers Side)</option>
+                        <option value={"Great Greate GrandFather (Fathers Side)"}>GrandFather (Fathers Side)</option>
+                    </select>
+                    <span className="text-danger" />
+                </div>
+                <div className="form-group">
                     <label className="control-label">Tupuna Name</label>
                     <input name={"Member.NgaTupuna[" + this.props.index + "].Name"} id={"Member.NgaTupuna[" + this.props.index + "].Name"} type="text" className="form-control tupuna-control" onChange={this.onInputchange} value={this.props.name} />
 
@@ -110,18 +131,7 @@ class TupunaFormComponent extends React.Component {
 
                     <span className="text-danger" />
                 </div>
-                <div className="form-group">
-                    <label className="control-label" />
-                    <select defaultValue={this.props.relationship} name={"Member.NgaTupuna[" + this.props.index + "].Relationship"} id={"Member.NgaTupuna[" + this.props.index + "].Relationship"} className="form-control">
 
-                        <option value={"Relationship"}>Relationship</option>
-                        <option value={"GrandMother (Mothers Side)"}>GrandMother (Mothers Side)</option>
-                        <option value={"GrandFather (Mothers Side)"}>GrandFather (Mothers Side)</option>
-                        <option value={"GrandMother (Fathers Side)"}>GrandMother (Fathers Side)</option>
-                        <option value={"GrandFather (Fathers Side)"}>GrandFather (Fathers Side)</option>
-                    </select>
-                    <span className="text-danger" />
-                </div>
             </div >);
     }
 }
