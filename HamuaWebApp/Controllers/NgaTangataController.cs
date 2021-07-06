@@ -15,6 +15,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using HamuaHapuRegistration.ApiClients.Interfaces;
 using HamuaHapuRegistration.ViewModels;
+using System.Security.Claims;
 
 namespace HamuaHapuRegistration.Controllers
 {
@@ -109,7 +110,8 @@ namespace HamuaHapuRegistration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Gender,DOB,PlaceOfBirth,Occupation,SpecialtySkills,Address1,Address2,Address3,PostCode,Country,HomePhone,Mobile,Email,IsTeReoFirstLanguage,CanYouSpeakTeReo,TeReoProficiency,ReturnToRuatokiToLive,ReturnComment,Facebook,Twitter,Instagram")] TangataResource hapuMember)
         {
-            var tangata = await ngaTangataClient.EditAsync(id, hapuMember);
+            var modifierName = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var tangata = await ngaTangataClient.EditAsync(id, hapuMember, modifierName);
 
             if (tangata == null)
             {

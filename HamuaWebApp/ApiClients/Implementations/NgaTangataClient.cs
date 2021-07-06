@@ -28,9 +28,11 @@ namespace HamuaHapuRegistration.ApiClients.Implementations
         //    throw new NotImplementedException();
         //}
 
-        public async Task<TangataResource> EditAsync(int id, TangataResource ngaTangata)
+        public async Task<TangataResource> EditAsync(int id, TangataResource ngaTangata, string modifierName)
         {
             //StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+            ngaTangata.ModifiedBy = modifierName;
+
             string endpoint = $"{apiBaseUrl}/{id}";
             var jsonString = JsonConvert.SerializeObject(ngaTangata);
 

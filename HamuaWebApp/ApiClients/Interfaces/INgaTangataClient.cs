@@ -14,7 +14,7 @@ namespace HamuaHapuRegistration.ApiClients.Interfaces
 
         //Task<TangataResource> CreateAsync(SaveTangataResource ngaMarae);
 
-        Task<TangataResource> EditAsync(int id, TangataResource ngaMarae);
+        Task<TangataResource> EditAsync(int id, TangataResource ngaMarae, string modifierName);
 
         Task<IEnumerable<IGrouping<string, TangataResource>>> GetTangataReoProficiency();
 

@@ -56,6 +56,11 @@ namespace HamuaRegistrationApi.DAL.Models
 
         public ICollection<Marae> NgaMarae { get; set; } = new List<Marae>();
         public ICollection<Tupuna> NgaTupuna { get; set; } = new List<Tupuna>();
+
+        public DateTime DateCreated { get; set; }
+        public DateTime DateModified { get; set; }
+        public string ModifiedBy { get; set; }
+        public string IsActive { get; set; }
         //public int MaraeId { get; set; }
 
         //public bool? IsDeleted { get; set; }

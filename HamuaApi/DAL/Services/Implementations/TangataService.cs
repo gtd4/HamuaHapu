@@ -29,6 +29,9 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
         {
             try
             {
+                newTangata.DateCreated = DateTime.Today;
+                newTangata.DateModified = DateTime.Today;
+
                 await tangataProvider.AddAsync(newTangata, ngaMarae);
                 await tangataUnitOfWork.CompleteAsync();
 
@@ -78,6 +81,8 @@ namespace HamuaRegistrationApi.DAL.Services.Implementations
             existingTangata.Facebook = editTangata.Facebook;
             existingTangata.Twitter = editTangata.Twitter;
             existingTangata.Instagram = editTangata.Instagram;
+            existingTangata.DateModified = DateTime.Today;
+            existingTangata.ModifiedBy = editTangata.ModifiedBy;
             //existingTangata.NgaMarae = editTangata.NgaMarae;
             //existingTangata.Mother = editTangata.Mother;
             //existingTangata.Father = editTangata.Father;

@@ -394,7 +394,12 @@ img.about-us-image {
 }
 
 img.committee-member {
-    width: 200px;
+    width: 100%;
+}
+
+.committee-member-img-container {
+    height: 350px;
+    overflow: hidden;
 }
 
 .about-content {
