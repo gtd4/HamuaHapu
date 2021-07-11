@@ -61,6 +61,10 @@ namespace HamuaRegistrationApi.DAL.Models
         public DateTime DateModified { get; set; }
         public string ModifiedBy { get; set; }
         public string IsActive { get; set; }
+
+        public string HighestEducation { get; set; }
+        public bool OwnHome { get; set; }
+        public int NumberInHome { get; set; }
         //public int MaraeId { get; set; }
 
         //public bool? IsDeleted { get; set; }

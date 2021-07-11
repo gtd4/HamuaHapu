@@ -120,7 +120,7 @@ namespace HamuaHapuRegistration.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("FirstName,LastName,Gender,DOB,PlaceOfBirth,Occupation,SalaryRange,SpecialtySkills,Address1,Address2,Address3,PostCode,Country,HomePhone,Mobile,Email,IsTeReoFirstLanguage,CanYouSpeakTeReo,TeReoProficiency,ReturnToRuatokiToLive,ReturnComment,Facebook,Twitter,Instagram,NgaMaraeIdList,NgaTupuna")] SaveTangataResource Member)
+        public async Task<IActionResult> Register([Bind("FirstName,LastName,Gender,DOB,PlaceOfBirth,Occupation,SalaryRange,OwnHome, NumberInHome,HighestEducation,SpecialtySkills,Address1,Address2,Address3,PostCode,Country,HomePhone,Mobile,Email,IsTeReoFirstLanguage,CanYouSpeakTeReo,TeReoProficiency,ReturnToRuatokiToLive,ReturnComment,Facebook,Twitter,Instagram,NgaMaraeIdList,NgaTupuna")] SaveTangataResource Member)
         {
             var parentsValid = ValidateParents(Member.NgaTupuna);
             var validTupuna = new List<SaveTupunaResource>();

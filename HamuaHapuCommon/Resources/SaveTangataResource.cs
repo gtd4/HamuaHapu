@@ -77,5 +77,9 @@ namespace HamuaHapuCommon.Resources
         public IEnumerable<SaveTupunaResource> NgaTupuna { get; set; } = new List<SaveTupunaResource>();
 
         public string ModifiedBy { get; set; }
+
+        public string HighestEducation { get; set; }
+        public bool OwnHome { get; set; }
+        public int NumberInHome { get; set; }
     }
 }

@@ -41,5 +41,8 @@ namespace HamuaHapuCommon.Resources
         public DateTime DateModified { get; set; }
         public string ModifiedBy { get; set; }
         public string IsActive { get; set; }
+        public string HighestEducation { get; set; }
+        public bool OwnHome { get; set; }
+        public int NumberInHome { get; set; }
     }
 }
