@@ -56,13 +56,13 @@ class TupunaForm extends React.Component {
     render() {
         return (
             <div className="tupuna-container">
-                <h2>Add Grandparents</h2>
+                <h2>Add Whanau</h2>
                 <hr />
                 {this.state.ngaTupuna.map(function (TupunaFormComponent, index) {
                     return TupunaFormComponent;
                 })}
-                
-                <button onClick={this.addTupuna} className="add-tupuna-button btn btn-dark">+ Add Grandparents</button>
+
+                <button onClick={this.addTupuna} className="add-tupuna-button btn btn-dark">+ Add Whanau</button>
                 <hr />
             </div>);
     }
@@ -91,7 +91,7 @@ class TupunaFormComponent extends React.Component {
     render() {
         return (
             <div>
-                <button className="remove-tupuna-btn btn btn-danger" onClick={(e) => this.props.removeTupuna(e, this.props.index)}>-</button>
+                <button className="remove-tupuna-btn btn btn-danger" onClick={(e) => this.props.removeTupuna(e, this.props.index)}>- Remove Whanau</button>
                 <hr />
                 <div className="form-group">
                     <label className="control-label" />
@@ -102,31 +102,31 @@ class TupunaFormComponent extends React.Component {
                         <option value={"GrandFather (Mothers Side)"}>GrandFather (Mothers Side)</option>
                         <option value={"GrandMother (Fathers Side)"}>GrandMother (Fathers Side)</option>
                         <option value={"GrandFather (Fathers Side)"}>GrandFather (Fathers Side)</option>
-                        <option value={"Great GrandMother (Mothers Side)"}>GrandMother (Mothers Side)</option>
-                        <option value={"Great GrandFather (Mothers Side)"}>GrandFather (Mothers Side)</option>
-                        <option value={"Great GrandMother (Fathers Side)"}>GrandMother (Fathers Side)</option>
-                        <option value={"Great GrandFather (Fathers Side)"}>GrandFather (Fathers Side)</option>
-                        <option value={"Great Greate GrandMother (Mothers Side)"}>GrandMother (Mothers Side)</option>
-                        <option value={"Great Greate GrandFather (Mothers Side)"}>GrandFather (Mothers Side)</option>
-                        <option value={"Great Greate GrandMother (Fathers Side)"}>GrandMother (Fathers Side)</option>
-                        <option value={"Great Greate GrandFather (Fathers Side)"}>GrandFather (Fathers Side)</option>
+                        <option value={"Great GrandMother (Mothers Side)"}>Great GrandMother (Mothers Side)</option>
+                        <option value={"Great GrandFather (Mothers Side)"}>Great GrandFather (Mothers Side)</option>
+                        <option value={"Great GrandMother (Fathers Side)"}>Great GrandMother (Fathers Side)</option>
+                        <option value={"Great GrandFather (Fathers Side)"}>Great GrandFather (Fathers Side)</option>
+                        <option value={"Great Greate GrandMother (Mothers Side)"}>Great GrandMother (Mothers Side)</option>
+                        <option value={"Great Greate GrandFather (Mothers Side)"}>Great GrandFather (Mothers Side)</option>
+                        <option value={"Great Greate GrandMother (Fathers Side)"}>Great GrandMother (Fathers Side)</option>
+                        <option value={"Great Greate GrandFather (Fathers Side)"}>Great GrandFather (Fathers Side)</option>
                     </select>
                     <span className="text-danger" />
                 </div>
                 <div className="form-group">
-                    <label className="control-label">Tupuna Name</label>
+                    <label className="control-label">Tipuna Name</label>
                     <input name={"Member.NgaTupuna[" + this.props.index + "].Name"} id={"Member.NgaTupuna[" + this.props.index + "].Name"} type="text" className="form-control tupuna-control" onChange={this.onInputchange} value={this.props.name} />
 
                     <span className="text-danger" />
                 </div>
                 <div className="form-group">
-                    <label className="control-label">Tupuna Primary Iwi</label>
+                    <label className="control-label">Tipuna Primary Iwi</label>
                     <input name={"Member.NgaTupuna[" + this.props.index + "].PrimaryIwi"} id={" Member.NgaTupuna[" + this.props.index + "].PrimaryIwi"} type="text" onChange={this.onInputchange} value={this.props.primaryIwi} className="form-control tupuna-control" />
 
                     <span className="text-danger" />
                 </div>
                 <div className="form-group">
-                    <label className="control-label">Tupuna Primary Hapū</label>
+                    <label className="control-label">Tipuna Primary Hapū</label>
                     <input name={"Member.NgaTupuna[" + this.props.index + "].PrimaryHapu"} id={"Member.NgaTupuna[" + this.props.index + "].PrimaryHapu"} type="text" onChange={this.onInputchange} value={this.props.primaryHapu} className="form-control tupuna-control" />
 
                     <span className="text-danger" />

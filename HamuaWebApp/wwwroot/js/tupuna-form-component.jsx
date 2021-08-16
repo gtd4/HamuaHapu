@@ -14,17 +14,17 @@ class TupunaFormComponent extends React.Component {
                 <button className="remove-tupuna-btn" onClick={(e) => this.props.removeTupuna(e, this.props.index)}>Remove {this.props.index}</button>
                 <hr />
                 <div className="form-group">
-                    <label className="control-label">Tupuna Name</label>
+                    <label className="control-label">Tipuna Name</label>
                     <input name="Member.NgaTupuna[{this.props.index}].Name" id="Member.NgaTupuna[{this.props.index}].Name" asp-for="@Model.Member.NgaTupuna.ElementAt({this.props.index}).Name" type="text" className="form-control tupuna-control" />
                     <span className="text-danger" />
                 </div>
                 <div className="form-group">
-                    <label className="control-label">Tupuna Primary Iwi</label>
+                    <label className="control-label">Tipuna Primary Iwi</label>
                     <input name="Member.NgaTupuna[{this.props.index}].PrimaryIwi" id="Member.NgaTupuna[{this.props.index}].PrimaryIwi" asp-for="@Model.Member.NgaTupuna.ElementAt({this.props.index}).PrimaryIwi" type="text" className="form-control tupuna-control" />
                     <span className="text-danger" />
                 </div>
                 <div className="form-group">
-                    <label className="control-label">Tupuna Primary Hapū</label>
+                    <label className="control-label">Tipuna Primary Hapū</label>
                     <input name="Member.NgaTupuna[{this.props.index}].PrimaryHapu" id="Member.NgaTupuna[{this.props.index}].PrimaryHapu" asp-for="@Model.Member.NgaTupuna.ElementAt({this.props.index}).PrimaryHapu" type="text" className="form-control tupuna-control" />
                     <span className="text-danger" />
                 </div>
