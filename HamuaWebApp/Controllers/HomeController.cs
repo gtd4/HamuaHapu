@@ -192,7 +192,7 @@ namespace HamuaHapuRegistration.Controllers
                         MailboxAddress from = new MailboxAddress("Admin", "admin@example.com");
                         message.From.Add(from);
 
-                        MailboxAddress to = new MailboxAddress("User", "gtd005@gmail.com");
+                        MailboxAddress to = new MailboxAddress("User", tangata.Email);
                         message.To.Add(to);
 
                         message.Subject = "Thank you for registering with the Waikirikiri Marae Committee";
