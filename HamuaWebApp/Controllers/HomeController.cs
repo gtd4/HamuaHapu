@@ -14,6 +14,8 @@ using HamuaHapuCommon.Resources;
 using HamuaHapuRegistration.ApiClients.Interfaces;
 using HamuaHapuRegistration.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace HamuaHapuRegistration.Controllers
 {
@@ -184,6 +186,32 @@ namespace HamuaHapuRegistration.Controllers
                     {
                         var stringResult = await response.Content.ReadAsStringAsync();
                         var tangata = JsonConvert.DeserializeObject<TangataResource>(stringResult);
+
+                        //Email Sending code
+                        MimeMessage message = new MimeMessage();
+                        MailboxAddress from = new MailboxAddress("Admin", "admin@example.com");
+                        message.From.Add(from);
+
+                        MailboxAddress to = new MailboxAddress("User", "gtd005@gmail.com");
+                        message.To.Add(to);
+
+                        message.Subject = "Thank you for registering with the Waikirikiri Marae Committee";
+
+                        BodyBuilder bodyBuilder = new BodyBuilder();
+                        bodyBuilder.HtmlBody = "<h1> Thank you for registering</h1>";
+                        bodyBuilder.TextBody = "Thank you for registering";
+
+                        message.Body = bodyBuilder.ToMessageBody();
+
+                        SmtpClient emailClient = new SmtpClient();
+
+                        emailClient.Connect("smtp.gmail.com", 465, true);
+                        emailClient.Authenticate("waikirikiriMaraeCommittee@gmail.com", "Gav12345678");
+
+                        emailClient.Send(message);
+                        emailClient.Disconnect(true);
+                        emailClient.Dispose();
+
                         return RedirectToAction(nameof(RegisterSuccess));
                     }
                     else
