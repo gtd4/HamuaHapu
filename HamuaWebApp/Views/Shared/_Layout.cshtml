@@ -29,7 +29,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><div class="nav-brand-logo-light">WMC</div><div class="nav-brand-text"><p>Waikiriri Marae</p> <p>Committee</p></div></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><div class="nav-brand-text"><img class="nav-brand-image" src="~/img/Logo n text.png" /></div></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -46,9 +46,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" aria-label="Learn more about the Waikirikiri marae committee" asp-area="" asp-controller="Home" asp-action="About"><i class="fas fa-address-card nav-icon"></i> About Us</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" aria-label="Contact the Waikirikiri marae committee" asp-area="" asp-controller="Home" asp-action="Contact"><i class="fas fa-envelope nav-icon"></i> Contact Us</a>
-                        </li>
+                        @*<li class="nav-item">
+                                <a class="nav-link text-light" aria-label="Contact the Waikirikiri marae committee" asp-area="" asp-controller="Home" asp-action="Contact"><i class="fas fa-envelope nav-icon"></i> Contact Us</a>
+                            </li>*@
                         <li class="nav-item">
                             <a class="nav-link text-light" aria-label="Go to the privacy page" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fas fa-user-secret nav-icon"></i> Privacy</a>
                         </li>
@@ -67,7 +67,7 @@
     <div class="footer-basic">
         <footer>
             <div class="container">
-                <div class="social"><a href="#" aria-label="Instagram"><i class="icon ion-social-instagram"></i></a><a href="#" aria-label="Snapchat"><i class="icon ion-social-snapchat"></i></a><a href="#" aria-label="twitter"><i class="icon ion-social-twitter"></i></a><a href="#" aria-label="facebook"><i class="icon ion-social-facebook"></i></a></div>
+
                 <ul class="list-inline">
                     <li class="list-inline-item"><a class="" aria-label="Return to the home page" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li class="list-inline-item">
@@ -78,6 +78,7 @@
 
                     <li class="list-inline-item"><a class="" aria-label="Go to the privacy page" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
                 </ul>
+                <div class="social">@*<a href="#" aria-label="Instagram"><i class="icon ion-social-instagram"></i></a><a href="#" aria-label="Snapchat"><i class="icon ion-social-snapchat"></i></a><a href="#" aria-label="twitter"><i class="icon ion-social-twitter"></i></a>*@<a href="https://www.facebook.com/groups/189002851174539" aria-label="facebook"><i class="icon ion-social-facebook"></i></a></div>
                 <p class="copyright">&copy; @DateTime.Now.Year - Waikirikiri Marae</p>
             </div>
         </footer>

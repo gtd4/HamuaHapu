@@ -9,9 +9,11 @@ namespace HamuaHapuCommon.Resources
     public class SaveTangataResource
     {
         [Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
@@ -22,13 +24,16 @@ namespace HamuaHapuCommon.Resources
         public DateTime DOB { get; set; }
 
         [Required]
+        [Display(Name = "Place of Birth")]
         public string PlaceOfBirth { get; set; }
 
         [Required]
         public string Occupation { get; set; }
 
+        [Display(Name = "Salary Range")]
         public string SalaryRange { get; set; }
 
+        [Display(Name = "Specialty Skills")]
         public string SpecialtySkills { get; set; }
 
         [Required]
@@ -45,7 +50,9 @@ namespace HamuaHapuCommon.Resources
         [Required]
         public string Country { get; set; }
 
+        [Display(Name = "Home Phone")]
         public string HomePhone { get; set; }
+
         public string Mobile { get; set; }
 
         [Required, EmailAddress]

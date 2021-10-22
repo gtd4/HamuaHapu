@@ -189,7 +189,7 @@ namespace HamuaHapuRegistration.Controllers
 
                         //Email Sending code
                         MimeMessage message = new MimeMessage();
-                        MailboxAddress from = new MailboxAddress("Admin", "admin@example.com");
+                        MailboxAddress from = new MailboxAddress("Admin", "waikirikiri51@gmail.com");
                         message.From.Add(from);
 
                         MailboxAddress to = new MailboxAddress("User", tangata.Email);
@@ -206,7 +206,7 @@ namespace HamuaHapuRegistration.Controllers
                         SmtpClient emailClient = new SmtpClient();
 
                         emailClient.Connect("smtp.gmail.com", 465, true);
-                        emailClient.Authenticate("waikirikiriMaraeCommittee@gmail.com", "Gav12345678");
+                        emailClient.Authenticate("waikirikiri51@gmail.com", "ifghdxoeuzchydyg");
 
                         emailClient.Send(message);
                         emailClient.Disconnect(true);
