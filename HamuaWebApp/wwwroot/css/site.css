@@ -1,5 +1,18 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+.home-image-container {
+    left: 0;
+    top: 190px;
+    height: calc(100vh - 190px);
+    position: absolute;
+    width: 100%;
+}
+
+img.home-image {
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+}
 
 .fa-chevron-down, .fa-chevron-up {
     padding-right: 10px;
@@ -111,7 +124,7 @@ html {
         width: 100%;
         margin: auto;
         padding: 10px;
-        top: 30%;
+        top: 40%;
         /*background: white;
         width: 600px;
         height: 300px;
@@ -261,23 +274,8 @@ body {
         margin-bottom: 0;
     }
 
-img.bg {
-    /* Set rules to fill background */
-    min-height: 100%;
-    min-width: 1024px;
-    /* Set up proportionate scaling */
-    width: 100%;
-    height: auto;
-    /* Set up positioning */
-    position: fixed;
-    top: 0;
-    left: 0;
-    opacity: 0.6;
-    margin-bottom: 188px;
-}
-
 @media screen and (max-width: 1024px) { /* Specific to this particular image */
-    img.bg {
+    img .bg {
         left: 50%;
         margin-left: -512px; /* 50% */
     }
@@ -294,6 +292,19 @@ img.bg {
 }
 
 @media (max-width: 768px) {
+    .home-image-container {
+        left: 0;
+        top: 160px;
+        height: calc(100vh - 160px);
+        position: absolute;
+        width: 100%;
+    }
+
+    .nav-link {
+        /* font-weight: bold; */
+        font-size: 16px;
+    }
+
     .table td, .table th {
         padding: 6px;
     }
@@ -313,9 +324,15 @@ img.bg {
     .home-heading {
         font-weight: bold;
         width: 100%;
-        color: white;
-        font-size: 60px;
+        /*color: white;
+        font-size: 60px;*/
         margin-top: 100px;
+    }
+
+    .home-sub-heading {
+        font-size: 16px;
+        color: black;
+        font-weight: bold;
     }
 
     .header-link {
@@ -335,16 +352,6 @@ img.bg {
         width: 100%;
         margin: auto;
         padding: 10px;
-        top: 10%;
-        /*background: white;
-        width: 600px;
-        height: 300px;
-        /*padding: 20px;
-        position: absolute;
-        top: 50%;
-        /*left: 50%;
-        margin: -150px 0 0 0;
-        border: 3px solid green;*/
     }
 
     .footer-basic li {
