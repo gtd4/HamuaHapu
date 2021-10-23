@@ -9,25 +9,26 @@ namespace HamuaHapuCommon.Resources
     public class SaveTangataResource
     {
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "*First Name")]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last Name")]
+        [Display(Name = "*Last Name")]
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "*Gender")]
         public string Gender { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [Display(Name = "*DOB")]
         public DateTime DOB { get; set; }
 
         [Required]
-        [Display(Name = "Place of Birth")]
+        [Display(Name = "*Place of Birth")]
         public string PlaceOfBirth { get; set; }
 
-        [Required]
         public string Occupation { get; set; }
 
         [Display(Name = "Salary Range")]
@@ -37,17 +38,21 @@ namespace HamuaHapuCommon.Resources
         public string SpecialtySkills { get; set; }
 
         [Required]
+        [Display(Name = "*Address 1")]
         public string Address1 { get; set; }
 
         public string Address2 { get; set; }
 
         [Required]
+        [Display(Name = "*Suburb")]
         public string Address3 { get; set; }
 
         [Required]
+        [Display(Name = "*Post Code")]
         public string PostCode { get; set; }
 
         [Required]
+        [Display(Name = "*Country")]
         public string Country { get; set; }
 
         [Display(Name = "Home Phone")]
@@ -56,6 +61,7 @@ namespace HamuaHapuCommon.Resources
         public string Mobile { get; set; }
 
         [Required, EmailAddress]
+        [Display(Name = "*Email")]
         public string Email { get; set; }
 
         public bool IsTeReoFirstLanguage { get; set; }

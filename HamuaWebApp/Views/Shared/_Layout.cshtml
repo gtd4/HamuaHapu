@@ -29,7 +29,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><div class="nav-brand-text"><img class="nav-brand-image" src="~/img/Logo n text.png" /></div></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><div class="nav-brand-text"><img class="nav-brand-image" src="~/img/Logo n text.png" alt="waikirikiri logo" /></div></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -44,11 +44,11 @@
                             <a class="nav-link text-light" aria-label="Register as a hapū member" asp-area="" asp-controller="Home" asp-action="Register"><i class="fab fa-wpforms nav-icon"></i> Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" aria-label="Learn more about the Waikirikiri marae committee" asp-area="" asp-controller="Home" asp-action="About"><i class="fas fa-address-card nav-icon"></i> About Us</a>
+                            <a class="nav-link text-light" aria-label="Learn more about the Waikirikiri marae committee" asp-area="" asp-controller="Home" asp-action="About"><i class="fas fa-address-card nav-icon"></i> About</a>
                         </li>
-                        @*<li class="nav-item">
-                                <a class="nav-link text-light" aria-label="Contact the Waikirikiri marae committee" asp-area="" asp-controller="Home" asp-action="Contact"><i class="fas fa-envelope nav-icon"></i> Contact Us</a>
-                            </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link text-light" aria-label="Contact the Waikirikiri marae committee" href="mailto:waikirikiri51@gmail.com?subject=feedback"><i class="fas fa-envelope nav-icon"></i> Contact</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" aria-label="Go to the privacy page" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fas fa-user-secret nav-icon"></i> Privacy</a>
                         </li>
@@ -74,7 +74,9 @@
                         <a class="" aria-label="Register as a hapū member" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
                     </li>
 
-                    <li class="list-inline-item"><a href="#" aria-label="Learn more about the Waikiriri marae committee">About</a></li>
+                    <li class="list-inline-item"><a aria-label="Learn more about the Waikiriri marae committee" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+
+                    <li class="list-inline-item"><a class="" aria-label="Contact the Waikirikiri marae committee" href="mailto:waikirikiri51@gmail.com?subject=feedback">Contact</a></li>
 
                     <li class="list-inline-item"><a class="" aria-label="Go to the privacy page" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
                 </ul>
@@ -83,11 +85,7 @@
             </div>
         </footer>
     </div>
-    @*<footer class="border-top footer text-muted navbar-dark bg-dark">
-            <div class="container">
-                &copy; @DateTime.Now.Year - HamuaHapuRegistration - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>*@
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
