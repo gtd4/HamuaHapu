@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using HamuaHapuCommon.Resources;
@@ -30,14 +31,21 @@ namespace HamuaRegistrationApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync(string orderby, string searchString, bool includeTangata)
         {
-            var ngamarae = await maraeService.GetAllMaraeAsync(orderby, searchString, includeTangata);
-
-            if (includeTangata)
+            try
             {
-                return Ok(maraeMapper.Map<IEnumerable<Marae>, IEnumerable<MaraeResourceWithNgaTangata>>(ngamarae));
-            }
+                var ngamarae = await maraeService.GetAllMaraeAsync(orderby, searchString, includeTangata);
 
-            return Ok(maraeMapper.Map<IEnumerable<Marae>, IEnumerable<MaraeResource>>(ngamarae));
+                if (includeTangata)
+                {
+                    return Ok(maraeMapper.Map<IEnumerable<Marae>, IEnumerable<MaraeResourceWithNgaTangata>>(ngamarae));
+                }
+
+                return Ok(maraeMapper.Map<IEnumerable<Marae>, IEnumerable<MaraeResource>>(ngamarae));
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         [HttpGet("area/{areaname}")]
